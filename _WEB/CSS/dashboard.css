@@ -1,0 +1,57 @@
+.htmlContenedor {
+    border: 1px solid;
+    /*height: 100%;*/
+    align-content:stretch;
+
+}
+
+
+.htmlPanel.hide {
+    opacity: 0;
+    min-height: 0;
+}
+
+
+.htmlPanel.hide .widget {
+	opacity: 0;
+	min-height: 0;
+	display:none;
+}
+
+.htmlPanel.hide .htmlPanel {
+	opacity: 0;
+	min-height: 0;
+	display:none;
+}
+
+
+.htmlPanel {
+    border: 1px solid;
+    min-height: 100px;
+    display: flex;
+    flex-direction: row;
+    transition: 0.6s ease-in-out;
+    opacity: 1;
+}
+
+
+.htmlPanel .htmlPanel {
+	border: 1px solid;
+	min-height: 100px;
+	min-width: 20px;
+	display: flex;
+	flex-grow: 2;
+	flex-direction: column;
+}
+
+.htmlPanel .htmlPanel .htmlPanel {
+	flex-direction: row;
+}
+.htmlPanel .htmlPanel .htmlPanel .htmlPanel {
+	flex-direction: column;
+}
+
+
+.widget {
+    border: 1px solid;
+}

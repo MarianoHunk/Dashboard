@@ -1,0 +1,13 @@
+*.*
+!*.h
+!*.c
+!*.xsl
+!*.xslt
+!*.html
+!*.json
+!*.css
+!*.js
+
+
+
+!*.gitignore

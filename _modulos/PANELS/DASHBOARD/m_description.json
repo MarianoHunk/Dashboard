@@ -1,0 +1,13 @@
+{
+	"Categoria":"PANELS",
+	"ModuleName":"DASHBOARD",
+	"DisplayName":"DASHBOARD",
+	"type": "web",
+	"Descripcion":"The HRD_LORA module is a radio frequency transmitter, that allows data transmission over long distances with very good noise immunity. Supports 22dBm @ LF band (470MHz); 10dBm @ LF band (434MHz); HF supports 22dBm @ HF band (868/915MHz), and LoRaWAN protocol",
+	"Caracteristicas":[],
+	"Aplicaciones":[],
+	"KeyWord":[]
+}
+
+
+
