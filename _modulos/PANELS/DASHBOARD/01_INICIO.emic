@@ -47,7 +47,7 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/Templates/index_Template.html,name=)
 #unSetFile
 
-#setFile response
+#setFile htmlOut/Response
 <a href="./dashboard/.{userName}./.{project}./.{userModule}./index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
 #unSetFile
 
