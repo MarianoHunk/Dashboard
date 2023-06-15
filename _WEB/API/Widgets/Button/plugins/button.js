@@ -1,6 +1,6 @@
 import {EmicWidget} from "./emicWidget.js"
    
-class EmicWidgetButtonSr extends EmicWidget {
+class EmicWidgetButton extends EmicWidget {
         
         static namesList = {};
         myDiv;
@@ -11,8 +11,8 @@ class EmicWidgetButtonSr extends EmicWidget {
 		
 		getNewID() {
             var i;
-            for (i = 1; document.getElementById(`ButtonSr-${i}`) !== null; i++);
-            return `ButtonSr-${i}`;
+            for (i = 1; document.getElementById(`Button-${i}`) !== null; i++);
+            return `Button-${i}`;
         }
         static get observedAttributes() {
             return ["value"];
@@ -26,7 +26,7 @@ class EmicWidgetButtonSr extends EmicWidget {
 
         connectedCallback() {
             
-            if (!super.preconnectedCallback("ButtonSr")) {
+            if (!super.preconnectedCallback("Button")) {
                 return;
             }
            
@@ -69,4 +69,4 @@ class EmicWidgetButtonSr extends EmicWidget {
 
     
     }
-    customElements.define("emic-widget-buttonsr", EmicWidgetButtonSr);
+    customElements.define("emic-widget-button", EmicWidgetButton);

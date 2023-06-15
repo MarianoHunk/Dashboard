@@ -1,15 +1,5 @@
 //RFI TAG:driverName=HTML Widget
 
-/*RFI JSon
-{
-	'Nombre': 'icon',
-	'NombreToolBox': 'Icon',
-	'Tipo' : 'Widget',
-	'title': 'Text Box',
-	'html-tag': 'emic-widget-icon',
-	'instance': '{"component":"emic-widget-icon","attributes":{}}',
-}
-*/
 
 
 #setFile plugins/www/header.html
@@ -24,25 +14,23 @@
 #newRFIcode(_WEB/API/Widgets/Icon/plugins/icon.js,name=)
 #unSetFile
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
-	'Nombre': 'IconSetValue',
-	'NombreToolBox': 'IconSetValue',
-	'Tipo' : 'SistemFnc',
-	'title': 'Icon',
-
-	'InnerHTML':"
-		<div class='lineaDeCodigo' originalclass='funcion' originalid='IconSetValue' draggable='true' ondragstart='drag_linea(event)'>
-			icon.setValue(<div class='parametroDiv'></div> , <div class='parametroDiv'></div>)
-		</div>"
+	'Nombre': 'icon',
+	'NombreToolBox': 'Icon',
+	'Tipo' : 'Widget',
+	'title': 'Text Box',
+	'html-tag': 'emic-widget-icon',
+	'instance': '{"component":"emic-widget-icon","attributes":{}}',
 }
 */
 
-function IconSetValue(IconName,value){
-	document.getElementById(IconName).value = value;
-}
-
-
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
 	'Nombre': 'iconChange',
@@ -56,3 +44,32 @@ function IconSetValue(IconName,value){
 		}'
 }
 */
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*xRFI JSon
+{
+	'Nombre': 'IconSetValue',
+	'NombreToolBox': 'IconSetValue',
+	'Tipo' : 'SistemFnc',
+	'title': 'Icon',
+
+	'InnerHTML':"
+		<div class='lineaDeCodigo' originalclass='funcion' originalid='IconSetValue' draggable='true' ondragstart='drag_linea(event)'>
+			icon.setValue(<div class='parametroDiv'></div> , <div class='parametroDiv'></div>)
+		</div>"
+}
+*/
+/**
+ * @fn void IconSetValue(int IconName,int value)
+ * @alias IconSetValue
+ * @brief Icon value
+ * @param IconName IconName
+ * @param value value
+ * @return Nothing
+ */ 
+
+function IconSetValue(IconName,value){
+	document.getElementById(IconName).value = value;
+}

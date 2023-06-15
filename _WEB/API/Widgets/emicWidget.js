@@ -23,6 +23,8 @@ export class EmicWidget extends HTMLElement {
         this.draggable = true;
         this.style.border = "0pt solid #1F030C";
         this.style.alignSelf = "center";
+        // Mostrar identificador
+        this.setAttribute("title", this.getAttribute("id"))
     }
 
     preconnectedCallback(name) {

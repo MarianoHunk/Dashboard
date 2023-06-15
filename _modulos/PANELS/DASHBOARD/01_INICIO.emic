@@ -27,14 +27,16 @@ if ("serviceWorker" in navigator) {
 #unSetFile
 
 
-#newRFIcode(_WEB/API/Widgets/Gauge/customGauge.js,name=)
+#newRFIcode(_WEB/API/Widgets/Gauge/customGauge.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Switch/customSwitch.js,name=)
 #newRFIcode(_WEB/API/Widgets/Label/label.js,name=)
 #newRFIcode(_WEB/API/Widgets/TextBox/textBox.js,name=)
 #newRFIcode(_WEB/API/Widgets/LedIndicador/ledIndicador.js,name=)
 #newRFIcode(_WEB/API/Widgets/CheckBox/checkBox.js,name=)
 #newRFIcode(_WEB/API/Widgets/Icon/icon.js,name=)
-#newRFIcode(_WEB/API/Widgets/ButtonSr/buttonSr.js,name=)
+#newRFIcode(_WEB/API/Widgets/Button/button.js,name=)
+#newRFIcode(_WEB/API/Widgets/Slider/slider.emic,name=)
+#newRFIcode(_WEB/API/Widgets/LedIndicador2/led2.emic)
 #newRFIcode(temp/script.js,name=)
 #newRFIcode(temp/myVars.js,name=)
 #unSetFile

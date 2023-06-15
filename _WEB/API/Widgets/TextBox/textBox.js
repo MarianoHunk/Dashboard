@@ -38,8 +38,8 @@
 }
 */
 
-function TextBoxSetValue(TextBoxName,value){
-	document.getElementById(TextBoxName).value = value;
+function TextBoxSetValue(TextBoxName,Value){
+	document.getElementById(TextBoxName).value = Value;
 }
 
 

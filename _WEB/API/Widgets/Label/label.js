@@ -1,16 +1,5 @@
 //RFI TAG:driverName=HTML Widget
 
-/*RFI JSon
-{
-	'Nombre': 'label',
-	'NombreToolBox': 'Label',
-	'Tipo' : 'Widget',
-	'title': 'Label',
-	'html-tag': 'emic-widget-label',
-	'instance': '{"component":"emic-widget-label","attributes":{}}',
-}
-*/
-
 
 #setFile plugins/www/header.html
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/label.js"> </script>
@@ -24,3 +13,17 @@
 #newRFIcode(_WEB/API/Widgets/Label/plugins/label.js,name=)
 #unSetFile
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/*RFI JSon
+{
+	'Nombre': 'label',
+	'NombreToolBox': 'Label',
+	'Tipo' : 'Widget',
+	'title': 'Label',
+	'html-tag': 'emic-widget-label',
+	'instance': '{"component":"emic-widget-label","attributes":{}}',
+}
+*/
