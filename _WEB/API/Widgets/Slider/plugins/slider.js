@@ -4,7 +4,17 @@ class EmicWidgetSlider extends EmicWidget {
   static namesList = {};
   slider;
 
-  // Método para obtener un nuevo ID para el slider
+//****************************************************************************/
+//                               Constructor
+//****************************************************************************/
+constructor() {
+  super();
+  this.attachShadow({ mode: "open" });
+}
+//****************************************************************************/
+//                   Método para obtener un nuevo ID
+//****************************************************************************/
+ 
   getNewID() {
     var i;
     for (i = 1; EmicWidgetSlider.namesList[`slider-${i}`]; i++);
@@ -12,17 +22,10 @@ class EmicWidgetSlider extends EmicWidget {
     return `slider-${i}`;
   }
 
-  // Lista de atributos observados por el elemento
-  static get observedAttributes() {
-    return ["value", "max", "min"];
-  }
+//****************************************************************************/
+//               Cuando el elemento es conectado al DOM
+//****************************************************************************/
 
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-  }
-
-  // Callback llamada cuando el elemento es conectado al DOM
   connectedCallback() {
     if (!super.preconnectedCallback("Slider")) {
       return;
@@ -77,6 +80,13 @@ class EmicWidgetSlider extends EmicWidget {
     if (window.sliderChange)
       sliderChange(this.getAttribute("id"), event.target.value);
   }
+//****************************************************************************/
+//                               Si hay cambios
+//****************************************************************************/
+  // Lista de atributos observados por el elemento
+  static get observedAttributes() {
+    return ["value", "max", "min"];
+  }
 
   // Método llamado cuando hay cambios en los atributos del elemento
   attributeChangedCallback(name, old, now) {
@@ -94,7 +104,7 @@ class EmicWidgetSlider extends EmicWidget {
         break;
     }
   }
-
+//****************************************************************************/
   // Método para obtener el valor del atributo "value"
   get value() {
     return this.getAttribute("value");

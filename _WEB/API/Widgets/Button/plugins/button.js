@@ -29,8 +29,6 @@ class EmicWidgetButton extends EmicWidget {
             if (!super.preconnectedCallback("Button")) {
                 return;
             }
-           
-
             const img = document.createElement("img");
             img.src ="/dashboard/.{userName}./.{project}./.{userModule}./images/icons/btn.png";
             img.alt ="imagen pulsador emic";
