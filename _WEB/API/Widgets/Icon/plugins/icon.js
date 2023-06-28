@@ -1,143 +1,133 @@
-import {EmicWidget} from "./emicWidget.js"
+import { EmicWidget } from "./emicWidget.js";
 
+class EmicWidgetIcon extends EmicWidget {
+  static namesList = {};
+  myDiv;
+  getNewID() {
+    var i;
+    for (i = 1; document.getElementById(`icon-${i}`) !== null; i++);
+    return `icon-${i}`;
+  }
+  static get observedAttributes() {
+    return ["value"];
+  }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    class EmicWidgetIcon extends EmicWidget {
-        static namesList = {};
-        myDiv;
-        getNewID() {
-            var i;
-            for (i = 1; document.getElementById(`icon-${i}`) !== null; i++);
-            return `icon-${i}`;
-        }
-        static get observedAttributes() {
-            return ["value"];
-        }
-        constructor() {
-            super();
-            this.attachShadow({ mode: "open" });
-        }
+  connectedCallback() {
+    if (!super.preconnectedCallback("Icon")) {
+      return;
+    }
 
-        connectedCallback() {
-            if (!super.preconnectedCallback("Icon")) {
-                return;
-            }
+    //const upload = function uploadFile() {
+    //	let formData = new FormData();
+    //	//formData.append("file", fileupload.files[0]);
+    //	fetch('/Webservice2.asmx/UploadFile', {
+    //	  method: "POST",
+    //	  body: formData
+    //	});
+    //	alert('The file has been uploaded successfully.');
+    //}
 
-			//const upload = function uploadFile() {
-			//	let formData = new FormData();           
-			//	//formData.append("file", fileupload.files[0]);
-			//	fetch('/Webservice2.asmx/UploadFile', {
-			//	  method: "POST", 
-			//	  body: formData
-			//	});    
-			//	alert('The file has been uploaded successfully.');
-			//}			
+    if (!this.hasAttribute("id")) {
+      this.setAttribute("id", this.getNewID());
+    }
 
-            if (!this.hasAttribute('id')) {
-                this.setAttribute('id', this.getNewID());
-            }
+    //if (!this.hasAttribute('value')) {
+    //    this.setAttribute('value', this.getAttribute("id"));
+    //}
 
-            //if (!this.hasAttribute('value')) {
-            //    this.setAttribute('value', this.getAttribute("id"));
-            //}
+    const div = document.createElement("div");
+    const img = document.createElement("img");
+    const form = document.createElement("form");
+    const inputPath = document.createElement("input");
+    const inputFile = document.createElement("input");
 
-			
-            const div = document.createElement("div");
-            const img =  document.createElement("img");
-			const form = document.createElement("form");
-			const inputPath = document.createElement("input");
-			const inputFile = document.createElement("input");
+    if (this.hasAttribute("src")) {
+      img.src = this.getAttribute("src");
+    } else {
+      img.src =
+        "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/Encendido.png";
+    }
 
-            if (this.hasAttribute('src')) {
-                img.src = this.getAttribute('src');
-            }
-			else {
-				img.src = "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/Encendido.png";
-			}
-			
-			this.ondrop = async (e) => {
-				e.preventDefault();
-				e.stopPropagation();
-				let dt = e.dataTransfer
-				let files = dt.files
-				
-				if(files.length > 0)
-				{
-					inputFile.files = files;
+    this.ondrop = async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      let dt = e.dataTransfer;
+      let files = dt.files;
 
-					let response = await fetch('WebService2.asmx/UploadFile', {
-						method: 'POST',
-						body: new FormData(form)
-					});
-					
-					img.src = "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/" + files[0].name;
-					this.setAttribute('src',"/dashboard/.{userName}./.{project}./.{userModule}./images/icons/" + files[0].name);
-				}
-				//window.location.reload();
-			};
+      if (files.length > 0) {
+        inputFile.files = files;
 
-			//this.addEventListener('dragover', function 
-			//
-			//});
-			
-			
-			
-			
-			inputPath.name = "path";
-			inputPath.type = "text";
-			inputPath.value = "_USER/My Projects/.{project}./.{userModule}./wwwroot/images/icons";
-			inputPath.hidden = true;
-			inputFile.name = "filedata";
-			inputFile.type = "file";
-			inputFile.name="fileupload";
-			inputFile.hidden = true;
-			
-			form.appendChild(inputPath);
-			form.appendChild(inputFile);
+        let response = await fetch("WebService2.asmx/UploadFile", {
+          method: "POST",
+          body: new FormData(form),
+        });
 
-			div.appendChild(img);
-			div.appendChild(form);
-			
-			//div.appendChild(input);
-			//div.appendChild(buton);
-						
-			this.myDiv = div;
-			
+        img.src =
+          "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/" +
+          files[0].name;
+        this.setAttribute(
+          "src",
+          "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/" +
+            files[0].name
+        );
+      }
+      //window.location.reload();
+    };
 
-			
-            const style = document.createElement("style");
-            this.shadowRoot.appendChild(div);
-            this.shadowRoot.appendChild(style);
+    //this.addEventListener('dragover', function
+    //
+    //});
 
+    inputPath.name = "path";
+    inputPath.type = "text";
+    inputPath.value =
+      "_USER/My Projects/.{project}./.{userModule}./wwwroot/images/icons";
+    inputPath.hidden = true;
+    inputFile.name = "filedata";
+    inputFile.type = "file";
+    inputFile.name = "fileupload";
+    inputFile.hidden = true;
 
-            //div.innerHTML = this.getAttribute("value");
-            //this.addEventListener('click', this.eventClickListener);
-			
-			
-			//this.myDiv.innerHTML = `<input id="fileupload" type="file" name="fileupload" />
-			//					<button id="upload-button" onclick="this.uploadFile()"> Upload </button>`
-			
-			
-            super.connectedCallback();
-        }
-		
+    form.appendChild(inputPath);
+    form.appendChild(inputFile);
 
-		eventDragoverListener(e) {
-			let dt = e.dataTransfer;
-			let files = dt.files;
-			if (dt.types[0] == "Files")
-			//if(files.length > 0)
-			{
-				e.stopPropagation();
-				e.preventDefault();
-				e.dataTransfer.dropEffect = 'copy';
-				
-			}
-			else
-				super.eventDragoverListener(e);
-		}
-		
+    div.appendChild(img);
+    div.appendChild(form);
 
- /*       
+    //div.appendChild(input);
+    //div.appendChild(buton);
+
+    this.myDiv = div;
+
+    const style = document.createElement("style");
+    this.shadowRoot.appendChild(div);
+    this.shadowRoot.appendChild(style);
+
+    //div.innerHTML = this.getAttribute("value");
+    //this.addEventListener('click', this.eventClickListener);
+
+    //this.myDiv.innerHTML = `<input id="fileupload" type="file" name="fileupload" />
+    //					<button id="upload-button" onclick="this.uploadFile()"> Upload </button>`
+
+    super.connectedCallback();
+  }
+
+  eventDragoverListener(e) {
+    let dt = e.dataTransfer;
+    let files = dt.files;
+    if (dt.types[0] == "Files") {
+      //if(files.length > 0)
+      e.stopPropagation();
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "copy";
+    } else super.eventDragoverListener(e);
+  }
+
+  /*       
         eventClickListener(ev) {
 
             var input = document.createElement("input");
@@ -168,21 +158,20 @@ import {EmicWidget} from "./emicWidget.js"
         }
 */
 
-        attributeChangedCallback(name, old, now) {
-
-            switch (name) {
-                case 'value':
-                    //this.myDiv.innerHTML = this.getAttribute("value");
-                    break;
-            }
-        }
-
-        set value(newVal) {
-            this.setAttribute('value', newVal);
-        }
-
-        get value() {
-            return this.getAttribute('value');
-        }
+  attributeChangedCallback(name, old, now) {
+    switch (name) {
+      case "value":
+        //this.myDiv.innerHTML = this.getAttribute("value");
+        break;
     }
-    customElements.define("emic-widget-icon", EmicWidgetIcon);
+  }
+
+  set value(newVal) {
+    this.setAttribute("value", newVal);
+  }
+
+  get value() {
+    return this.getAttribute("value");
+  }
+}
+customElements.define("emic-widget-icon", EmicWidgetIcon);

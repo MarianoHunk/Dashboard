@@ -38,6 +38,8 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/API/Widgets/Slider/slider.emic,name=)
 #newRFIcode(_WEB/API/Widgets/LedIndicador2/led2.emic)
 #newRFIcode(_WEB/API/Widgets/Table/table.emic,name=)
+#newRFIcode(_WEB/API/Widgets/Plot/plot.emic,name=)
+#newRFIcode(_WEB/API/Widgets/Prueba/prueba.js,name=)
 #newRFIcode(temp/script.js,name=)
 #newRFIcode(temp/myVars.js,name=)
 #unSetFile
