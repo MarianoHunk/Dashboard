@@ -44,6 +44,8 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(temp/myVars.js,name=)
 #unSetFile
 
+INICIO()
+
 #setFile wwwroot/CSS/dashboard.css
 #newRFIcode(_WEB/Templates/TemplateDashboard.css,name=)
 #unSetFile
