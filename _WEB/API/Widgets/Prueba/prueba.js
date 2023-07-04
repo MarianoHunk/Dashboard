@@ -29,7 +29,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Eventos
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-/*RFI JSon
+/*xRFI JSon
 {
 	'Nombre': 'buttonPress',
 	'NombreToolBox': 'buttonPress',
@@ -44,7 +44,7 @@
 */
 
 
-/*RFI JSon
+/*xRFI JSon
 {
 	'Nombre': 'buttonRelease',
 	'NombreToolBox': 'buttonRelease',

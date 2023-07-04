@@ -1,20 +1,23 @@
 import { EmicWidget } from "./emicWidget.js";
 
 class EmicWidgetSlider extends EmicWidget {
+  //-----------------------------------------------------------------------------------
+  // Definimos variables.
+  //-----------------------------------------------------------------------------------
   static namesList = {};
   slider;
 
-//****************************************************************************/
-//                               Constructor
-//****************************************************************************/
-constructor() {
-  super();
-  this.attachShadow({ mode: "open" });
-}
-//****************************************************************************/
-//                   Método para obtener un nuevo ID
-//****************************************************************************/
- 
+  //-----------------------------------------------------------------------------------
+  // Constructor.
+  //-----------------------------------------------------------------------------------
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+  
+  //-----------------------------------------------------------------------------------
+  // Método para obtener un nuevo ID.
+  //-----------------------------------------------------------------------------------
   getNewID() {
     var i;
     for (i = 1; EmicWidgetSlider.namesList[`slider-${i}`]; i++);
@@ -22,9 +25,9 @@ constructor() {
     return `slider-${i}`;
   }
 
-//****************************************************************************/
-//               Cuando el elemento es conectado al DOM
-//****************************************************************************/
+  //-----------------------------------------------------------------------------------
+  // Cuando el elemento es conectado al DOM
+  //-----------------------------------------------------------------------------------
 
   connectedCallback() {
     if (!super.preconnectedCallback("Slider")) {
@@ -66,9 +69,10 @@ constructor() {
     // Establecemos el ancho y la altura del slider
     this.slider.style = "width:150px; height:40px;";
 
-    // Agregamos un event listener para el evento "change" del slider
+    //----------------------------------------------------
+    // Se define las llamadas a los eventos
     this.slider.addEventListener("change", this.change);
-
+    //----------------------------------------------------
     super.connectedCallback();
   }
 
@@ -80,9 +84,9 @@ constructor() {
     if (window.sliderChange)
       sliderChange(this.getAttribute("id"), event.target.value);
   }
-//****************************************************************************/
-//                               Si hay cambios
-//****************************************************************************/
+  //-----------------------------------------------------------------------------------
+  // Si hay cambios en tiempo de ejecucion.
+  //-----------------------------------------------------------------------------------
   // Lista de atributos observados por el elemento
   static get observedAttributes() {
     return ["value", "max", "min"];
@@ -104,7 +108,10 @@ constructor() {
         break;
     }
   }
-//****************************************************************************/
+    
+  //-----------------------------------------------------------------------------------
+  // Métodos para obtener el valor de los atributos
+  //-----------------------------------------------------------------------------------
   // Método para obtener el valor del atributo "value"
   get value() {
     return this.getAttribute("value");

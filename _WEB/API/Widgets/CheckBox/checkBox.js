@@ -32,7 +32,7 @@
 	'Tipo' : 'SistemEvt',
 	'title': 'when text Box change',
 	'instancia':'{
-		"NombreWorkBox": "Event.CheckBox.Change",
+		"NombreWorkBox": "Event.CheckBox.change",
 		"definir":"event_textBoxChange_active",
 		"parametros": [	{"value":"ChecktBox","title":"ChecktBox name "},{"value":"Value","title":"ChecktBox value"}]
 		}'

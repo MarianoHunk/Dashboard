@@ -10,9 +10,9 @@ class EmicWidgetTable extends EmicWidget {
   // Este método se utiliza para generar un nuevo ID único para el elemento.
   getNewID() {
     var i;
-    for (i = 1; EmicWidgetTable.namesList[`Table-${i}`]; i++);
-    EmicWidgetTable.namesList[`Table-${i}`] = this;
-    return `Table-${i}`;
+    for (i = 1; EmicWidgetTable.namesList[`table-${i}`]; i++);
+    EmicWidgetTable.namesList[`table-${i}`] = this;
+    return `table-${i}`;
   }
 
   //****************************************************************************/
@@ -62,9 +62,9 @@ class EmicWidgetTable extends EmicWidget {
     const table = this.myDiv;
     table.innerHTML = "";
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       const row = document.createElement("tr");
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < 2; j++) {
         const cell = document.createElement("td");
         cell.textContent = "-";
         row.appendChild(cell);

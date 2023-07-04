@@ -1,8 +1,8 @@
 import { EmicWidget } from "./emicWidget.js";
 
-class EmicWidgetPrueba extends EmicWidget {
+class EmicWidgetTextView extends EmicWidget {
   static namesList = {};
-  myDiv;
+  myTextView;
 
   //****************************************************************************/
   //                   Método para obtener un nuevo ID
@@ -10,8 +10,8 @@ class EmicWidgetPrueba extends EmicWidget {
   // Este método se utiliza para generar un nuevo ID único para el elemento.
   getNewID() {
     var i;
-    for (i = 1; document.getElementById(`prueba-${i}`) !== null; i++);
-    return `prueba-${i}`;
+    for (i = 1; document.getElementById(`textview-${i}`) !== null; i++);
+    return `textview-${i}`;
   }
 
   //****************************************************************************/
@@ -28,40 +28,29 @@ class EmicWidgetPrueba extends EmicWidget {
   //****************************************************************************/
   // Este método se ejecuta cuando el elemento personalizado se conecta al DOM.
   connectedCallback() {
-    if (!super.preconnectedCallback("Prueba")) {
-      return;
+    if (!super.preconnectedCallback("TextView")) {
+        return;
     }
-    //-----------------------------------------------------------------
-    // Se crea un nuevo elemento div usando document.createElement y se guarda en la variable div.
     const div = document.createElement("div");
-    // Se asigna el elemento div recién creado a la propiedad myDiv del objeto actual (instancia de EmicWidgetPrueba).
-    this.myDiv = div;
-    // Crea un nuevo elemento HTML <style> y lo asigna a la variable 'style'
+    div.textContent = this.getAttribute("ValorMedido");
+    this.myTextView = div;
     const style = document.createElement("style");
-    // Se agrega el elemento div como hijo del Shadow DOM del elemento actual (instancia de EmicWidgetPrueba).    
     this.shadowRoot.appendChild(div);
-    // Agrega el elemento 'style' como hijo del Shadow DOM de este componente
     this.shadowRoot.appendChild(style);
-    //-----------------------------------------------------------------
-    
-    // Si el elemento no tiene el atributo "id", se le asigna un nuevo ID generado.
-    if (!this.hasAttribute("id")) {
-      this.setAttribute("id", this.getNewID());
+
+    if (!this.hasAttribute('id')) {
+        this.setAttribute('id', this.getNewID());
     }
 
-    // Si el elemento no tiene el atributo "ValorMedido", se le asigna el mismo valor que su ID.
-    if (!this.hasAttribute("ValorMedido")) {
-      this.setAttribute("ValorMedido", this.getAttribute("id"));
+    if (!this.hasAttribute('ValorMedido')) {
+        this.setAttribute('ValorMedido', this.getAttribute("id"));
     }
-    //----------------------------------------------------------------
-    // Aqui se genera la etiqueta.
-    // Se establece el contenido del div con el valor del atributo "ValorMedido".
-    div.innerHTML = this.getAttribute("ValorMedido");
-    //----------------------------------------------------------------
-    // Se agrega un event listener para el evento "click" al elemento.
-    this.addEventListener("click", this.eventClickListener);
+
+    div.textContent = this.getAttribute("ValorMedido");
+    this.addEventListener('click', this.eventClickListener);
     super.connectedCallback();
-  }
+}
+
 
   //****************************************************************************/
   //                            Cuando se hace click
@@ -97,9 +86,9 @@ class EmicWidgetPrueba extends EmicWidget {
 
 // Se registra el elemento personalizado en el navegador. 
 /* 
-* El custom element: "emic-widget-prueba" *
+* El custom element: "emic-widget-textview" *
 * Debe contener al menos un guion (-).
 * No puede contener letras en mayúscula.
 * Debe tener al menos un carácter que no sea un guion.
 */
-customElements.define("emic-widget-prueba", EmicWidgetPrueba);
+customElements.define("emic-widget-textview", EmicWidgetTextView);

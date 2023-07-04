@@ -26,7 +26,9 @@ export class EmicWidget extends HTMLElement {
         // Mostrar identificador
         this.setAttribute("title", this.getAttribute("id"))
     }
-
+    //--------------------------------------------------------------------------------------------------------------------------------
+    // Este método hace varios ajustes a la instancia de EmicWidget dependiendo de su posición en el DOM y de ciertas características.
+    //--------------------------------------------------------------------------------------------------------------------------------
     preconnectedCallback(name) {
 
         if (this.closest("emic-dashboard") && this.classList.contains("herramienta")) {
