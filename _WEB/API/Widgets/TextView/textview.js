@@ -27,7 +27,22 @@
 */
 //	'instance': '{"component":"emic-widget-textview","attributes":{}}',
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//                                 Eventos
+//                                 Funciones
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+/**
+ * @fn void textSetValue(int textViewName,int Value)
+ * @alias textSetValue
+ * @brief Set text
+ * @param textViewName textViewName
+ * @param Value Value
+ * @return Nothing
+ */ 
 
+function textSetValue(textViewName, value) {
+	const textView = document.getElementById(textViewName);
+	// Cambia el valor del atributo 'valormedido' del elemento
+	textView.setAttribute('text_val', value);
+  }
+  
+  

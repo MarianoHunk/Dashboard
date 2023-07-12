@@ -53,6 +53,19 @@ class EmicWidgetTable extends EmicWidget {
     // Generar el contenido de la tabla
     this.generateTableContent();
 
+    // Agregar estilos CSS para el borde de la tabla
+    style.textContent = `
+    table {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    
+    td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+  `;
+
     // Agregar un event listener para el clic
     this.addEventListener("click", this.eventClickListener);
     super.connectedCallback();
@@ -66,7 +79,7 @@ class EmicWidgetTable extends EmicWidget {
       const row = document.createElement("tr");
       for (let j = 0; j < 2; j++) {
         const cell = document.createElement("td");
-        cell.textContent = "-";
+        cell.textContent = "";
         row.appendChild(cell);
       }
       table.appendChild(row);

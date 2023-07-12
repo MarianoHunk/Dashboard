@@ -32,7 +32,7 @@ class EmicWidgetTextView extends EmicWidget {
         return;
     }
     const div = document.createElement("div");
-    div.textContent = this.getAttribute("ValorMedido");
+    div.innerText = this.getAttribute("text_val");
     this.myTextView = div;
     const style = document.createElement("style");
     this.shadowRoot.appendChild(div);
@@ -42,11 +42,11 @@ class EmicWidgetTextView extends EmicWidget {
         this.setAttribute('id', this.getNewID());
     }
 
-    if (!this.hasAttribute('ValorMedido')) {
-        this.setAttribute('ValorMedido', this.getAttribute("id"));
+    if (!this.hasAttribute('text_val')) {
+        this.setAttribute('text_val', this.getAttribute("id")); // Se setea el contenido de texto igual que el nombre del widget
     }
 
-    div.textContent = this.getAttribute("ValorMedido");
+    div.textContent = this.getAttribute("text_val");
     this.addEventListener('click', this.eventClickListener);
     super.connectedCallback();
 }
@@ -65,22 +65,25 @@ class EmicWidgetTextView extends EmicWidget {
   //****************************************************************************/
   // Este método define los atributos que se deben observar para detectar cambios.
   static get observedAttributes() {
-    return ["ValorMedido"];
+    return ["text_val"];
   }
 
-  // Este método se ejecuta cuando hay cambios en los atributos observados.
+  // Se ejecuta cuando hay cambios en los atributos observados
   attributeChangedCallback(name, old, now) {
-    // Aquí puedes implementar la lógica de los atributos observados
+    if (name === 'text_val' && this.myTextView) {
+      //this.myTextView.text_val = now;(error)
+      this.myTextView.textContent = now;
+    }
   }
 
-  // Setter para el atributo "ValorMedido".
-  set ValorMedido(newVal) {
-    this.setAttribute("ValorMedido", newVal);
+  // Setter para el atributo "text_val".
+  set text_val(newVal) {
+    this.setAttribute('text_val', newVal);
   }
 
-  // Getter para el atributo "ValorMedido".
-  get ValorMedido() {
-    return this.getAttribute("ValorMedido");
+  // Getter para el atributo "text_val".
+  get text_val() {
+    return this.getAttribute("text_val");
   }
 }
 

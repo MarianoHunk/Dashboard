@@ -106,6 +106,10 @@ class EmicWidgetSlider extends EmicWidget {
       case "min":
         this.slider.min = now;
         break;
+              // Si el atributo cambiado es "min", se actualiza el valor mínimo del slider
+      case "value":
+        this.slider.value = now;
+        break;
     }
   }
     
@@ -126,7 +130,10 @@ class EmicWidgetSlider extends EmicWidget {
   get min() {
     return this.getAttribute("min");
   }
-
+  // Método para establecer el valor del atributo "max"
+  set value(newVal) {
+    this.setAttribute("value", newVal); 
+  }
   // Método para establecer el valor del atributo "max"
   set max(newVal) {
     this.setAttribute("max", newVal);

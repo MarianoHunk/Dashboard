@@ -108,15 +108,20 @@ function sMQTT(topic){
 		}'
 }
 */
-
-if (MQTTsvr && MQTTport && USERMQTT && PASSMQTT) {
+if (!USERMQTT){
+	USERMQTT="";
+}
+if (!PASSMQTT){
+	PASSMQTT="";
+}
+if (MQTTsvr && MQTTport) {
   //client = new Paho.MQTT.Client("openproject.rfindustrial.com", Number(9090), "clientId"+makeid(10));
   //client = new Paho.MQTT.Client("editor.emic.io", Number(8081), "clientId"+makeid(10));
   client = new Paho.MQTT.Client(MQTTsvr, Number(MQTTport), "clientId" + makeid(10));
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   client.connect({
-    //useSSL: true,
+    useSSL: true,
     userName: USERMQTT,
     password: PASSMQTT,
     onSuccess: onConnect
