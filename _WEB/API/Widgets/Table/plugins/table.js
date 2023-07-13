@@ -73,43 +73,137 @@ class EmicWidgetTable extends EmicWidget {
 
   generateTableContent() {
     const table = this.myDiv;
-    table.innerHTML = "";
-
-    for (let i = 0; i < 2; i++) {
-      const row = document.createElement("tr");
-      for (let j = 0; j < 2; j++) {
-        const cell = document.createElement("td");
-        cell.textContent = "";
-        row.appendChild(cell);
+  
+    // Verificar si ya existe una tabla
+    if (table.rows.length > 0) {
+      // Guardar los valores existentes en un array bidimensional
+      const values = [];
+      for (let i = 0; i < table.rows.length; i++) {
+        const row = table.rows[i];
+        const rowData = [];
+        for (let j = 0; j < row.cells.length; j++) {
+          const cell = row.cells[j];
+          rowData.push(cell.textContent);
+        }
+        values.push(rowData);
       }
-      table.appendChild(row);
+  
+      // Eliminar la tabla existente
+      table.innerHTML = "";
+  
+      // Obtener las nuevas dimensiones de la tabla
+      const cellRows = this.getAttribute("cell-rows") || 2;
+      const cellColumns = this.getAttribute("cell-columns") || 2;
+  
+      // Redimensionar la tabla
+      for (let i = 0; i < cellRows; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < cellColumns; j++) {
+          const cell = document.createElement("td");
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+  
+      // Colocar los valores guardados en la nueva tabla
+      for (let i = 0; i < cellRows; i++) {
+        const row = table.rows[i];
+        for (let j = 0; j < cellColumns; j++) {
+          const cell = row.cells[j];
+          // Verificar si aún quedan valores guardados por colocar
+          if (i < values.length && j < values[i].length) {
+            cell.textContent = values[i][j];
+          } else {
+            // No hay más valores guardados, colocar "_"
+            cell.textContent = "_";
+          }
+        }
+      }
+    } else {
+      // No existe una tabla previa, generar una nueva tabla con las dimensiones especificadas
+      const cellRows = this.getAttribute("cell-rows") || 2;
+      const cellColumns = this.getAttribute("cell-columns") || 2;
+  
+      for (let i = 0; i < cellRows; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < cellColumns; j++) {
+          const cell = document.createElement("td");
+          cell.textContent = "_";
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
     }
   }
-  //****************************************************************************/
-  //                            Cuando se hace click
-  //****************************************************************************/
-  // Este método se ejecuta cuando se hace clic en el elemento personalizado.
-  eventClickListener(ev) {
-    // Lógica del listener del evento de clic va aquí
-  }
+  
+  
+
   //****************************************************************************/
   //                               Si hay cambios
   //****************************************************************************/
-  // Este método define los atributos que se deben observar para detectar cambios.
-  static get observedAttributes() {
-    return [];
+    // Este método define los atributos que se deben observar para detectar cambios.
+    static get observedAttributes() {
+      return ["cell-rows", "cell-columns"];
+    }
+  
+    attributeChangedCallback(name, old, now) {
+      // Verificar si el valor del atributo ha cambiado
+      if (old !== now) {
+        // Verificar si el atributo modificado es "cell-rows" o "cell-columns"
+        if (name === "cell-rows" || name === "cell-columns") {
+          // Regenerar el contenido de la tabla
+          this.generateTableContent();
+        }
+      }
+    }
+  
+    // Setter para el atributo "dimensiones"
+    set dimensiones(value) {
+      // Separar el valor en celdas y columnas
+      const [cellRows, cellColumns] = value.split(",");
+      // Establecer los atributos "cell-rows" y "cell-columns" con los nuevos valores
+      this.setAttribute("cell-rows", cellRows);
+      this.setAttribute("cell-columns", cellColumns);
+    }
+  
+    // Getter para el atributo "dimensiones"
+    get dimensiones() {
+      // Obtener el valor actual de los atributos "cell-rows" y "cell-columns"
+      const cellRows = this.getAttribute("cell-rows") || 2;
+      const cellColumns = this.getAttribute("cell-columns") || 2;
+      // Devolver el valor en formato "celdas,columnas"
+      return `${cellRows},${cellColumns}`;
+    }
+  
+    // Setter para el atributo "valCelCol"
+    set valCelCol(value) {
+      // Separar el valor en fila, columna y valor de la celda
+      const [cell, column, cellValue] = value.split(",");
+      // Obtener la referencia a la tabla
+      const table = this.myDiv;
+      // Obtener el número de filas en la tabla
+      const rowCount = table.rows.length;
+  
+      // Verificar si el índice de fila es válido y está dentro del rango
+      if (rowCount > cell && cell >= 0) {
+        // Obtener la fila correspondiente al índice especificado
+        const targetRow = table.rows[cell];
+        // Obtener el número de celdas en la fila
+        const cellCount = targetRow.cells.length;
+  
+        // Verificar si el índice de columna es válido y está dentro del rango
+        if (cellCount > column && column >= 0) {
+          // Obtener la celda correspondiente al índice especificado
+          const targetCell = targetRow.cells[column];
+          // Asignar el valor especificado como contenido de la celda
+          targetCell.textContent = cellValue;
+        } else {
+          console.error("Column index out of range or invalid.");
+        }
+      } else {
+        console.error("Row index out of range or invalid.");
+      }
+    }
   }
-  attributeChangedCallback(name, old, now) {
-    // Lógica del callback para cambios de atributos va aquí
-  }
-
-  set value(newVal) {
-    // Setter para el atributo "value" va aquí
-  }
-
-  get value() {
-    // Getter para el atributo "value" va aquí
-  }
-}
 
 customElements.define("emic-widget-table", EmicWidgetTable);

@@ -50,7 +50,7 @@ doCMDstr(TOPICSUBS) // Topic to subscribe immediately after connect to MQTT brok
 function pMQTT(topic,payload){
 		message = new Paho.MQTT.Message(payload);
 		message.destinationName = topic;
-		message.retained = false;
+		message.retained = true;
 		client.send(message); 
 }
 
