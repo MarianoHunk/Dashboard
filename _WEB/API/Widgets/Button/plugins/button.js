@@ -43,7 +43,7 @@ class EmicWidgetButton extends EmicWidget {
       this.setAttribute("id", this.getNewID());
     }
 
-    img.style = "width:80px; height:80px;";
+    img.style = "width:50px; height:50px;";
     //----------------------------------------------------
     // Se define las llamadas a los eventos
 

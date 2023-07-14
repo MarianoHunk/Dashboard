@@ -14,7 +14,7 @@ class EmicWidgetSlider extends EmicWidget {
     super();
     this.attachShadow({ mode: "open" });
   }
-  
+
   //-----------------------------------------------------------------------------------
   // Método para obtener un nuevo ID.
   //-----------------------------------------------------------------------------------
@@ -67,22 +67,24 @@ class EmicWidgetSlider extends EmicWidget {
     this.shadowRoot.appendChild(this.slider);
 
     // Establecemos el ancho y la altura del slider
-    this.slider.style = "width:150px; height:40px;";
+    this.slider.style =
+      "height:150px; width:150px; transform-origin: center center; transform: rotate(-40deg);";
 
     //----------------------------------------------------
     // Se define las llamadas a los eventos
-    this.slider.addEventListener("change", this.change);
+    this.slider.addEventListener("change", this.change.bind(this));
     //----------------------------------------------------
     super.connectedCallback();
   }
 
   // Método llamado cuando ocurre el evento "change" en el slider
   change(event) {
-    console.log("change", event.target.value);
+    console.log(this.getAttribute("id"), " change ", event.target.value);
 
     // Si existe una función global "sliderChange", se llama a esa función y se le pasa el ID del slider y su nuevo valor
     if (window.sliderChange)
       sliderChange(this.getAttribute("id"), event.target.value);
+    this.setAttribute("value", event.target.value); // Actualizamos el atributo "value"
   }
   //-----------------------------------------------------------------------------------
   // Si hay cambios en tiempo de ejecucion.
@@ -106,13 +108,13 @@ class EmicWidgetSlider extends EmicWidget {
       case "min":
         this.slider.min = now;
         break;
-              // Si el atributo cambiado es "min", se actualiza el valor mínimo del slider
+      // Si el atributo cambiado es "min", se actualiza el valor mínimo del slider
       case "value":
         this.slider.value = now;
         break;
     }
   }
-    
+
   //-----------------------------------------------------------------------------------
   // Métodos para obtener el valor de los atributos
   //-----------------------------------------------------------------------------------
@@ -132,7 +134,7 @@ class EmicWidgetSlider extends EmicWidget {
   }
   // Método para establecer el valor del atributo "max"
   set value(newVal) {
-    this.setAttribute("value", newVal); 
+    this.setAttribute("value", newVal);
   }
   // Método para establecer el valor del atributo "max"
   set max(newVal) {

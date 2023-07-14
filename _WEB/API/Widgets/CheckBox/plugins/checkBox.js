@@ -5,8 +5,8 @@ import {EmicWidget} from "./emicWidget.js"
         myDiv;
         getNewID() {
             var i;
-            for (i = 1; document.getElementById(`checkBox-${i}`) !== null; i++);
-            return `checkBox-${i}`;
+            for (i = 1; document.getElementById(`checkbox-${i}`) !== null; i++);
+            return `checkbox-${i}`;
         }
         static get observedAttributes() {
             // return ["value"];
@@ -29,9 +29,6 @@ import {EmicWidget} from "./emicWidget.js"
             <input type="checkbox"  id="check"></div>`
             var checkbox = this.shadowRoot.getElementById('check');
 
-
-
-
             const div = document.createElement("div");
             this.myDiv = div
             const style = document.createElement("style");
@@ -52,12 +49,10 @@ import {EmicWidget} from "./emicWidget.js"
            
             let elemento=this.getAttribute("value")
             checkbox.addEventListener( 'change', function(e) {
-                //if(this.checked) {
-                //    alert(elemento +' esta seleccionado');
-                //}
 				
 				if (window.chexkBoxChange)
 					chexkBoxChange(this.getAttribute("id").substr(7), (e.currentTarget.checked)?"1":"0");
+                    this.setAttribute("value", e.currentTarget.checked ? "1" : "0");
 				
             });
             this.style.textAlign="center"

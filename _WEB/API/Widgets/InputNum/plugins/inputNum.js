@@ -10,7 +10,7 @@ class EmicWidgetInputNum extends EmicWidget {
     super();
     this.attachShadow({ mode: "open" });
   }
-  
+
   getNewID() {
     var i;
     for (i = 1; EmicWidgetInputNum.namesList[`inputNum-${i}`]; i++);
@@ -41,7 +41,7 @@ class EmicWidgetInputNum extends EmicWidget {
 
     this.inputNum.style = "width:40px; height:40px;";
 
-    this.inputNum.addEventListener("change", this.change);
+    this.inputNum.addEventListener("change", this.change.bind(this));
     super.connectedCallback();
   }
 
@@ -49,8 +49,9 @@ class EmicWidgetInputNum extends EmicWidget {
     console.log("change", event.target.value);
     if (window.inputNumChange)
       inputNumChange(this.getAttribute("id"), event.target.value);
+    this.setAttribute("value", event.target.value); // Actualizamos el atributo "value"
   }
-  
+
   static get observedAttributes() {
     return ["value"];
   }

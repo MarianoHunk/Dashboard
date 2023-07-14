@@ -14,7 +14,7 @@ class EmicWidgetTable extends EmicWidget {
     EmicWidgetTable.namesList[`table-${i}`] = this;
     return `table-${i}`;
   }
-
+  
   //****************************************************************************/
   //                               Constructor
   //****************************************************************************/
@@ -135,8 +135,6 @@ class EmicWidgetTable extends EmicWidget {
       }
     }
   }
-  
-  
 
   //****************************************************************************/
   //                               Si hay cambios
@@ -204,6 +202,7 @@ class EmicWidgetTable extends EmicWidget {
         console.error("Row index out of range or invalid.");
       }
     }
+    
   }
 
 customElements.define("emic-widget-table", EmicWidgetTable);
