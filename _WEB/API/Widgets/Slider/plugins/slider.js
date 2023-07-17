@@ -68,7 +68,7 @@ class EmicWidgetSlider extends EmicWidget {
 
     // Establecemos el ancho y la altura del slider
     this.slider.style =
-      "height:150px; width:150px; transform-origin: center center; transform: rotate(-40deg);";
+      "height:150px; width:150px; transform-origin: center center; transform: rotate(0 deg);";
 
     //----------------------------------------------------
     // Se define las llamadas a los eventos

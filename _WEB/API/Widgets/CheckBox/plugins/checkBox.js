@@ -1,107 +1,109 @@
-import {EmicWidget} from "./emicWidget.js"
+import { EmicWidget } from "./emicWidget.js";
 
-    class EmicWidgetCheckBox extends EmicWidget {
-        static namesList = {};
-        myDiv;
-        getNewID() {
-            var i;
-            for (i = 1; document.getElementById(`checkbox-${i}`) !== null; i++);
-            return `checkbox-${i}`;
-        }
-        static get observedAttributes() {
-            // return ["value"];
-            return ["text"];
-        }
-        constructor() {
-            super();
-            this.attachShadow({ mode: "open" });
-            this.text="chan1"
-        }
+class EmicWidgetCheckbox extends EmicWidget {
+  //-----------------------------------------------------------------------------------
+  // Definimos variables.
+  //-----------------------------------------------------------------------------------
+  static namesList = {};
+  checkbox;
 
-        connectedCallback() {
+  //-----------------------------------------------------------------------------------
+  // Constructor.
+  //-----------------------------------------------------------------------------------
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-            
-            if (!super.preconnectedCallback("CheckBox")) {
-                return;
-            }
+  //-----------------------------------------------------------------------------------
+  // Método para obtener un nuevo ID.
+  //-----------------------------------------------------------------------------------
+  getNewID() {
+    var i;
+    for (i = 1; EmicWidgetCheckbox.namesList[`checkbox-${i}`]; i++);
+    EmicWidgetCheckbox.namesList[`checkbox-${i}`] = this;
+    return `checkbox-${i}`;
+  }
 
-            this.shadowRoot.innerHTML=`<div>          
-            <input type="checkbox"  id="check"></div>`
-            var checkbox = this.shadowRoot.getElementById('check');
-
-            const div = document.createElement("div");
-            this.myDiv = div
-            const style = document.createElement("style");
-            this.shadowRoot.appendChild(div);
-            this.shadowRoot.appendChild(style);
-
-            if (!this.hasAttribute('id')) {
-                this.setAttribute('id', this.getNewID());
-            }
-
-            if (!this.hasAttribute('value')) {
-                this.setAttribute('value', this.getAttribute("id"));
-            }
-
-            div.innerHTML = this.getAttribute("value");
-            // this.addEventListener('click', this.eventClickListener);
-            super.connectedCallback();
-           
-            let elemento=this.getAttribute("value")
-            checkbox.addEventListener( 'change', function(e) {
-				
-				if (window.chexkBoxChange)
-					chexkBoxChange(this.getAttribute("id").substr(7), (e.currentTarget.checked)?"1":"0");
-                    this.setAttribute("value", e.currentTarget.checked ? "1" : "0");
-				
-            });
-            this.style.textAlign="center"
-    
-        }
-        
-        eventClickListener(ev) {
-
-            var input = document.createElement("input");
-            input.value = this.getAttribute("value");
-            this.myDiv.innerText = "";
-            this.myDiv.appendChild(input);
-            input.focus();
-
-            input.addEventListener("blur", (e) => {
-                e.stopPropagation;
-                this.setAttribute("value", e.currentTarget.value)
-                this.myDiv.innerHTML = e.currentTarget.value;
-            });
-            input.addEventListener("keypress", (e) => {
-                e.stopPropagation;
-                if (e.key === "Enter") {
-                    this.setAttribute("value", e.currentTarget.value)
-                    this.myDiv.innerHTML = e.currentTarget.value;
-
-                }
-            });
-            input.addEventListener("click", (e) => {
-                e.stopPropagation;
-            });
-        }
-
-
-        attributeChangedCallback(name, old, now) {
-            
-
-            switch (name) {
-                case 'value':
-                    
-                    break;
-            }
-        }
-
-        set value(newVal) {
-            this.setAttribute('value', newVal);
-        }
-
-        get value() {
-            return this.getAttribute('value');
-        }
+  //-----------------------------------------------------------------------------------
+  // Cuando el elemento es conectado al DOM
+  //-----------------------------------------------------------------------------------
+  connectedCallback() {
+    if (!super.preconnectedCallback("Checkbox")) {
+      return;
     }
-    customElements.define("emic-widget-checkbox", EmicWidgetCheckBox);
+    // Creamos un nuevo elemento <input>
+    this.checkbox = document.createElement("input");
+
+    // Establecemos el tipo de input como "checkbox"
+    this.checkbox.type = "checkbox";
+    
+    // Si el elemento no tiene un atributo "id", se le asigna uno nuevo
+    if (!this.hasAttribute("id")) {
+      this.setAttribute("id", this.getNewID());
+    }
+    // Mostrar identificador
+    this.setAttribute("title", this.getAttribute("id"));
+
+    // Si el elemento no tiene un atributo "checked", se le asigna el valor false
+    if (!this.hasAttribute("checked")) {
+      this.setAttribute("checked", "0");
+    }
+
+    this.shadowRoot.appendChild(this.checkbox);
+
+    //----------------------------------------------------
+    // Se define las llamadas a los eventos
+    this.checkbox.addEventListener("change", this.change.bind(this));
+    //----------------------------------------------------
+    super.connectedCallback();
+  }
+
+  // Método llamado cuando ocurre el evento "change" en el checkbox
+  change(event) {
+    let checkedValue = event.target.checked ? "1" : "0";
+    console.log(this.getAttribute("id"), " change ", checkedValue);
+
+    // Si existe una función global "checkboxChange", se llama a esa función y se le pasa el ID del checkbox y su nuevo valor
+    if (window.checkboxChange)
+      checkboxChange(this.getAttribute("id"), checkedValue);
+    this.setAttribute("checked", checkedValue); // Actualizamos el atributo "checked"
+  }
+  //-----------------------------------------------------------------------------------
+  // Si hay cambios en tiempo de ejecucion.
+  //-----------------------------------------------------------------------------------
+  // Lista de atributos observados por el elemento
+  static get observedAttributes() {
+    return ["checked"];
+  }
+
+  // Método llamado cuando hay cambios en los atributos del elemento
+  attributeChangedCallback(name, old, now) {
+    // Si el checkbox no está definido, se retorna
+    if (typeof this.checkbox == "undefined") return;
+
+    switch (name) {
+      // Si el atributo cambiado es "checked", se actualiza el estado del checkbox
+      case "checked":
+        this.checkbox.checked = now == "1";
+        break;
+    }
+  }
+
+  //-----------------------------------------------------------------------------------
+  // Métodos para obtener el valor de los atributos
+  //-----------------------------------------------------------------------------------
+  // Método para obtener el valor del atributo "checked"
+  get checked() {
+    return this.getAttribute("checked") == "1";
+  }
+
+  // Método para establecer el valor del atributo "checked"
+  set checked(newVal) {
+    this.setAttribute("checked", newVal ? "1" : "0");
+  }
+}
+
+// Se define el nuevo elemento "emic-widget-checkbox"
+customElements.define("emic-widget-checkbox", EmicWidgetCheckbox);
+
