@@ -4,8 +4,8 @@ import {EmicWidget} from "./emicWidget.js"
         static namesList = {};
         getNewID() {
             var i;
-            for (i = 1; document.getElementById(`LedIndicador-${i}`) !== null; i++);
-            return `LedIndicador-${i}`;
+            for (i = 1; document.getElementById(`led-${i}`) !== null; i++);
+            return `led-${i}`;
         }
         static get observedAttributes() {
             return ["state"];

@@ -13,9 +13,9 @@ class EmicWidgetInputTime extends EmicWidget {
   
   getNewID() {
     var i;
-    for (i = 1; EmicWidgetInputTime.namesList[`inputTime-${i}`]; i++);
-    EmicWidgetInputTime.namesList[`inputTime-${i}`] = this;
-    return `inputTime-${i}`;
+    for (i = 1; EmicWidgetInputTime.namesList[`inputtime-${i}`]; i++);
+    EmicWidgetInputTime.namesList[`inputtime-${i}`] = this;
+    return `inputtime-${i}`;
   }
 
   connectedCallback() {

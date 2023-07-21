@@ -38,7 +38,19 @@
 }
 */
 
-function LedIndicadorSetValue(LedIndicadorName,value){
-	document.getElementById(LedIndicadorName).state = value;
+function LedIndicadorSetValue(LedIndicadorName, Value) {
+    var tName = LedIndicadorName;
+    if (LedIndicadorName.includes('/')) {
+        tName = LedIndicadorName.substr(LedIndicadorName.lastIndexOf('/') + 1);
+    }
+    var element = document.getElementById(tName);
+    if (element) {
+        // Si el elemento existe, le asigna el valor 'Value' a su propiedad 'state'
+        element.state = Value;
+    } 
+    else {
+        console.log("Led Indicador con id ", tName, " no encontrado");
+    }
 }
+
 

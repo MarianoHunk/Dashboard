@@ -13,9 +13,9 @@ class EmicWidgetInputNum extends EmicWidget {
 
   getNewID() {
     var i;
-    for (i = 1; EmicWidgetInputNum.namesList[`inputNum-${i}`]; i++);
-    EmicWidgetInputNum.namesList[`inputNum-${i}`] = this;
-    return `inputNum-${i}`;
+    for (i = 1; EmicWidgetInputNum.namesList[`inputnum-${i}`]; i++);
+    EmicWidgetInputNum.namesList[`inputnum-${i}`] = this;
+    return `inputnum-${i}`;
   }
 
   connectedCallback() {

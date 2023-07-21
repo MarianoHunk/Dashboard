@@ -22,8 +22,8 @@ class EmicWidgetButton extends EmicWidget {
   //-----------------------------------------------------------------------------------
   getNewID() {
     var i;
-    for (i = 1; document.getElementById(`Button-${i}`) !== null; i++);
-    return `Button-${i}`;
+    for (i = 1; document.getElementById(`button-${i}`) !== null; i++);
+    return `button-${i}`;
   }
 
   //-----------------------------------------------------------------------------------

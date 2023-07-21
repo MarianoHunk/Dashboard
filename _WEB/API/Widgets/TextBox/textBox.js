@@ -1,17 +1,5 @@
 //RFI TAG:driverName=HTML Widget
 
-/*RFI JSon
-{
-	'Nombre': 'textBox',
-	'NombreToolBox': 'TextBox',
-	'Tipo' : 'Widget',
-	'title': 'Text Box',
-	'html-tag': 'emic-widget-textbox',
-	'instance': '{"component":"emic-widget-textbox","attributes":{}}',
-}
-*/
-
-
 #setFile plugins/www/header.html
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/textBox.js"> </script>
 #unSetFile
@@ -24,25 +12,24 @@
 #newRFIcode(_WEB/API/Widgets/TextBox/plugins/textBox.js,name=)
 #unSetFile
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 /*RFI JSon
 {
-	'Nombre': 'TextBoxSetValue',
-	'NombreToolBox': 'TextBoxSetValue',
-	'Tipo' : 'SistemFnc',
-	'title': 'set Text Box value',
-
-	'InnerHTML':"
-		<div class='lineaDeCodigo' originalclass='funcion' originalid='TextBoxSetValue' draggable='true' ondragstart='drag_linea(event)'>
-			textBox.setValue(<div class='parametroDiv'></div> , <div class='parametroDiv'></div>)
-		</div>"
+	'Nombre': 'textBox',
+	'NombreToolBox': 'TextBox',
+	'Tipo' : 'Widget',
+	'title': 'Text Box',
+	'html-tag': 'emic-widget-textbox',
+	'instance': '{"component":"emic-widget-textbox","attributes":{}}',
 }
 */
 
-function TextBoxSetValue(TextBoxName,Value){
-	document.getElementById(TextBoxName).value = Value;
-}
-
-
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
 	'Nombre': 'textBoxChange',
@@ -56,3 +43,31 @@ function TextBoxSetValue(TextBoxName,Value){
 		}'
 }
 */
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/**
+ * @fn void TextBoxSetValue(int textId,int Value)
+ * @alias TextBoxSetValue
+ * @brief Set Value
+ * @param textId textId
+ * @param Value Value
+ * @return Nothing
+ */ 
+function TextBoxSetValue(textId, Value){
+    var tName = textId;
+    if (textId.includes('/')) {
+        tName = textId.substr(textId.lastIndexOf('/') + 1);
+    }
+    var element = document.getElementById(tName);
+    if (element) {
+        // Si el elemento existe, le asigna el valor 'Value'
+        element.setAttribute('value', Value);
+    } 
+    else {
+        console.log("Elemento con id ", tName, " no encontrado");
+    }
+}
+

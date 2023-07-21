@@ -49,9 +49,9 @@ class EmicWidgetSlider extends EmicWidget {
     // Mostrar identificador
     this.setAttribute("title", this.getAttribute("id"));
 
-    // Si el elemento no tiene un atributo "value", se le asigna el valor 0
+    // Si el elemento no tiene un atributo "value", se le asigna el valor 50
     if (!this.hasAttribute("value")) {
-      this.setAttribute("value", 0);
+      this.setAttribute("value", 50);
     }
 
     // Si el elemento no tiene un atributo "max", se le asigna el valor 100
@@ -67,8 +67,10 @@ class EmicWidgetSlider extends EmicWidget {
     this.shadowRoot.appendChild(this.slider);
 
     // Establecemos el ancho y la altura del slider
-    this.slider.style =
-      "height:150px; width:150px; transform-origin: center center; transform: rotate(-40deg);";
+    this.slider.style.height = "150px";
+    this.slider.style.width = "150px";
+    this.slider.style.transformOrigin = "center center";
+    this.slider.style.transform = "rotate(0deg)";
 
     //----------------------------------------------------
     // Se define las llamadas a los eventos
