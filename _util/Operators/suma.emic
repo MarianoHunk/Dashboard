@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "suma",
+	'NombreToolBox': 'suma',
+	"Tipo" : "SistemFnc",
+	"title": "suma",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/suma.js' definir='use_suma_function' originalclass='funcion' originalid='suma' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> + <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

@@ -2,6 +2,9 @@ import {EmicWidget} from "./emicWidget.js"
 
 class EmicWidgetSwitch extends EmicWidget {
         //static namesList = {};
+
+        config = { backgrown:"green" };
+
         getNewID() {
             var i;
 

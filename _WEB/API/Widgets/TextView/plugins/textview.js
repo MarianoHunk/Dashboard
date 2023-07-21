@@ -3,6 +3,17 @@ import { EmicWidget } from "./emicWidget.js";
 class EmicWidgetTextView extends EmicWidget {
   static namesList = {};
   myTextView;
+  config = [
+     {
+      name:"font",
+      type:"list",
+      options:["arial","sansserif"],
+     },
+     {
+        name:"color",
+        
+
+  ]
 
   //****************************************************************************/
   //                   Método para obtener un nuevo ID

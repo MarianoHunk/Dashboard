@@ -25,7 +25,24 @@ export class EmicWidget extends HTMLElement {
         this.style.alignSelf = "center";
         // Mostrar identificador
         this.setAttribute("title", this.getAttribute("id"))
+		
+		this.addEventListener("click", this);
     }
+	
+	  handleEvent(event) {
+		if (event.type === "click") {
+            event.stopPropagation();
+		    const messageEvent = new CustomEvent("user:data-message", {
+			detail: { from: "Manz", message: "Hello!" },
+			bubbles: true,
+			composed: true
+		  });
+		  this.dispatchEvent(messageEvent);
+		}
+
+	  }	
+	
+	
     //--------------------------------------------------------------------------------------------------------------------------------
     // Este método hace varios ajustes a la instancia de EmicWidget dependiendo de su posición en el DOM y de ciertas características.
     //--------------------------------------------------------------------------------------------------------------------------------
