@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "compIgual",
+	'NombreToolBox': 'compIgual',
+	"Tipo" : "SistemFnc",
+	"title": "Comparación estricta. Si valor1 y valor2 son iguales devuelve 1, de lo contrario devuelve 0.",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/compIgual.js' definir='use_compIgual_function' originalclass='funcion' originalid='compIgual' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> =? <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

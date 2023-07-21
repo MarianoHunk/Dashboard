@@ -11,8 +11,7 @@ class EmicWidgetTextView extends EmicWidget {
      },
      {
         name:"color",
-        
-
+     } 
   ]
 
   //-----------------------------------------------------------------------------------

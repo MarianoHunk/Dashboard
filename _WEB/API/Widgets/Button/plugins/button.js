@@ -42,28 +42,30 @@ class EmicWidgetButton extends EmicWidget {
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
+    // Mostrar identificador
+    this.setAttribute("title", this.getAttribute("id"));
 
     img.style = "width:50px; height:50px;";
     //----------------------------------------------------
     // Se define las llamadas a los eventos
 
     //img.addEventListener('click', this.presionado);
-    img.addEventListener("mousedown", this.presionado);
-    img.addEventListener("mouseup", this.soltado);
+    img.addEventListener("mousedown", this.presionado.bind(this));
+    img.addEventListener("mouseup", this.soltado.bind(this));
     //----------------------------------------------------
     super.connectedCallback();
   }
 
   presionado() {
     this.TinicioClick = new Date();
-    console.log("presionado");
+    console.log(this.getAttribute("id"), "presionado");
 
     if (window.buttonPress) buttonPress(this.getAttribute("id"));
   }
   soltado() {
     this.TfinClick = new Date();
     this.TDuracionClick = this.TfinClick - this.TinicioClick;
-    console.log("soltado en :" + this.TDuracionClick + "[ms]");
+    console.log(this.getAttribute("id"), "soltado en :" + this.TDuracionClick + "[ms]");
 
     if (window.buttonRelease)
       buttonRelease(this.getAttribute("id"), this.TDuracionClick);
