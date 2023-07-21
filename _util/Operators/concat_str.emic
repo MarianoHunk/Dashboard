@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "concat_str",
+	'NombreToolBox': 'concat_str',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) concat_str(value1, value2)",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/concat_str.js' definir='use_concat_str_function' originalclass='funcion' originalid='concat_str' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> - <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

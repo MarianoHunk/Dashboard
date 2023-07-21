@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "remainder",
+	'NombreToolBox': 'remainder',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) Value remaining after division",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/remainder.js' definir='use_remainder_function' originalclass='funcion' originalid='remainder' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> % <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "arround",
+	'NombreToolBox': 'arround',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) arround(float, int)",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/arround.js' definir='use_arround_function' originalclass='funcion' originalid='arround' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> arround <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

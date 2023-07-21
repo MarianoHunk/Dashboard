@@ -1,5 +1,5 @@
 #setFile wwwroot/JS/emic.js
-function resolventeX1(op1, op2, op3) {
+function resolventX1(op1, op2, op3) {
     // Convertir los parámetros a valores flotantes
     const a = parseFloat(op1);
     const b = parseFloat(op2);

@@ -1,0 +1,10 @@
+ /*RFI JSon
+{
+	"Nombre": "subtract",
+	'NombreToolBox': 'subtract',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) subtract(a-b)",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/subtract.js' definir='use_subtract_function' originalclass='funcion' originalid='subtract' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> + <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
