@@ -106,4 +106,3 @@ class EmicWidgetCheckbox extends EmicWidget {
 
 // Se define el nuevo elemento "emic-widget-checkbox"
 customElements.define("emic-widget-checkbox", EmicWidgetCheckbox);
-

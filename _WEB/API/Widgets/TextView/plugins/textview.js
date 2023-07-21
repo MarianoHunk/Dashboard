@@ -4,9 +4,9 @@ class EmicWidgetTextView extends EmicWidget {
   static namesList = {};
   myTextView;
 
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   //                   Método para obtener un nuevo ID
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   // Este método se utiliza para generar un nuevo ID único para el elemento.
   getNewID() {
     var i;
@@ -14,22 +14,22 @@ class EmicWidgetTextView extends EmicWidget {
     return `textview-${i}`;
   }
 
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   //                               Constructor
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   // El constructor de la clase. Llama al constructor de la clase padre y crea un Shadow DOM.
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   //               Cuando el elemento es conectado al DOM
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   // Este método se ejecuta cuando el elemento personalizado se conecta al DOM.
   connectedCallback() {
     if (!super.preconnectedCallback("TextView")) {
-        return;
+      return;
     }
     const div = document.createElement("div");
     div.innerText = this.getAttribute("text_val");
@@ -49,20 +49,19 @@ class EmicWidgetTextView extends EmicWidget {
     div.textContent = this.getAttribute("text_val");
     this.addEventListener('click', this.eventClickListener);
     super.connectedCallback();
-}
+  }
 
-
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   //                            Cuando se hace click
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   // Este método se ejecuta cuando se hace clic en el elemento personalizado.
   eventClickListener(ev) {
     // Aquí puedes implementar la lógica del evento 'click' del Web Component
   }
 
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   //                               Si hay cambios
-  //****************************************************************************/
+  //-----------------------------------------------------------------------------------
   // Este método define los atributos que se deben observar para detectar cambios.
   static get observedAttributes() {
     return ["text_val"];
@@ -87,11 +86,11 @@ class EmicWidgetTextView extends EmicWidget {
   }
 }
 
-// Se registra el elemento personalizado en el navegador. 
-/* 
-* El custom element: "emic-widget-textview" *
-* Debe contener al menos un guion (-).
-* No puede contener letras en mayúscula.
-* Debe tener al menos un carácter que no sea un guion.
-*/
+// Se registra el elemento personalizado en el navegador.
+/*
+ * El custom element: "emic-widget-textview" *
+ * Debe contener al menos un guion (-).
+ * No puede contener letras en mayúscula.
+ * Debe tener al menos un carácter que no sea un guion.
+ */
 customElements.define("emic-widget-textview", EmicWidgetTextView);

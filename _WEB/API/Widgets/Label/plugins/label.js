@@ -54,7 +54,7 @@ import {EmicWidget} from "./emicWidget.js"
             input.addEventListener("keypress", (e) => {
                 e.stopPropagation;
                 if (e.key === "Enter") {
-                    this.setAttribute("value", e.currentTarget.value)
+                    this.setAttribute("value", e.currentTarget.value);
                     this.myDiv.innerHTML = e.currentTarget.value;
 
                 }
@@ -66,13 +66,16 @@ import {EmicWidget} from "./emicWidget.js"
 
 
         attributeChangedCallback(name, old, now) {
-
             switch (name) {
                 case 'value':
-                    
+                    // Si existe una función global "labelChange", se llama a esa función y se le pasa el ID del label y su nuevo valor
+                    if (window.labelChange) {
+                        labelChange(this.getAttribute("id"), now);
+                    }
                     break;
             }
         }
+        
 
         set value(newVal) {
             this.setAttribute('value', newVal);

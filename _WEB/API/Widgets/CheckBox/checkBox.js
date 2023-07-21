@@ -17,15 +17,14 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
-	'Nombre': 'checkbox',
-	'NombreToolBox': 'checkbox',
+	'Nombre': 'checkBox',
+	'NombreToolBox': 'CheckBox',
 	'Tipo' : 'Widget',
-	'title': 'Control checkbox',
+	'title': 'Check Box',
 	'html-tag': 'emic-widget-checkbox',
+	'instance': '{"component":"emic-widget-checkbox","attributes":{}}',
 }
 */
-//	'instance': '{"component":"emic-widget-checkbox","attributes":{}}',
-
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Evento
@@ -43,4 +42,35 @@
 		}'
 }
 */
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/**
+ * @fn void checkboxSetcheck(int chekboxId,int Value)
+ * @alias checkboxSetcheck
+ * @brief Set check
+ * @param chekboxId chekboxId
+ * @param Value Value
+ * @return Nothing
+ */
+
+function checkboxSetcheck(chekboxId, Value) {
+	var tName = chekboxId;
+	if (chekboxId.includes('/')) {
+		tName = chekboxId.substr(chekboxId.lastIndexOf('/') + 1);
+	}
+	var element = document.getElementById(tName);
+
+	// Este es el 'if' que verifica si el elemento existe
+	if (element) {
+		element.checked = (Value == "1");
+	}
+	// Si el elemento no existe, se ejecuta este bloque 'else'
+	else {
+		// Este es el console.log que se ejecuta si el elemento no se encuentra
+		console.log("Checkbox con id ", tName, " no encontrado");
+	}
+}
 
