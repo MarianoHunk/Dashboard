@@ -24,6 +24,7 @@ if ("serviceWorker" in navigator) {
 //-----------------------------------------------------------------------------------
 #newRFIcode(_WEB/API/Dashboard/dashboard.js,name=)
 #newRFIcode(_WEB/API/MQTT/mqtt.js,name=)
+#newRFIcode(_WEB/API/NOTIFICATION/notification.js,name=)
 #newRFIcode(_WEB/API/Tic/tic.js,name=)
 #newRFIcode(_WEB/API/System/system.js,name=)
 //-----------------------------------------------------------------------------------

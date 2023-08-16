@@ -4,7 +4,7 @@
 	'NombreToolBox': 'sum',
 	"Tipo" : "SistemFnc",
 	"title": "(Num) sum(a+b)",
-	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/sum.js' definir='use_sum_function' originalclass='funcion' originalid='sum' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> - <div type='' class='parametroDiv'></div>)</div>"
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/sum.js' definir='use_sum_function' originalclass='funcion' originalid='sum' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> + <div type='' class='parametroDiv'></div>)</div>"
 }
 */
 
