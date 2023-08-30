@@ -4,15 +4,15 @@ class EmicWidgetTextView extends EmicWidget {
   static namesList = {};
   myTextView;
   config = [
-     {
-      name:"font",
-      type:"list",
-      options:["arial","sansserif"],
-     },
-     {
-        name:"color",
-     } 
-  ]
+    {
+      name: "font",
+      type: "list",
+      options: ["arial", "sansserif"],
+    },
+    {
+      name: "color",
+    },
+  ];
 
   //-----------------------------------------------------------------------------------
   //                   Método para obtener un nuevo ID
@@ -47,17 +47,27 @@ class EmicWidgetTextView extends EmicWidget {
     const style = document.createElement("style");
     this.shadowRoot.appendChild(div);
     this.shadowRoot.appendChild(style);
+    //############################################################################
+    // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
+    this.myTextView.style.height = "40px";
+    this.myTextView.style.lineHeight = "40px"; // Centra el texto verticalmente al hacerlo igual a la altura
+    //this.myTextView.style.border = "1px solid #008CBA"; // Borde azul para coincidir con la tabla
+    this.myTextView.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
+    this.myTextView.style.backgroundColor = "transparent"; // Fondo celeste claro para coincidir con la tabla
+    this.myTextView.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
+    this.myTextView.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
+    //############################################################################
 
-    if (!this.hasAttribute('id')) {
-        this.setAttribute('id', this.getNewID());
+    if (!this.hasAttribute("id")) {
+      this.setAttribute("id", this.getNewID());
     }
 
-    if (!this.hasAttribute('text_val')) {
-        this.setAttribute('text_val', this.getAttribute("id")); // Se setea el contenido de texto igual que el nombre del widget
+    if (!this.hasAttribute("text_val")) {
+      this.setAttribute("text_val", this.getAttribute("id")); // Se setea el contenido de texto igual que el nombre del widget
     }
 
     div.textContent = this.getAttribute("text_val");
-    this.addEventListener('click', this.eventClickListener);
+    this.addEventListener("click", this.eventClickListener);
     super.connectedCallback();
   }
 
@@ -79,7 +89,7 @@ class EmicWidgetTextView extends EmicWidget {
 
   // Se ejecuta cuando hay cambios en los atributos observados
   attributeChangedCallback(name, old, now) {
-    if (name === 'text_val' && this.myTextView) {
+    if (name === "text_val" && this.myTextView) {
       //this.myTextView.text_val = now;(error)
       this.myTextView.textContent = now;
     }
@@ -87,7 +97,7 @@ class EmicWidgetTextView extends EmicWidget {
 
   // Setter para el atributo "text_val".
   set text_val(newVal) {
-    this.setAttribute('text_val', newVal);
+    this.setAttribute("text_val", newVal);
   }
 
   // Getter para el atributo "text_val".

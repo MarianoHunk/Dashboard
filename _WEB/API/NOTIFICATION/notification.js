@@ -2,11 +2,16 @@
 		
 #setFile temp/header.html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"> </script>
+#unSetFile
+#setFile temp/header.html
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js" type="text/javascript"> </script>
+#unSetFile
+#setFile temp/header.html
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-messaging-compat.js" type="text/javascript"> </script>
 #unSetFile
 
-/*RFI JSon
+
+/*xRFI JSon
 {
 	'Nombre': 'Register_Notification',
 	'NombreToolBox': 'Register',
@@ -37,92 +42,90 @@ function Register_Notification(ID,payload){
 		client.send(message); 
 }
 
-/*RFI JSon
-{
-	'Nombre': 'getTOKEN',
-	'NombreToolBox': 'Token',
-	'Tipo' : 'SistemFnc',
-	'title': 'token',
-	'returnInfo': {'type':'','tooltip':'Nothing'},
-	'parameters': [],
-	'InnerHTML':"
-		<div class='lineaDeCodigo' originalclass='funcion' originalid='getTOKEN' draggable='true' ondragstart='drag_linea(event)'>
-			NOTIFICATION.Token()
-		</div>"
-}
-*/
+//-----------------------------------------------------------------------------------------------
+/**
+ * @fn int getTOKEN(int num)
+ * @alias token
+ * @brief Set notification text
+ * @param num num
+ * @return value
+ */ 
 
-function getTOKEN(topic){
-	// Asegurarse de que Firebase esté cargado antes de usarlo
-window.onload = function () {
-	// Configuración de Firebase
-	const firebaseConfig = {
-	  // Credenciales y configuración de la aplicación
-	  apiKey: "AIzaSyBaefJaGbvJEcUz4JxWZltRSiXwTlr37cg",
-	  authDomain: "app-nueva-b3943.firebaseapp.com",
-	  projectId: "app-nueva-b3943",
-	  storageBucket: "app-nueva-b3943.appspot.com",
-	  messagingSenderId: "947440843893",
-	  appId: "1:947440843893:web:8ddeca8c860e07b67f4c3c",
-	};
-  
-	// Inicializa Firebase con la configuración proporcionada
-	const app = firebase.initializeApp(firebaseConfig);
-	const messaging = firebase.messaging();
-  
-	// Intenta recuperar el token del localStorage
-	const cachedToken = window.localStorage.getItem("firebaseToken");
-  
-	if (cachedToken) {
-	  // Token ya existente en caché, solo imprímelo
-	  console.log("Token desde el local storage:", cachedToken);
-	  
-	} else {
-	  // Genera el token del dispositivo usando la id pública
-	  messaging
-		.getToken({
-		  // Configuración del token
-		  vapidKey:
-		  //Modificar
-			"BPRhvp0upPy3JoG6Nocso6QfKZipK2RsFpANKzzL4gSs8b4wru3TsUZuPSj37JWh8RUZF2cBzXH6c1vj8Whi5OU",
-		})
-		.then((currentToken) => {
-		  if (currentToken) {
-			// Guarda el token en localStorage
-			window.localStorage.setItem("firebaseToken", currentToken);
+const firebaseConfig = {
+    // Credenciales y configuración de la aplicación
+    apiKey: "AIzaSyBaefJaGbvJEcUz4JxWZltRSiXwTlr37cg",
+    authDomain: "app-nueva-b3943.firebaseapp.com",
+    projectId: "app-nueva-b3943",
+    storageBucket: "app-nueva-b3943.appspot.com",
+    messagingSenderId: "947440843893",
+    appId: "1:947440843893:web:8ddeca8c860e07b67f4c3c",
+  };
 
-			console.log(currentToken);
-			// Enviar el token a MQTT
-			message = new Paho.MQTT.Message(currentToken);
-			message.destinationName = "Token/register/" + ID;
-			message.retained = true;
-			client.send(message); 
-			
-		  } else {
-			setTokenSentToServer(false);
-		  }
-		})
-		.catch((err) => {
-		  console.log(err);
-		  setTokenSentToServer(false);
-		});
+  // Inicializa Firebase con la configuración proporcionada
+  const app = firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+  if (messaging){
+	console.log(messaging);
+  }
+
+  function getTOKEN(num) {
+	try {
+	  const cachedToken = window.localStorage.getItem("firebaseToken");
+	  if (cachedToken) {
+		return cachedToken;
+	  } else {
+		return messaging
+		  .getToken({
+			vapidKey:
+			  "BPRhvp0upPy3JoG6Nocso6QfKZipK2RsFpANKzzL4gSs8b4wru3TsUZuPSj37JWh8RUZF2cBzXH6c1vj8Whi5OU",
+		  })
+		  .then((currentToken) => {
+			if (currentToken) {
+			  window.localStorage.setItem("firebaseToken", currentToken);
+			  return currentToken;
+			} else {
+			  console.log("no se pudo conseguir el token");
+			  return null;
+			}
+		  })
+		  .catch((err) => {
+			if (err.code === 'messaging/permission-blocked') {
+			  console.error('Permiso de notificación bloqueado por el usuario');
+			  // Aquí puedes manejar este caso específico, como mostrar un mensaje al usuario
+			  return null; // Puedes retornar un valor específico o manejarlo como desees
+			} else {
+			  console.log(err);
+			  return null;
+			}
+		  });
+	  }
+	} catch (error) {
+	  console.error(error);
+	  return num * 5;
 	}
-}
+  }
+  
+  
+  
+//-----------------------------------------------------------------------------------------------
+/**
+ * @fn int authorizeNotification(int num)
+ * @alias AuthoriceNotification
+ * @brief Set notification text
+ * @param num num
+ * @return Nothing
+ */ 
 
-/*RFI JSon
-{
-	'Nombre': 'AuthNotif',
-	'NombreToolBox': 'Authorize',
-	'Tipo' : 'SistemFnc',
-	'title': 'token...',
-	'returnInfo': {'type':'','tooltip':'Nothing'},
-	'parameters': [],
-	'InnerHTML':"
-		<div class='lineaDeCodigo' originalclass='funcion' originalid='AuthNotif' draggable='true' ondragstart='drag_linea(event)'>
-			NOTIFICATION.Authorize()
-		</div>"
-}
-*/
-function AuthNotif(topic){
-	// obtener el token
-}
+
+function authorizeNotification(num) {
+	Notification.requestPermission().then((permission) => {
+	  if (permission === 'granted') {
+		// El usuario otorgó permiso, ahora puedes obtener el token
+		getTOKEN(num);
+	  } else {
+		// El usuario no otorgó permiso
+		console.log('Permiso de notificación no otorgado');
+	  }
+	});
+  }
+  

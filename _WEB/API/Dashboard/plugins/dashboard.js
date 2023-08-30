@@ -27,7 +27,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
             //seccion;
             const nuevoDiv = document.createElement("div");
             const style = document.createElement("style");
-            style.innerHTML = `:host(:hover) {border : 1px solid;} section.show {min-height: 10px;opacity: 1;padding: 10px;} section.hide {min-height: 0px;  opacity: 0;padding: 0px;}                `;
+            style.innerHTML = `:host(:hover) {border : 1px solid;} section.show {min-height: 10px;opacity: 1;padding: 0px;} section.hide {min-height: 0px;  opacity: 0;padding: 0px;}                `;
 
             this.shadowRoot.appendChild(style);
             const boton = document.createElement("button");
@@ -163,15 +163,16 @@ if (customElements.get("emic-dash-panel") === undefined) {
             const style = document.createElement("style");
             style.innerHTML = ``;
             this.shadowRoot.appendChild(style);
-            this.seccion.style['border'] = '1px solid';
+            this.seccion.style['border'] = '1px solid #003366';
             this.seccion.style['display'] = 'flex';
             this.seccion.style['justify-content'] = 'space-evenly';
             this.seccion.style['flex-wrap'] = 'wrap';
             this.seccion.style['min-width'] = '10px';
             this.seccion.style['min-height'] = '10px';
-            this.seccion.style['padding'] = '4px';
+            this.seccion.style['padding'] = '0px';
             this.seccion.style['flex-grow'] = '1';
             this.seccion.style['position'] = 'relative';
+            this.seccion.style.backgroundColor = "#F0F0F0"; 
 
             this.menu = document.createElement("i");
             this.menu.style = "position: absolute;right:0;right:1;top:0;"

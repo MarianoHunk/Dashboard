@@ -25,6 +25,19 @@ class EmicWidgetInputTime extends EmicWidget {
     this.inputTime = document.createElement("input");
     this.inputTime.type = "time";
 
+    //############################################################################
+    // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
+    this.inputTime.style.width = "150px";
+    this.inputTime.style.height = "40px";
+    this.inputTime.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
+    this.inputTime.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
+    this.inputTime.style.backgroundColor = "#e6f7ff"; // Fondo celeste claro para coincidir con la tabla
+    this.inputTime.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
+    this.inputTime.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
+    this.inputTime.style.cursor = "pointer";
+
+    //############################################################################
+
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
@@ -37,7 +50,7 @@ class EmicWidgetInputTime extends EmicWidget {
 
     this.shadowRoot.appendChild(this.inputTime);
 
-    this.inputTime.style = "width:150px; height:40px;";
+    //this.inputTime.style = "width:150px; height:40px;";
 
     this.inputTime.addEventListener("change", this.change);
     super.connectedCallback();

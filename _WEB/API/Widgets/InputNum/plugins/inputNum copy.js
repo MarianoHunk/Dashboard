@@ -27,19 +27,6 @@ class EmicWidgetInputNum extends EmicWidget {
     this.inputNum.step = "1";
     this.inputNum.maxLength = "2";
 
-    //############################################################################
-    // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
-    this.inputNum.style.width = "40px";
-    this.inputNum.style.height = "40px";
-    this.inputNum.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
-    this.inputNum.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
-    this.inputNum.style.backgroundColor = "#e6f7ff"; // Fondo celeste claro para coincidir con la tabla
-    this.inputNum.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
-    this.inputNum.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
-    this.inputNum.style.cursor = "pointer";
-
-    //############################################################################
-
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
@@ -50,7 +37,9 @@ class EmicWidgetInputNum extends EmicWidget {
       this.setAttribute("value", "0");
     }
 
-    this.shadowRoot.appendChild(this.inputNum); // Asegúrate de que el input también esté en el shadow DOM
+    this.shadowRoot.appendChild(this.inputNum);
+
+    this.inputNum.style = "width:40px; height:40px;";
 
     this.inputNum.addEventListener("change", this.change.bind(this));
     super.connectedCallback();

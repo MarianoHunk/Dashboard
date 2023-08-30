@@ -65,12 +65,51 @@ class EmicWidgetSlider extends EmicWidget {
     }
 
     this.shadowRoot.appendChild(this.slider);
-
+    //############################################################################
     // Establecemos el ancho y la altura del slider
     this.slider.style.height = "150px";
     this.slider.style.width = "150px";
     this.slider.style.transformOrigin = "center center";
     this.slider.style.transform = "rotate(0deg)";
+    this.slider.style.backgroundColor = "transparent";
+    //############################################################################
+    //############################################################################
+    // Agregamos una etiqueta de estilo para el Shadow DOM
+    const style = document.createElement("style");
+    style.innerHTML = `
+    /* Estilos para el pulgar del slider */
+    input[type="range"]::-webkit-slider-thumb {
+      background: linear-gradient(to bottom, rgb(110, 159, 243) 40%, #6c79a7);
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      opacity: 0.9;
+      border: 3px solid #008CBA;
+      appearance: none; /* Importante para que los estilos se apliquen en diferentes navegadores */
+    }
+    
+    /* Estilos para la pista del slider */
+    input[type="range"]::-webkit-slider-runnable-track {
+      background: #e6f7ff;
+      height: 26px;
+      width: 100%;
+      border-radius: 12px;
+      border: 3px solid #008CBA;
+      cursor: pointer;
+      appearance: none; /* Importante para que los estilos se apliquen en diferentes navegadores */
+    }
+    
+    /* Asegurar que se vea bien en todos los navegadores */
+    input[type="range"] {
+      appearance: none; /* Eliminar el aspecto por defecto del navegador */
+      width: 100%; /* Se necesita un ancho específico */
+    }
+    
+    `;
+    // Adjuntamos la etiqueta de estilo al Shadow DOM
+    this.shadowRoot.appendChild(style);
+    //############################################################################
+
 
     //----------------------------------------------------
     // Se define las llamadas a los eventos
