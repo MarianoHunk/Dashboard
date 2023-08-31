@@ -2,7 +2,7 @@ import { EmicWidget } from "./emicWidget.js";
 
 class EmicWidgetTable extends EmicWidget {
   static namesList = {};
-  myDiv;
+  myTable;
 
   //****************************************************************************/
   //                   Método para obtener un nuevo ID
@@ -37,7 +37,7 @@ class EmicWidgetTable extends EmicWidget {
     // Crea un nuevo elemento HTML <table> y lo asigna a la variable 'table'
     const table = document.createElement("table");
     // Asigna el elemento 'table' al atributo 'myDiv' de la instancia actual de la clase
-    this.myDiv = table;
+    this.myTable = table;
     // Crea un nuevo elemento HTML <style> y lo asigna a la variable 'style'
     const style = document.createElement("style");
     // Agrega el elemento 'table' como hijo del Shadow DOM de este componente
@@ -72,7 +72,7 @@ class EmicWidgetTable extends EmicWidget {
   }
 
   generateTableContent() {
-    const table = this.myDiv;
+    const table = this.myTable;
   
     // Verificar si ya existe una tabla
     if (table.rows.length > 0) {
@@ -178,7 +178,7 @@ class EmicWidgetTable extends EmicWidget {
       // Separar el valor en fila, columna y valor de la celda
       const [cell, column, cellValue] = value.split(",");
       // Obtener la referencia a la tabla
-      const table = this.myDiv;
+      const table = this.myTable;
       // Obtener el número de filas en la tabla
       const rowCount = table.rows.length;
   

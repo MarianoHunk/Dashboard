@@ -3,7 +3,6 @@ import { EmicWidget } from "./emicWidget.js";
 class EmicWidgetDropdown extends EmicWidget {
   static namesList = {};
   dropdown;
-  panel;  // Agregado: Variable para el panel
 
   constructor() {
     super();
@@ -22,31 +21,23 @@ class EmicWidgetDropdown extends EmicWidget {
       return;
     }
 
-    // Crear el panel
-    this.panel = document.createElement("div");
-    this.panel.className = "emic-dash-panel";
-
     this.dropdown = document.createElement("select");
     this.dropdown.className = "form-control";
-
+    
     // Añadir una opción por defecto
     const defaultOption = document.createElement("option");
-    defaultOption.text = "Sensor 1";
+    defaultOption.text = "Sensor 1";  // Corregido: Cambiar "Options" a "Option"
     defaultOption.value = "?";
     defaultOption.selected = true;
-    this.dropdown.appendChild(defaultOption);
+    this.dropdown.appendChild(defaultOption);  // Corregido: Usar appendChild en lugar de add
 
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
 
-    // Agregar el dropdown al panel
-    this.panel.appendChild(this.dropdown);  // Modificación: Agregando el dropdown al panel
+    this.shadowRoot.appendChild(this.dropdown);
 
-    // Agregar el panel al shadow DOM
-    this.shadowRoot.appendChild(this.panel);  // Modificación: Agregando el panel en lugar del dropdown
-
-    this.dropdown.addEventListener("change", this.change.bind(this));
+    this.dropdown.addEventListener("change", this.change.bind(this));  // Corregido: Agregar .bind(this)
     super.connectedCallback();
   }
 
