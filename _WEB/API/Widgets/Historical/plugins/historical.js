@@ -40,12 +40,12 @@ class EmicWidgetHistorical extends EmicWidget {
       this.setAttribute("id", this.getNewID());
     }
     if (!this.hasAttribute("label")) {
-      // Establecer valores de ejemplo para el atributo label
-      this.setAttribute("label", JSON.stringify(["" ]));
+      // Corrección: Establecer un valor más representativo
+      this.setAttribute("label", " "); 
     }
     if (!this.hasAttribute("data-labels")) {
-      // Establecer valores de ejemplo para los atributos
-      this.setAttribute("data-labels", JSON.stringify(["Nada"]));
+      // Corrección: Establecer un valor más representativo
+      this.setAttribute("data-labels", " "); 
     }
   
     if (!this.hasAttribute("data-values")) {
@@ -78,16 +78,15 @@ class EmicWidgetHistorical extends EmicWidget {
   
       this.createChart(); // Llamamos a la función para crear el gráfico
     }
-  
     super.connectedCallback();
   }
   
   // Función para crear y configurar el gráfico utilizando los valores de los atributos
   createChart() {
-    const labels = JSON.parse(this.getAttribute("data-labels"));
+    const labels = this.getAttribute("data-labels");  // Cambiado aquí
     const datasets = JSON.parse(this.getAttribute("data-values"));
     const canvas = this.canvas; // Usamos el canvas previamente creado
-    const labelNames = JSON.parse(this.getAttribute("label")); // Obtener los nombres de las etiquetas
+    const labelNames = this.getAttribute("label");
   
   // Asegurar que el número de conjuntos de datos coincida con el número de etiquetas
   while (datasets.length < labelNames.length) {

@@ -40,21 +40,20 @@ class EmicWidgetHistorical extends EmicWidget {
       this.setAttribute("id", this.getNewID());
     }
     if (!this.hasAttribute("label")) {
-      // Establecer valores de ejemplo para el atributo label
-      this.setAttribute("label", JSON.stringify(["humedad", "temperatura"]));
+      // Corrección: Establecer un valor más representativo
+      this.setAttribute("label", " "); 
     }
     if (!this.hasAttribute("data-labels")) {
-      // Establecer valores de ejemplo para los atributos
-      this.setAttribute("data-labels", JSON.stringify(["25-11-2023", "26-11-2023", "27-11-2023", "28-11-2023", "29-11-2023", "30-11-2023", "01-12-2023", "02-12-2023"]));
+      // Corrección: Establecer un valor más representativo
+      this.setAttribute("data-labels", " "); 
     }
   
     if (!this.hasAttribute("data-values")) {
       // Establecer valores de ejemplo para los atributos
       this.setAttribute("data-values", JSON.stringify([
-        [10, 20, 30, 40, 50, 60, 70, 80], // Datos para Historical Data 1
-        [15, 25, 35, 45, 55, 65, 75, 85], // Datos para Historical Data 2
+        [0]]
         // Agregar más conjuntos de datos si es necesario
-      ]));
+      ));
     }
     //------- Fin Agregamos atributos---------------
   
@@ -72,24 +71,29 @@ class EmicWidgetHistorical extends EmicWidget {
       this.canvas.style.border = "1px solid black";
       this.canvas.style.padding = "10px";
       this.canvas.style.backgroundColor = "white";
-      this.canvas.style.width = "400px"; // Puedes ajustar esto a tus necesidades
-      this.canvas.style.height = "300px"; // Puedes ajustar esto a tus necesidades
+      this.canvas.style.width = "600px"; // Puedes ajustar esto a tus necesidades
+      this.canvas.style.height = "350px"; // Puedes ajustar esto a tus necesidades
   
       this.shadowRoot.appendChild(this.canvas);
   
       this.createChart(); // Llamamos a la función para crear el gráfico
     }
-  
     super.connectedCallback();
   }
   
   // Función para crear y configurar el gráfico utilizando los valores de los atributos
   createChart() {
-    const labels = JSON.parse(this.getAttribute("data-labels"));
+    const labels = this.getAttribute("data-labels");  // Cambiado aquí
     const datasets = JSON.parse(this.getAttribute("data-values"));
     const canvas = this.canvas; // Usamos el canvas previamente creado
-    const labelNames = JSON.parse(this.getAttribute("label")); // Obtener los nombres de las etiquetas
+    const labelNames = this.getAttribute("label");
   
+  // Asegurar que el número de conjuntos de datos coincida con el número de etiquetas
+  while (datasets.length < labelNames.length) {
+    datasets.push([]);
+  }
+  datasets.length = labelNames.length; // Si hay más conjuntos, truncar la cantidad
+
     this.chart = new Chart(canvas.getContext("2d"), {
       type: "line",
       data: {
@@ -123,27 +127,44 @@ class EmicWidgetHistorical extends EmicWidget {
   //                               Si hay cambios
   //****************************************************************************/
   attributeChangedCallback(name, old, now) {
-    if (old !== now) {
+    if (old !== now && this.chart) {
       if (name === "data-labels") {
-        this.myHistorical.data.labels = JSON.parse(now);
-      } else if (name === "data-values") {
-        this.myHistorical.data.datasets[0].data = JSON.parse(now);
+        this.chart.data.labels = JSON.parse(now);
       }
-      this.myHistorical.update();
+      else if (name === "data-values") {
+        const newValues = JSON.parse(now);
+        const labelNames = JSON.parse(this.getAttribute("label"));
+  
+        // Reconfiguramos la longitud de this.chart.data.datasets.
+        this.chart.data.datasets = newValues.map((data, index) => ({
+          label: labelNames[index],
+          data: data,
+          fill: false,
+          borderColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+          tension: 0.1,
+        }));
+      } 
+      else if (name === "label") {
+        const labelNames = JSON.parse(now);
+        this.chart.data.datasets.forEach((dataset, index) => {
+          dataset.label = labelNames[index];
+        });
+      }
+      this.chart.update();
     }
-    super.attributeChangedCallback(name, old, now); // Llamada al método de la clase base
   }
-
+  
   static get observedAttributes() {
-    return ["data-labels", "data-values"];
+    return ["data-labels", "data-values", "label"];
   }
-
+  
   //****************************************************************************/
   //               Cuando el elemento es desconectado del DOM
   //****************************************************************************/
   disconnectedCallback() {
     clearInterval(this.chartCheckInterval);  // Detener el intervalo
   }
+  
 }
 
 customElements.define("emic-widget-historical", EmicWidgetHistorical);
