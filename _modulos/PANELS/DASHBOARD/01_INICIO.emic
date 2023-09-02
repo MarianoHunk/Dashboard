@@ -47,7 +47,7 @@ if ("serviceWorker" in navigator) {
 //-----------------------------------------------------------------------------------
 #newRFIcode(_WEB/API/Widgets/Button/button.js,name=)
 #newRFIcode(_WEB/API/Widgets/CheckBox/checkBox.js,name=)
-#newRFIcode(_WEB/API/Widgets/Dropdown/dropdown.emic,name=)
+#newRFIcode(_WEB/API/Widgets/OptionChooser/optionChooser.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Gauge/customGauge.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Icon/icon.js,name=)
 //#newRFIcode(_WEB/API/Widgets/Label/label.js,name=)
