@@ -140,7 +140,7 @@
 */
 
 
-document.addEventListener('DOMContentLoaded', INICIO);
+//document.addEventListener('DOMContentLoaded', INICIO);
 
 
 

@@ -32,7 +32,7 @@
 	'title': 'when press mouse over button',
 	'instancia':'{
 		"NombreWorkBox": "Event.ButtonSr.Presionado",
-		"definir":"event_mousedown_active",
+		"definir":"event_buttonPress_active",
 		"parametros": [{"value":"ChecktBox","title":"ChecktBox name "}]
 		}'
 }
@@ -47,7 +47,7 @@
 	'title': 'time in which the button was up in [ms], when up mouse over button',
 	'instancia':'{
 		"NombreWorkBox": "Event.ButtonSr.Soltado",
-		"definir":"event_mousedown_active",
+		"definir":"event_buttonRelease_active",
 		"parametros": [	{"value":"ChecktBox","title":"ChecktBox name "},{"value":"TimeEndClick","title":"time in which the button was up in [ms] "}]
 		}'
 }

@@ -1,6 +1,8 @@
 #define nombreModulo "DASHBOARD"
 #setFile wwwroot/JS/emic.js
 
+ INIVAR();
+
 if ("serviceWorker" in navigator) {
 	window.addEventListener("load", function () {
 		navigator.serviceWorker
@@ -37,6 +39,9 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/API/Widgets/ButtonSr/buttonSr.js,name=)
 #newRFIcode(temp/script.js,name=)
 #newRFIcode(temp/myVars.js,name=)
+
+ INICIO();
+
 #unSetFile
 
 #setFile wwwroot/CSS/dashboard.css
