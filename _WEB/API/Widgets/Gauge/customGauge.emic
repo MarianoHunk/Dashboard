@@ -1,0 +1,66 @@
+//RFI TAG:driverName=HTML Widget
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/gauge.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/gauge.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/gauge.js
+#newRFIcode(_WEB/API/Widgets/Gauge/plugins/gauge.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/*RFI JSon
+{
+	'Nombre': 'gauge',
+	'NombreToolBox': 'Gauge',
+	'Tipo' : 'Widget',
+	'title': 'when it receives a text string on the EMIC bus',
+	'html-tag': 'emic-widget-gauge',
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/*RFI JSon
+{
+	'Nombre': 'GaugeSetValue',
+	'NombreToolBox': 'GaugeSetValue',
+	'Tipo' : 'SistemFnc',
+	'title': 'set gauge value',
+
+	'InnerHTML':"
+		<div class='lineaDeCodigo' originalclass='funcion' originalid='GaugeSetValue' draggable='true' ondragstart='drag_linea(event)'>
+			gauge.setValue(<div class='parametroDiv'></div> , <div class='parametroDiv'></div>)
+		</div>"
+}
+*/
+
+function GaugeSetValue(gaugeName,value){
+	var gName = gaugeName;
+	if (gaugeName.includes('/')) {
+		gName = gaugeName.substr(gaugeName.lastIndexOf('/')+1);
+	}
+
+	var element = document.getElementById(gName);
+
+	// Este 'if' verifica si el elemento con id 'gName' existe
+	if (element) {
+		// Si el elemento existe, le asigna el valor 'value'
+		element.value = value;
+	} 
+	// Si el elemento no existe, este bloque 'else' se ejecutará
+	else {
+		// Imprime un mensaje de error en la consola
+		console.log("Gauge con id ", gName, " no encontrado");
+	}
+}
+

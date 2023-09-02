@@ -1,0 +1,89 @@
+//RFI TAG:driverName=HTML Widget
+
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/inputDate.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/inputDate.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/inputDate.js
+#newRFIcode(_WEB/API/Widgets/InputDate/plugins/inputDate.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'inputDate',
+	'NombreToolBox': 'inputDate',
+	'Tipo' : 'Widget',
+	'title': 'Control deslizante',
+	'html-tag': 'emic-widget-inputDate',
+}
+*/
+//	'instance': '{"component":"emic-widget-inputdate","attributes":{}}',
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'inputDateChange',
+	'NombreToolBox': 'inputDateChange',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.inputDate.change",
+		"definir":"event_mousedown_active",
+		"parametros": [{"value":"InputDate","title":"InputDate name "},{"value":"Value","title":"InputDate value "}]
+		}'
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void dateSetValue(int dateName,int Value)
+ * @alias dateSetValue
+ * @brief Set Value
+ * @param dateName dateName
+ * @param Value Value
+ * @return Nothing
+ */ 
+
+function dateSetValue(dateName, value) {
+  // Expresión regular para verificar el formato de fecha en ISO (AAAA-MM-DD)
+  var regex = /^\d{4}-\d{2}-\d{2}$/;
+  
+  var dName = dateName;
+  
+  // Este 'if' comprueba si 'dateName' incluye '/',
+  // si es así, entonces actualiza 'dName' para ser la porción después de la última '/'
+  if (dateName.includes('/')) {
+    dName = dateName.substr(dateName.lastIndexOf('/') + 1);
+  }
+
+  // Intenta obtener el elemento del documento por su 'id'
+  var element = document.getElementById(dName);
+  
+  // Este 'if' comprueba si el elemento con 'id' 'dName' existe
+  if (element) {
+    // Verificar que el valor coincide con el formato de la fecha
+    if (regex.test(value)) {
+      element.value = value;
+    } else {
+      console.error('El valor proporcionado no tiene el formato AAAA-MM-DD');
+    }
+  } else {
+    console.log("Elemento con id ", dName, " no encontrado");
+  }
+}
+
+
+
+

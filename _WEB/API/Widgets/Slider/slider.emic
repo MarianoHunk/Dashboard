@@ -1,0 +1,127 @@
+//RFI TAG:driverName=HTML Widget
+
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/slider.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/slider.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/slider.js
+#newRFIcode(_WEB/API/Widgets/Slider/plugins/slider.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'slider',
+	'NombreToolBox': 'slider',
+	'Tipo' : 'Widget',
+	'title': 'Control deslizante',
+	'html-tag': 'emic-widget-slider',
+}
+*/
+//	'instance': '{"component":"emic-widget-slider","attributes":{}}',
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'sliderChange',
+	'NombreToolBox': 'sliderChange',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.slider.change",
+		"definir":"event_mousedown_active",
+		"parametros": [{"value":"Slider","title":"Slider name "},{"value":"Value","title":"Slider value "}]
+		}'
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*xRFI JSon
+{
+	'Nombre': 'sliderSetMax',
+	'NombreToolBox': 'sliderSetMax',
+	'Tipo' : 'SistemFnc',
+	'title': 'Set max',
+
+	'InnerHTML':"
+		<div class='lineaDeCodigo' originalclass='funcion' originalid='sliderSetMax' draggable='true' ondragstart='drag_linea(event)'>
+			slider.setMax(<div class='parametroDiv' title='SliderName'></div> , <div class='parametroDiv'></div>)
+		</div>"
+}
+*/
+
+/**
+ * @fn void sliderSetMax(int SliderName,int Value)
+ * @alias sliderSetMax
+ * @brief Set max
+ * @param SliderName SliderName
+ * @param Value Value
+ * @return Nothing
+ */ 
+
+function sliderSetMax(SliderName,Value){
+	document.getElementById(SliderName).max = Value;
+}
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*xRFI JSon
+{
+	'Nombre': 'sliderSetMin',
+	'NombreToolBox': 'sliderSetMin',
+	'Tipo' : 'SistemFnc',
+	'title': 'slider.setMin(SliderName,Value)',
+
+	'InnerHTML':"
+		<div class='lineaDeCodigo' originalclass='funcion' originalid='sliderSetMin' draggable='true' ondragstart='drag_linea(event)'>
+			slider.setMin(<div class='parametroDiv'></div> , <div class='parametroDiv'></div>)
+		</div>"
+}
+*/
+
+/**
+ * @fn void sliderSetMin(int SliderName,int Value)
+ * @alias sliderSetMin
+ * @brief Set min
+ * @param SliderName SliderName
+ * @param Value Value
+ * @return Nothing
+ */ 
+
+function sliderSetMin(SliderName,Value){
+	document.getElementById(SliderName).min = Value;
+}
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void sliderSetValue(int SliderName,int Value)
+ * @alias sliderSetValue
+ * @brief Set Value
+ * @param SliderName SliderName
+ * @param Value Value
+ * @return Nothing
+ */ 
+
+function sliderSetValue(SliderName, Value) {
+    var tName = SliderName;
+    if (SliderName.includes('/')) {
+        tName = SliderName.substr(SliderName.lastIndexOf('/') + 1);
+    }
+    var element = document.getElementById(tName);
+    if (element) {
+        // Si el elemento existe, le asigna el valor 'Value'
+        element.value = Value;
+    } 
+    else {
+        console.log("Slider con id ", tName, " no encontrado");
+    }
+}
+

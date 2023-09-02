@@ -1,0 +1,97 @@
+//RFI TAG:driverName=HTML Widget
+
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/inputNum.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/inputNum.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/inputNum.js
+#newRFIcode(_WEB/API/Widgets/InputNum/plugins/inputNum.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'inputNum',
+	'NombreToolBox': 'inputNum',
+	'Tipo' : 'Widget',
+	'title': 'Control deslizante',
+	'html-tag': 'emic-widget-inputNum',
+}
+*/
+//	'instance': '{"component":"emic-widget-inputnum","attributes":{}}',
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'inputNumChange',
+	'NombreToolBox': 'inputNumChange',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.inputNum.change",
+		"definir":"event_mousedown_active",
+		"parametros": [{"value":"InputNum","title":"InputNum name "},{"value":"Value","title":"InputNum value "}]
+		}'
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/**
+ * @fn void numSetValue(int numberId,int Value)
+ * @alias numSetValue
+ * @brief Set Value
+ * @param numberId numberId
+ * @param Value Value
+ * @return Nothing
+ */ 
+
+function numSetValue(numberId, Value){
+    var tName = numberId;
+    // Este 'if' comprueba si 'numberId' incluye '/',
+    // si es así, entonces actualiza 'tName' para ser la porción después de la última '/'
+    if (numberId.includes('/')) {
+        tName = numberId.substr(numberId.lastIndexOf('/') + 1);
+    }
+    // Intenta obtener el elemento del documento por su 'id'
+    var element = document.getElementById(tName);
+
+    // Este 'if' verifica si el elemento con id 'tName' existe
+    if (element) {
+        // Si el elemento existe, le asigna el valor 'Value'
+        element.value = Value;
+    } 
+    // Si el elemento no existe, este bloque 'else' se ejecutará
+    else {
+        // Imprime un mensaje de error en la consola
+        console.log("Elemento con id ", tName, " no encontrado");
+    }
+}
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/**
+ * @fn int numGetValue(int numberId,int Value)
+ * @alias numGetValue
+ * @brief Set Value
+ * @param numberId numberId
+ * @return Value
+ */ 
+
+function numGetValue(numberId){
+	Value = document.getElementById(numberId).value;
+	return Value;
+}

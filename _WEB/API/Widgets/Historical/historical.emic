@@ -1,0 +1,93 @@
+//RFI TAG:driverName=HTML Widget
+
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/historical.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/historical.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/historical.js
+#newRFIcode(_WEB/API/Widgets/Historical/plugins/historical.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'historical',
+	'NombreToolBox': 'historical',
+	'Tipo' : 'Widget',
+	'title': 'Control deslizante',
+	'html-tag': 'emic-widget-historical',
+}
+*/
+//	'instance': '{"component":"emic-widget-historical","attributes":{}}',
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'historicalChange',
+	'NombreToolBox': 'historicalChange',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.historical.change",
+		"definir":"event_mousedown_active",
+		"parametros": [{"json":"Historical","title":"Historical name "},{"json":"Value","title":"Historical json "}]
+		}'
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/**
+ * @fn void SetDataHist(int HistName,int Value)
+ * @alias SetDataHist
+ * @brief Set text
+ * @param HistName HistName
+ * @param Value Value
+ * @return Nothing
+ */ 
+ 
+function SetDataHist(HistName, Hjson) {
+  // Obtener el elemento del DOM con el ID proporcionado
+  const historical = document.getElementById(HistName);
+
+  // Verificar si el elemento existe
+  if (historical) {
+    // Parsear el objeto JSON
+    const obj = JSON.parse(Hjson);
+
+    // Extraer datos del objeto
+    const label = obj.label;
+    const dataLabels = obj.dataLabels;
+    const dataValues = obj.dataValues;
+
+    // Actualizar los atributos del elemento. Esto desencadenará
+    // la función attributeChangedCallback en tu Web Component,
+    // que a su vez actualizará el gráfico.
+    if (label !== undefined) {
+      historical.setAttribute("label", JSON.stringify(label));
+    }
+    if (dataLabels !== undefined) {
+      historical.setAttribute("data-labels", JSON.stringify(dataLabels));
+    }
+
+    // Actualizar o eliminar conjuntos de datos según el número de variables
+    // Simplemente usamos dataValues tal como es, sin manipulación.
+    const updatedDataValues = dataValues;
+
+    // Actualiza el atributo con los nuevos valores
+    historical.setAttribute("data-values", JSON.stringify(updatedDataValues));
+  } else {
+    console.error(`Elemento con ID ${HistName} no encontrado.`);
+  }
+}
