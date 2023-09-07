@@ -61,6 +61,7 @@ class EmicWidgetHistorical extends EmicWidget {
       const img = document.createElement("img");
       img.src = "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/grafica.png";
       img.alt = "imagen Emic";
+      img.style = "width:800px; height:250px;";
       this.shadowRoot.appendChild(img);
     }
     else {
@@ -71,8 +72,8 @@ class EmicWidgetHistorical extends EmicWidget {
       this.canvas.style.border = "1px solid black";
       this.canvas.style.padding = "10px";
       this.canvas.style.backgroundColor = "white";
-      this.canvas.style.width = "600px"; // Puedes ajustar esto a tus necesidades
-      this.canvas.style.height = "350px"; // Puedes ajustar esto a tus necesidades
+      this.canvas.style.width = "800px"; // Puedes ajustar esto a tus necesidades
+      this.canvas.style.height = "250px"; // Puedes ajustar esto a tus necesidades
   
       this.shadowRoot.appendChild(this.canvas);
   

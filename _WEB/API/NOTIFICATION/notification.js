@@ -11,7 +11,7 @@
 #unSetFile
 
 
-/*xRFI JSon
+/*RFI JSon
 {
 	'Nombre': 'Register_Notification',
 	'NombreToolBox': 'Register',
@@ -83,6 +83,7 @@ const firebaseConfig = {
 			if (currentToken) {
 			  window.localStorage.setItem("firebaseToken", currentToken);
 			  return currentToken;
+			  //---- Mas codigo aqui ----
 			} else {
 			  console.log("no se pudo conseguir el token");
 			  return null;

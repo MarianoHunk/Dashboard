@@ -39,9 +39,14 @@ class EmicWidgetSlider extends EmicWidget {
     // Establecemos el tipo de input como "range"
     this.slider.type = "range";
     // Establecemos el valor mínimo y maximo
-    this.slider.min = "0";
-    this.slider.max = "100";
-
+    //this.slider.min = "0";
+    //this.slider.max = "100";
+    if (this.hasAttribute("min")) {
+    this.slider.min = this.getAttribute("min");
+    }
+    if (this.hasAttribute("max")) {
+    this.slider.max = this.getAttribute("max");
+    }
     // Si el elemento no tiene un atributo "id", se le asigna uno nuevo
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());

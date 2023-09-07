@@ -1248,15 +1248,21 @@ class EmicWidgetGauge extends EmicWidget {
 
     this.gauge = new Gauge(element);
 
-    this.gauge.maxValue = 100;
-    this.gauge.setMinValue(0);
+    //this.gauge.maxValue = 100;
+    //this.gauge.setMinValue(0);
     this.gauge.set(0);
     this.gauge.animationSpeed = 32;
+
+    if (this.hasAttribute("min")) {
+      this.gauge.setMinValue(this.getAttribute("min"));
+    }
+      if (this.hasAttribute("max")) {
+        this.gauge.maxValue = this.getAttribute("max");
+    }
 
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
-
     this.setAttribute("title", this.getAttribute("id"));
 
     if (!this.hasAttribute("value")) {

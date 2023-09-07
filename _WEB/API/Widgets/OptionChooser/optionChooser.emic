@@ -60,6 +60,7 @@
 function addOptionChooserOption(optionChooserName, label, value) {
   
   var dName = optionChooserName;
+  console.log("dName", dName);
   
   // Este 'if' comprueba si 'optionChooserName' incluye '/',
   // si es así, entonces actualiza 'dName' para ser la porción después de la última '/'
@@ -69,9 +70,10 @@ function addOptionChooserOption(optionChooserName, label, value) {
 
   // Intenta obtener el elemento del documento por su 'id'
   var element = document.getElementById(dName);
-  console.log(element);
+  console.log("element", element);
+
   // Este 'if' comprueba si el elemento con 'id' 'dName' existe y es un EmicWidgetOptionChooser
-  if (element && element.tagName.toLowerCase() === "emic-widget-optionChooser") {
+  if (element && element.tagName.toLowerCase() === "emic-widget-optionchooser") {
     // Validar que tanto la etiqueta como el valor sean cadenas no vacías
     if (label && value && typeof label === "string" && typeof value === "string") {
       element.addOption(label, value);
@@ -80,6 +82,39 @@ function addOptionChooserOption(optionChooserName, label, value) {
     }
   } else {
     console.log("Elemento con id ", dName, " no encontrado o no es un EmicWidgetOptionChooser");
+  }
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void setOptionChooserValue(int optionChooserId, int newValue)
+ * @alias setOptionChooserValue
+ * @brief Selecciona una nueva opcion
+ * @param optionChooserId ID del widget de lista desplegable
+ * @param newValue Valor de la nueva opción
+ * @return Nothing
+ */ 
+
+function setOptionChooserValue(optionChooserId, newValue) {
+  // Intenta obtener el elemento del documento por su 'id'
+  const element = document.getElementById(optionChooserId);
+
+  // Verifica si el elemento con 'id' existe y es un EmicWidgetOptionChooser
+  if (element && element.tagName.toLowerCase() === "emic-widget-optionchooser") {
+    
+    // Obtiene las opciones disponibles en el select
+    const options = Array.from(element.optionChooser.options).map(option => option.value);
+
+    // Verifica si el nuevo valor está entre las opciones disponibles
+    if (options.includes(newValue)) {
+      // Actualiza el atributo 'value' del elemento
+      element.setAttribute("value", newValue);
+    } else {
+      // Muestra un mensaje de error y lista las opciones disponibles
+      console.log(`El valor ${newValue} no está entre las opciones disponibles. Las opciones disponibles son: ${options.join(", ")}`);
+    }
+  } else {
+    console.log(`Elemento con id ${optionChooserId} no encontrado o no es un EmicWidgetOptionChooser`);
   }
 }
 

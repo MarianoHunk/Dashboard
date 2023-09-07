@@ -44,23 +44,27 @@
 }
 */
 
-function GaugeSetValue(gaugeName,value){
-	var gName = gaugeName;
-	if (gaugeName.includes('/')) {
-		gName = gaugeName.substr(gaugeName.lastIndexOf('/')+1);
-	}
+// Esta función establece el valor de un indicador (gauge) en la página web.
+function GaugeSetValue(gaugeName, value) {
+    // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+    var gName = gaugeName.includes('/') ? gaugeName.substr(gaugeName.lastIndexOf('/') + 1) : gaugeName;
 
-	var element = document.getElementById(gName);
+    // Busca el elemento con el ID igual a 'gName'.
+    var element = document.getElementById(gName);
 
-	// Este 'if' verifica si el elemento con id 'gName' existe
-	if (element) {
-		// Si el elemento existe, le asigna el valor 'value'
-		element.value = value;
-	} 
-	// Si el elemento no existe, este bloque 'else' se ejecutará
-	else {
-		// Imprime un mensaje de error en la consola
-		console.log("Gauge con id ", gName, " no encontrado");
-	}
+    // Intenta encontrar el elemento con el ID "G-" + 'gName' si el elemento con 'gName' no se encuentra.
+    if (!element) {
+        element = document.getElementById("G-" + gName);
+    }
+
+    // Comprueba si se encontró un elemento con el ID 'gName' o "G-" + 'gName'.
+    if (element) {
+        // Si se encontró el elemento, le asigna el valor 'value'.
+        element.value = value;
+    } else {
+        // Si no se encontró el elemento, muestra un mensaje de error en la consola.
+        console.log("Gauge con ID ", gName, " no encontrado");
+    }
 }
+
 

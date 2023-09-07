@@ -51,6 +51,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
 
 
             // --------------------- EVENTS ---------------- en teste caso this referncia a "EmicDashboard"
+            /*
             this.seccion.addEventListener('dragover', (e) => {
                 e.stopPropagation();
                 var nd = document.miDrag;
@@ -94,7 +95,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
                             this.appendChild(nd);
                     }
                 }
-            });
+            });*/
         }
 
         attributeChangedCallback(name, old, now) {
@@ -136,14 +137,6 @@ if (customElements.get("emic-dash-panel") === undefined) {
                 this.style.opacity = "0.1";
 
             }
-
-            // Si el panel (fila o columna) se encuentra fuera de areacentral o controles (fabricacion) se bloquea el draggable.
-            if (!this.closest("#areacentral") && !this.closest("#controles"))
-            {
-                this.draggable = false;
-            }
-
-
             else if (this.shadowRoot.innerHTML !== "") {
                 return;
 
@@ -157,18 +150,15 @@ if (customElements.get("emic-dash-panel") === undefined) {
                     document.miDrag = this;
                     document.miDragAction = 'create';
                 });
-                
+                this.addEventListener('dragend', (e) => {
+                    document.miDrag.style.opacity = "1";
+                    e.dataTransfer.setData("text", null);
+                    document.miDrag = null;
+                    this.style.opacity = "1";
 
-                    this.addEventListener('dragend', (e) => {
-                        document.miDrag.style.opacity = "1";
-                        e.dataTransfer.setData("text", null);
-                        document.miDrag = null;
-                        this.style.opacity = "1";
-
-                    })
-                
+                })
                 return;
-                }
+            }
             //return true;
             //this.style.flexFlow = 1;
             const style = document.createElement("style");
@@ -228,8 +218,9 @@ if (customElements.get("emic-dash-panel") === undefined) {
             this.seccion.appendChild(document.createElement("slot"));
             this.shadowRoot.appendChild(this.seccion);
 
-            // --------------------- EVENTS ----------------
 
+            /*
+            // --------------------- EVENTS ----------------
             this.addEventListener('dragover', this.enventDragoverListener);
             this.addEventListener('dragstart', (e) => {
                 e.stopPropagation();
@@ -242,6 +233,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
                 this.style.opacity = "1";
             })
 
+            */
             // -----------------------------------------------
 
             this.isDescendant = function (el) {

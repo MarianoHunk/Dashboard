@@ -8,6 +8,17 @@ export class EmicWidget extends HTMLElement {
         //this.addEventListener('drop', (e) => {
         //    this.mostrar();
         //});
+        if (this.closest("#areacentral") || this.closest("#controles"))
+        {
+        this.draggable = true;
+        }
+        // Si el widget se encuentra fuera de areacentral o controles (fabricacion) se bloquea el draggable.
+        if (!this.closest("#areacentral") && !this.closest("#controles"))
+        {
+            this.draggable = false;
+        }
+
+
         this.addEventListener('dragover', this.eventDragoverListener);
 
         this.addEventListener('dragstart', (e) => {
@@ -20,7 +31,7 @@ export class EmicWidget extends HTMLElement {
             document.miDrag = null;
             this.style.opacity = "1";
         })
-        this.draggable = true;
+        
         this.style.border = "0pt solid #1F030C";
         this.style.alignSelf = "center";
         // Mostrar identificador

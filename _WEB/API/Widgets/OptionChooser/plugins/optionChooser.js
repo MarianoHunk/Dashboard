@@ -8,7 +8,7 @@ class EmicWidgetOptionChooser extends EmicWidget {
   //-----------------------------------------------------------------------------
   static namesList = {};
   optionChooser;
-  panel;  // Variable para el panel añadida
+  optionPanel; 
 
   //-----------------------------------------------------------------------------
   // Constructor
@@ -37,14 +37,38 @@ class EmicWidgetOptionChooser extends EmicWidget {
       return;
     }
   
-    // Crear el panel para contener el optionChooser
-    this.panel = document.createElement("div");
-    this.panel.className = "emic-dash-panel";
-  
+    // Crear el panel para contener el optionChooser y el control de arrastre
+    this.optionPanel = document.createElement("div");
+    this.optionPanel.className = "emic-dash-panel";
+    this.optionPanel.style.display = "flex";  // Establecer el layout a flexbox
+    this.optionPanel.style.flexDirection = "row";  // Alinear elementos como una fila
+    this.optionPanel.style.height = "40px";
+    this.optionPanel.style.lineHeight = "40px"; // Centra el texto verticalmente al hacerlo igual a la altura
+    this.optionPanel.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
+    this.optionPanel.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
+    this.optionPanel.style.backgroundColor = "transparent"; // Fondo celeste claro para coincidir con la tabla
+
+  // Para poder arrastrar ------------------------------------------------------
+    // Crear el control de arrastre
+    const dragHandle = document.createElement("div");
+    dragHandle.className = "drag-handle";
+    
+    // Establecer dimensiones y otros estilos para el recuadro de arrastre
+    dragHandle.style.width = "10px";
+    dragHandle.style.height = "40px";
+    dragHandle.style.backgroundColor = "transparent";
+    dragHandle.style.cursor = "grab";  // Cambia el cursor a una mano al pasar por encima
+    // Para poder arrastrar fin ------------------------------------------------------
+    
     // Crear el elemento optionChooser (select) y asignarle una clase
     this.optionChooser = document.createElement("select");
     this.optionChooser.className = "form-control";
   
+
+    // Aplicar tipo y tamaño de letra al optionChooser
+    this.optionChooser.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
+    this.optionChooser.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
+    this.optionChooser.style.cursor = "pointer";
     // Llamar al método para llenar el contenido del optionChooser
     this.generateOptionChooserContent();
   
@@ -52,35 +76,28 @@ class EmicWidgetOptionChooser extends EmicWidget {
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
-    
-    // Verificar si el elemento tiene un atributo 'text', de no ser así, se asigna uno nuevo
-    if (!this.hasAttribute("text")) {
-      this.setAttribute("text", "Sensor 1"); ;
-    }
-
-    // Verificar si el elemento tiene un atributo 'value', de no ser así, se asigna uno nuevo
-    if (!this.hasAttribute("value")) {
-      this.setAttribute("value", "?");
-    }
-    // Añadir el optionChooser al panel
-    this.panel.appendChild(this.optionChooser);
+  
+    // Añadir el control de arrastre y el optionChooser al panel
+    this.optionPanel.appendChild(dragHandle);
+    this.optionPanel.appendChild(this.optionChooser);
   
     // Añadir el panel al Shadow DOM del componente
-    this.shadowRoot.appendChild(this.panel);
+    this.shadowRoot.appendChild(this.optionPanel);
   
     // Añadir evento para detectar cambios en el optionChooser
     this.optionChooser.addEventListener("change", this.change.bind(this));
+  
     super.connectedCallback();
   }
-  
+ 
   //-----------------------------------------------------------------------------
   // Método para llenar el contenido del optionChooser
   //-----------------------------------------------------------------------------
   generateOptionChooserContent() {
     // Añadir una opción por defecto al optionChooser
     const defaultOption = document.createElement("option");
-    defaultOption.text = "Sensor 1";
-    defaultOption.value = "?";
+    defaultOption.text = "Seleccion";
+    defaultOption.value = "Seleccion";
     defaultOption.selected = false;
     this.optionChooser.appendChild(defaultOption);
   }
@@ -88,13 +105,25 @@ class EmicWidgetOptionChooser extends EmicWidget {
   //-----------------------------------------------------------------------------
   // Método que se ejecuta cuando hay un cambio en el optionChooser
   //-----------------------------------------------------------------------------
+
   change(event) {
-    console.log(this.getAttribute("id"), "change", event.target.value);
-    console.log(this.getAttribute("id"), "change", event.target.text);
+    const selectedText = event.target.options[event.target.selectedIndex].text; // Obtener el texto seleccionado
+    const selectedValue = event.target.value; // Obtener el valor seleccionado
+
+    console.log(this.getAttribute("id"), " value=", selectedValue);
+    console.log(this.getAttribute("id"), " text=", selectedText);
+
+    // Actualizar los atributos del componente para reflejar los cambios en el DOM
+    this.setAttribute("value", selectedValue);
+    this.setAttribute("text", selectedText);
+
+    // Si hay una función global llamada optionChooserChange, invocarla
     if (window.optionChooserChange) {
-      window.optionChooserChange(this.getAttribute("id"), event.target.value);
+      window.optionChooserChange(this.getAttribute("id"), selectedValue);
+      window.optionChooserChange(this.getAttribute("id"), selectedText);
     }
   }
+
 
   //-----------------------------------------------------------------------------
   // Método para añadir una nueva opción al optionChooser

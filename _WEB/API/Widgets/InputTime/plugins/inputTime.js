@@ -31,7 +31,7 @@ class EmicWidgetInputTime extends EmicWidget {
     this.inputTime.style.height = "40px";
     this.inputTime.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
     this.inputTime.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
-    this.inputTime.style.backgroundColor = "#e6f7ff"; // Fondo celeste claro para coincidir con la tabla
+    this.inputTime.style.backgroundColor = "transparent"; // Fondo celeste claro para coincidir con la tabla
     this.inputTime.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
     this.inputTime.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
     this.inputTime.style.cursor = "pointer";

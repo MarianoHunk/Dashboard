@@ -58,8 +58,14 @@
  */ 
  
 function SetDataHist(HistName, Hjson) {
-  // Obtener el elemento del DOM con el ID proporcionado
-  const historical = document.getElementById(HistName);
+  // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+  var gName = HistName.includes('/') ? HistName.substr(HistName.lastIndexOf('/') + 1) : HistName;
+
+  var historical = document.getElementById(gName);
+ 
+  if (!historical) {
+      historical = document.getElementById("H-" + gName);
+  }
 
   // Verificar si el elemento existe
   if (historical) {

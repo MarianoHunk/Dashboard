@@ -65,8 +65,8 @@ class EmicWidgetSwitch extends EmicWidget {
       position: relative;
       display: inline-block;
       vertical-align: top;
-      width: 56px;
-      height: 20px;
+      width: 80px;
+      height: 40px;
       padding: 3px;
       background-color: white;
       border-radius: 18px;
@@ -139,10 +139,10 @@ class EmicWidgetSwitch extends EmicWidget {
       position: absolute;
       top: 4px;
       left: 4px;
-      width: 18px;
-      height: 18px;
+      width: 40px;
+      height: 40px;
       background: white;
-      border-radius: 10px;
+      border-radius: 250px;
       box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
       background-image: linear-gradient(to bottom, rgb(110, 159, 243) 40%, #6c79a7);
       transition: left 0.15s ease-out;
@@ -153,11 +153,11 @@ class EmicWidgetSwitch extends EmicWidget {
       position: absolute;
       top: 50%;
       left: 50%;
-      margin: -6px 0 0 -6px;
-      width: 12px;
-      height: 12px;
+      margin: -13px 0 0 -12px;
+      width: 25px;
+      height: 25px;
       background: #f9f9f9;
-      border-radius: 6px;
+      border-radius: 15px;
       box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
       background-image: linear-gradient(to bottom, #1b86a4, white);
     }

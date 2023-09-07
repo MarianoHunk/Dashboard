@@ -29,7 +29,7 @@ class EmicWidgetTextBox extends EmicWidget {
     // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
     this.myDiv.style.height = "40px";
     this.myDiv.style.lineHeight = "40px"; // Centra el texto verticalmente al hacerlo igual a la altura
-    this.myDiv.style.border = "2px solid #0E6655"; // Borde azul para coincidir con la tabla
+    this.myDiv.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
     this.myDiv.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
     this.myDiv.style.backgroundColor = "transparent"; // Fondo celeste claro para coincidir con la tabla
     this.myDiv.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
