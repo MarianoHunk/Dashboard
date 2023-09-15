@@ -53,14 +53,19 @@ class EmicWidgetInputDate extends EmicWidget {
     }
 
     this.inputDate.addEventListener("change", this.change);
+
+    // Agregamos un listener al input para actualizar el atributo "value" cuando cambie
+    this.inputDate.addEventListener("change", (event) => {
+      console.log("Fecha cambiada", event.target.value);
+      console.log("Nombre", this.getAttribute("id"));
+      this.setAttribute("value", event.target.value);
+      if (window.inputDateChange)
+        inputDateChange(this.getAttribute("id"), event.target.value);
+    });
+
     super.connectedCallback();
   }
 
-  change(event) {
-    console.log("Fecha cambiada", event.target.value);
-    if (window.inputDateChange)
-      inputDateChange(this.getAttribute("id"), event.target.value);
-  }
 
   static get observedAttributes() {
     return ["value"];

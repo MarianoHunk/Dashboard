@@ -58,42 +58,128 @@
  */ 
  
 function SetDataHist(HistName, Hjson) {
-  // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
-  var gName = HistName.includes('/') ? HistName.substr(HistName.lastIndexOf('/') + 1) : HistName;
+    // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+    var gName = HistName.includes("/")
+        ? HistName.substr(HistName.lastIndexOf("/") + 1)
+        : HistName;
+    var historical = document.getElementById(gName);
 
-  var historical = document.getElementById(gName);
+    if (!historical) {
+        historical = document.getElementById("H-" + gName);
+    }
+
+    // Verificar si el elemento existe y es del tipo correcto
+    if (
+        historical &&
+        historical.tagName.toLowerCase() === "emic-widget-historical"
+    ) {
+        // Intentar parsear el JSON
+        let obj;
+        try {
+            obj = JSON.parse(Hjson);
+        } catch (e) {
+            console.error("El argumento Hjson proporcionado no es un JSON válido.");
+            return; // Termina la función si Hjson no es un JSON válido
+        }
+
+        // Verificar que obj tiene las propiedades esperadas
+        if (
+            !obj.hasOwnProperty("label") ||
+            !obj.hasOwnProperty("dataLabels") ||
+            !obj.hasOwnProperty("dataValues")
+        ) {
+            console.error(
+                "El objeto JSON no tiene las propiedades requeridas: label, dataLabels, dataValues"
+            );
+            return;
+        }
+        const { label, dataLabels, dataValues } = obj;
+
+        if (Array.isArray(label)) {
+            historical.setAttribute("label", JSON.stringify(label));
+        } else {
+            console.error("label debe ser un array");
+        }
+
+        if (Array.isArray(dataLabels)) {
+            historical.setAttribute("data-labels", JSON.stringify(dataLabels));
+        } else {
+            console.error("dataLabels debe ser un array");
+        }
+
+        if (Array.isArray(dataValues)) {
+            historical.setAttribute("data-values", JSON.stringify(dataValues));
+        } else {
+            console.error("dataValues debe ser un array");
+        }
+    } 
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void MultiSetDataHist(int compTopic, int topic, int payload, int WidgetName)
+ * @alias MultiSetDataHist
+ * @brief Set text
+ * @param compTopic compTopic
+ * @param topic topic
+ * @param payload payload
+ * @param WidgetName WidgetName
+ * @return Nothing
+ */ 
  
-  if (!historical) {
-      historical = document.getElementById("H-" + gName);
-  }
+function MultiSetDataHist(compTopic, topic, payload, WidgetName) {
+    // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+    if (compTopic === topic) {
+        var historical = document.getElementById(WidgetName);
 
-  // Verificar si el elemento existe
-  if (historical) {
-    // Parsear el objeto JSON
-    const obj = JSON.parse(Hjson);
+        if (!historical) {
+            historical = document.getElementById("H-" + WidgetName);
+        }
 
-    // Extraer datos del objeto
-    const label = obj.label;
-    const dataLabels = obj.dataLabels;
-    const dataValues = obj.dataValues;
+        // Verificar si el elemento existe y es del tipo correcto
+        if (
+            historical &&
+            historical.tagName.toLowerCase() === "emic-widget-historical"
+        ) {
+            // Intentar parsear el JSON
+            let obj;
+            try {
+                obj = JSON.parse(payload);
+            } catch (e) {
+                console.error("El argumento Hjson proporcionado no es un JSON válido.");
+                return; // Termina la función si Hjson no es un JSON válido
+            }
 
-    // Actualizar los atributos del elemento. Esto desencadenará
-    // la función attributeChangedCallback en tu Web Component,
-    // que a su vez actualizará el gráfico.
-    if (label !== undefined) {
-      historical.setAttribute("label", JSON.stringify(label));
+            // Verificar que obj tiene las propiedades esperadas
+            if (
+                !obj.hasOwnProperty("label") ||
+                !obj.hasOwnProperty("dataLabels") ||
+                !obj.hasOwnProperty("dataValues")
+            ) {
+                console.error(
+                    "El objeto JSON no tiene las propiedades requeridas: label, dataLabels, dataValues"
+                );
+                return;
+            }
+            const { label, dataLabels, dataValues } = obj;
+
+            if (Array.isArray(label)) {
+                historical.setAttribute("label", JSON.stringify(label));
+            } else {
+                console.error("label debe ser un array");
+            }
+
+            if (Array.isArray(dataLabels)) {
+                historical.setAttribute("data-labels", JSON.stringify(dataLabels));
+            } else {
+                console.error("dataLabels debe ser un array");
+            }
+
+            if (Array.isArray(dataValues)) {
+                historical.setAttribute("data-values", JSON.stringify(dataValues));
+            } else {
+                console.error("dataValues debe ser un array");
+            }
+        }
     }
-    if (dataLabels !== undefined) {
-      historical.setAttribute("data-labels", JSON.stringify(dataLabels));
-    }
-
-    // Actualizar o eliminar conjuntos de datos según el número de variables
-    // Simplemente usamos dataValues tal como es, sin manipulación.
-    const updatedDataValues = dataValues;
-
-    // Actualiza el atributo con los nuevos valores
-    historical.setAttribute("data-values", JSON.stringify(updatedDataValues));
-  } else {
-    console.error(`Elemento con ID ${HistName} no encontrado.`);
-  }
 }

@@ -4,6 +4,15 @@
 
 import { EmicWidget } from "./emicWidget.js";
 
+// Función de utilidad para intentar parsear JSON
+function tryParseJSON(str) {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    return str; // Si el análisis falla, devolver la cadena original
+  }
+}
+
 class EmicWidgetHistorical extends EmicWidget {
   static namesList = {};
   myHistorical;
@@ -41,11 +50,11 @@ class EmicWidgetHistorical extends EmicWidget {
     }
     if (!this.hasAttribute("label")) {
       // Corrección: Establecer un valor más representativo
-      this.setAttribute("label", " "); 
+      this.setAttribute("label", JSON.stringify(" ")); 
     }
     if (!this.hasAttribute("data-labels")) {
       // Corrección: Establecer un valor más representativo
-      this.setAttribute("data-labels", " "); 
+      this.setAttribute("data-labels", JSON.stringify(" ")); 
     }
   
     if (!this.hasAttribute("data-values")) {
@@ -61,6 +70,7 @@ class EmicWidgetHistorical extends EmicWidget {
       const img = document.createElement("img");
       img.src = "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/grafica.png";
       img.alt = "imagen Emic";
+      img.style = "width:800px; height:250px;";
       this.shadowRoot.appendChild(img);
     }
     else {
@@ -71,8 +81,8 @@ class EmicWidgetHistorical extends EmicWidget {
       this.canvas.style.border = "1px solid black";
       this.canvas.style.padding = "10px";
       this.canvas.style.backgroundColor = "white";
-      this.canvas.style.width = "600px"; // Puedes ajustar esto a tus necesidades
-      this.canvas.style.height = "350px"; // Puedes ajustar esto a tus necesidades
+      this.canvas.style.width = "800px"; // Puedes ajustar esto a tus necesidades
+      this.canvas.style.height = "250px"; // Puedes ajustar esto a tus necesidades
   
       this.shadowRoot.appendChild(this.canvas);
   
@@ -83,10 +93,11 @@ class EmicWidgetHistorical extends EmicWidget {
   
   // Función para crear y configurar el gráfico utilizando los valores de los atributos
   createChart() {
-    const labels = this.getAttribute("data-labels");  // Cambiado aquí
-    const datasets = JSON.parse(this.getAttribute("data-values"));
+    const labels = tryParseJSON(this.getAttribute("data-labels"));
+    const datasets = tryParseJSON(this.getAttribute("data-values"));
+    const labelNames = tryParseJSON(this.getAttribute("label"));
     const canvas = this.canvas; // Usamos el canvas previamente creado
-    const labelNames = this.getAttribute("label");
+    
   
   // Asegurar que el número de conjuntos de datos coincida con el número de etiquetas
   while (datasets.length < labelNames.length) {
@@ -101,7 +112,7 @@ class EmicWidgetHistorical extends EmicWidget {
         datasets: datasets.map((data, index) => ({
           label: labelNames[index], // Usar el nombre correspondiente
           data: data,
-          fill: false,
+          fill: true,
           borderColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
           tension: 0.1,
         })),
@@ -111,7 +122,7 @@ class EmicWidgetHistorical extends EmicWidget {
           x: [
             {
               ticks: {
-                autoSkip: true,
+                autoSkip: false,
                 maxRotation: 45, // Rotar las etiquetas en un ángulo de 45 grados
                 minRotation: 0,
               },
@@ -129,30 +140,50 @@ class EmicWidgetHistorical extends EmicWidget {
   attributeChangedCallback(name, old, now) {
     if (old !== now && this.chart) {
       if (name === "data-labels") {
-        this.chart.data.labels = JSON.parse(now);
+        const newLabels = tryParseJSON(now);
+        if (Array.isArray(newLabels)) {
+          this.chart.data.labels = newLabels;
+        } else {
+          console.error("data-labels no es un array válido");
+        }
+      } else if (name === "data-values") {
+        const newValues = tryParseJSON(now);
+        const labelNames = tryParseJSON(this.getAttribute("label"));
+    
+        if (Array.isArray(newValues) && Array.isArray(labelNames)) {
+          if (newValues.length === labelNames.length) {
+            this.chart.data.datasets = newValues.map((data, index) => {
+              return {
+                label: labelNames[index],
+                data: data,
+                fill: false,
+                // Si el índice es 0, establece el color a azul. De lo contrario, asigna un color aleatorio.
+                borderColor: index === 0 ? 'rgb(100, 149, 237)' : `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+                tension: 0.1,
+              };
+            });
+          } else {
+            console.error("La longitud de newValues y labelNames debe ser la misma");
+          }
+        } else {
+          console.error("newValues o labelNames no son arrays válidos");
+        }
+      } else if (name === "label") {
+        const labelNames = tryParseJSON(now);
+        if (Array.isArray(labelNames)) {
+          this.chart.data.datasets.forEach((dataset, index) => {
+            dataset.label = labelNames[index];
+          });
+        } else {
+          console.error("label no es un array válido");
+        }
       }
-      else if (name === "data-values") {
-        const newValues = JSON.parse(now);
-        const labelNames = JSON.parse(this.getAttribute("label"));
-  
-        // Reconfiguramos la longitud de this.chart.data.datasets.
-        this.chart.data.datasets = newValues.map((data, index) => ({
-          label: labelNames[index],
-          data: data,
-          fill: false,
-          borderColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
-          tension: 0.1,
-        }));
-      } 
-      else if (name === "label") {
-        const labelNames = JSON.parse(now);
-        this.chart.data.datasets.forEach((dataset, index) => {
-          dataset.label = labelNames[index];
-        });
-      }
+      this.chart.options.animation = false;
       this.chart.update();
+      
     }
   }
+  
   
   static get observedAttributes() {
     return ["data-labels", "data-values", "label"];

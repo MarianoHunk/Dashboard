@@ -38,7 +38,7 @@
 	'title': 'when press mouse over button',
 	'instancia':'{
 		"NombreWorkBox": "Event.optionChooser.change",
-		"definir":"event_mousedown_active",
+		"definir":"event_change_active",
 		"parametros": [{"value":"OptionChooser","title":"OptionChooser name "},{"value":"Value","title":"OptionChooser value "}]
 		}'
 }
@@ -96,8 +96,11 @@ function addOptionChooserOption(optionChooserName, label, value) {
  */ 
 
 function setOptionChooserValue(optionChooserId, newValue) {
-  // Intenta obtener el elemento del documento por su 'id'
-  const element = document.getElementById(optionChooserId);
+  var CName = optionChooserId;
+  if (optionChooserId.includes('/')) {
+      CName = optionChooserId.substr(optionChooserId.lastIndexOf('/') + 1);
+  }
+  var element = document.getElementById(CName);
 
   // Verifica si el elemento con 'id' existe y es un EmicWidgetOptionChooser
   if (element && element.tagName.toLowerCase() === "emic-widget-optionchooser") {
@@ -113,11 +116,41 @@ function setOptionChooserValue(optionChooserId, newValue) {
       // Muestra un mensaje de error y lista las opciones disponibles
       console.log(`El valor ${newValue} no está entre las opciones disponibles. Las opciones disponibles son: ${options.join(", ")}`);
     }
+  } 
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void getOptionChooserValue(int optionChooserId)
+ * @alias getOptionChooserValue
+ * @brief Revise que opcion existe
+ * @param optionChooserId ID del widget de lista desplegable
+ * @return value
+ */ 
+
+
+// Función para obtener el valor seleccionado de EmicWidgetOptionChooser
+function getOptionChooserValue(optionChooserId) {
+  // Obtener el elemento EmicWidgetOptionChooser por su ID
+  var emicWidget = document.getElementById(optionChooserId);
+
+  // Verificar si el elemento existe y es una instancia de EmicWidgetOptionChooser
+  if (emicWidget) {
+    // Obtener el valor seleccionado del EmicWidgetOptionChooser
+    var selectedValue = emicWidget.value;
+
+    // Devolver el valor seleccionado
+    console.log("Valor seleccionado: " , selectedValue);
+    return selectedValue;
   } else {
-    console.log(`Elemento con id ${optionChooserId} no encontrado o no es un EmicWidgetOptionChooser`);
+    // Si el elemento no es un EmicWidgetOptionChooser o no existe, devuelve null o maneja el error según tus necesidades.
+    console.log("No se encontro valor.");
+    return null;
   }
 }
 
+// Llamar a la función y guardar el valor en una variable
+var valorSeleccionado = getOptionChooserValue("tuIdDelEmicWidgetOptionChooser");
 
-
-
+// Imprimir el valor seleccionado en la consola
+console.log("El valor seleccionado es:", valorSeleccionado);

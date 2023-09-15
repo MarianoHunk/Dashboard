@@ -136,13 +136,13 @@ if (customElements.get("emic-dash-panel") === undefined) {
                 this.style.opacity = "0.1";
 
             }
-
+            //************************************************************************************************
             // Si el panel (fila o columna) se encuentra fuera de areacentral o controles (fabricacion) se bloquea el draggable.
             if (!this.closest("#areacentral") && !this.closest("#controles"))
             {
                 this.draggable = false;
             }
-
+            //************************************************************************************************
 
             else if (this.shadowRoot.innerHTML !== "") {
                 return;

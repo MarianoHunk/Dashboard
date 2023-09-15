@@ -86,7 +86,7 @@ function replaceTableMQTT(tableId, value) {
   var row, cell;
 
   // Expresión regular para validar y extraer el nombre de la tabla y el identificador de la celda
-  const pattern = /\/upload\/([^\/]+)(\/[a-z]+\d+)/i;
+  const pattern = /\/upload\/([^\/]+)(\/[a-zA-Z]{0,2}\d+)$/i;
   const match = tableId.match(pattern);
   console.log(match);
 
@@ -101,7 +101,7 @@ function replaceTableMQTT(tableId, value) {
     console.log(identifier);
 
     // Expresión regular para extraer fila y columna del identificador
-    const coordinatePattern = /([a-z]+)(\d+)/i;
+    const coordinatePattern = /([a-zA-Z]+)(\d+)/i;
     const [, column, rowStr] = coordinatePattern.exec(identifier) || [];
     
 
@@ -126,7 +126,7 @@ function replaceTableMQTT(tableId, value) {
     };
 
     // Asignar los números de fila y columna
-    const columnNumber = columnMapping[column.toLowerCase()]; // Convierte a minúsculas en caso de que la entrada no lo sea
+    const columnNumber = columnMapping[column.toLowerCase()];
     row = parseInt(rowStr, 10);
     cell = columnNumber;
   }
@@ -138,7 +138,7 @@ function replaceTableMQTT(tableId, value) {
   if (table) {
     // Si la tabla existe, la manipula de acuerdo con los valores de 'value'
     if ('valCelCol' in table) {
-      table.valCelCol = `${row},${cell},${value}`;
+      table.valCelCol = `${cell},${row},${value}`;
     }
   }
   // Si la tabla no se encontró, puedes agregar un mensaje o una acción aquí

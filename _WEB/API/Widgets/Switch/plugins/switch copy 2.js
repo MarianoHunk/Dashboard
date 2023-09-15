@@ -32,7 +32,6 @@ class EmicWidgetSwitch extends EmicWidget {
     input.setAttribute("type", "checkbox");
     input.addEventListener("change", (e) => {
       let status = e.target.checked;
-      this.setAttribute("value", status ? "1" : "0");  // Actualizo el atributo value
       if (window.switchToogle)
         switchToogle(this.getAttribute("id"), status ? "1" : "0");
     });
@@ -184,11 +183,12 @@ class EmicWidgetSwitch extends EmicWidget {
   }
 
   attributeChangedCallback(name, old, now) {
-    // He modificado esta parte para cambiar el estado del input checkbox
-    // cuando cambia el atributo 'value'.
-    if (name === "value" && now !== null) {  // Verifica que 'now' no sea null
-      const input = this.shadowRoot.querySelector('.switch-input');
-      input.checked = (now === "1");
+    if (typeof this.switch == "undefined") return;
+
+    switch (name) {
+      case "value":
+        this.switch.set(now);
+        break;
     }
   }
 
@@ -203,4 +203,4 @@ class EmicWidgetSwitch extends EmicWidget {
 
 customElements.define("emic-widget-switch", EmicWidgetSwitch);
 
-
+//}

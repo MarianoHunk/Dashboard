@@ -1,6 +1,5 @@
 //RFI TAG:driverName=HTML Widget
 
-
 #setFile plugins/www/header.html
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/slider.js"> </script>
 #unSetFile

@@ -39,7 +39,7 @@
 	'instancia':'{
 		"NombreWorkBox": "Event.inputTime.change",
 		"definir":"event_mousedown_active",
-		"parametros": [{"value":"InputTime","title":"InputTime name "},{"value":"Value","title":"InputTime value "}]
+		"parametros": [{"value":"InputTime","title":"InputTime name"},{"value":"Value","title":"InputTime value"}]
 		}'
 }
 */

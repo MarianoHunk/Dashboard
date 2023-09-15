@@ -120,7 +120,6 @@ class EmicWidgetOptionChooser extends EmicWidget {
     // Si hay una función global llamada optionChooserChange, invocarla
     if (window.optionChooserChange) {
       window.optionChooserChange(this.getAttribute("id"), selectedValue);
-      window.optionChooserChange(this.getAttribute("id"), selectedText);
     }
   }
 
