@@ -60,7 +60,7 @@
 }
 */
 
-/**
+/*x*
  * @fn void sliderSetMax(int SliderName,int Value)
  * @alias sliderSetMax
  * @brief Set max
@@ -87,7 +87,7 @@ function sliderSetMax(SliderName,Value){
 }
 */
 
-/**
+/*x*
  * @fn void sliderSetMin(int SliderName,int Value)
  * @alias sliderSetMin
  * @brief Set min

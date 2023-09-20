@@ -29,7 +29,7 @@ class EmicWidgetInputNum extends EmicWidget {
 
     //############################################################################
     // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
-    this.inputNum.style.width = "40px";
+    this.inputNum.style.width = "60px";
     this.inputNum.style.height = "40px";
     this.inputNum.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
     this.inputNum.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
@@ -50,6 +50,23 @@ class EmicWidgetInputNum extends EmicWidget {
       this.setAttribute("value", "0");
     }
 
+    // Si el elemento no tiene un atributo "max", se le asigna el valor 100
+    if (!this.hasAttribute("max")) {
+      this.setAttribute("max", 60);
+    }
+
+    // Si el elemento no tiene un atributo "min", se le asigna el valor 0
+    if (!this.hasAttribute("min")) {
+      this.setAttribute("min", 0);
+    }
+
+    if (this.hasAttribute("min")) {
+      this.inputNum.min = this.getAttribute("min");
+      }
+    if (this.hasAttribute("max")) {
+      this.inputNum.max = this.getAttribute("max");
+      }
+
     this.shadowRoot.appendChild(this.inputNum); // Asegúrate de que el input también esté en el shadow DOM
 
     this.inputNum.addEventListener("change", this.change.bind(this));
@@ -64,7 +81,7 @@ class EmicWidgetInputNum extends EmicWidget {
   }
 
   static get observedAttributes() {
-    return ["value"];
+    return ["value", "max", "min"];
   }
 
   attributeChangedCallback(name, old, now) {
@@ -72,6 +89,14 @@ class EmicWidgetInputNum extends EmicWidget {
     switch (name) {
       case "value":
         this.inputNum.value = now;
+        break;
+      // Si el atributo cambiado es "min", se actualiza el valor mínimo del slider
+      case "min":
+        this.inputNum.min = now;
+        break;
+      // Si el atributo cambiado es "max", se actualiza el valor máximo del slider
+      case "max":
+        this.inputNum.max = now;
         break;
     }
   }
@@ -83,6 +108,27 @@ class EmicWidgetInputNum extends EmicWidget {
   set value(newVal) {
     this.setAttribute("value", newVal);
   }
+
+  // Método para establecer el valor del atributo "max"
+  set max(newVal) {
+    this.setAttribute("max", newVal);
+  }
+
+  // Método para establecer el valor del atributo "min"
+  set min(newVal) {
+    this.setAttribute("min", newVal);
+  }
+
+   // Método para obtener el valor del atributo "max"
+  get max() {
+    return this.getAttribute("max");
+  }
+
+  // Método para obtener el valor del atributo "min"
+  get min() {
+    return this.getAttribute("min");
+  }
+
 }
 
 customElements.define("emic-widget-inputnum", EmicWidgetInputNum);

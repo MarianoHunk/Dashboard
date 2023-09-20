@@ -174,7 +174,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
             const style = document.createElement("style");
             style.innerHTML = ``;
             this.shadowRoot.appendChild(style);
-            this.seccion.style['border'] = '1px solid #003366';
+            this.seccion.style['border'] = '2px solid #008CBA';
             this.seccion.style['display'] = 'flex';
             this.seccion.style['justify-content'] = 'space-evenly';
             this.seccion.style['flex-wrap'] = 'wrap';
@@ -183,7 +183,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
             this.seccion.style['padding'] = '0px';
             this.seccion.style['flex-grow'] = '1';
             this.seccion.style['position'] = 'relative';
-            this.seccion.style.backgroundColor = "#F0F0F0"; 
+            this.seccion.style.backgroundColor = "#f0f0f0"; 
 
             this.menu = document.createElement("i");
             this.menu.style = "position: absolute;right:0;right:1;top:0;"
@@ -224,7 +224,15 @@ if (customElements.get("emic-dash-panel") === undefined) {
 
             this.seccion.appendChild(this.menu);
             
-            this.style = "justify-content: center;display:flex;flex-grow:1;margin:4px"; // 
+            this.style = "justify-content: center;display:flex;flex-grow:1;margin:4px"; 
+            //************************************************************************************************
+            // Si el panel (fila o columna) se encuentra fuera de areacentral o controles modifico el margen
+            if (!this.closest("#areacentral") && !this.closest("#controles"))
+            {
+                this.seccion.style['border'] = '1px solid #003366';
+                this.style = "justify-content: center;display:flex;flex-grow:1;margin:1px"; 
+            }
+            //************************************************************************************************
             this.seccion.appendChild(document.createElement("slot"));
             this.shadowRoot.appendChild(this.seccion);
 

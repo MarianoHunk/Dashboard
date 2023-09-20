@@ -2,15 +2,15 @@
 
 
 #setFile plugins/www/header.html
-<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/inputTime.js"> </script>
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/inputMinSec.js"> </script>
 #unSetFile
 
 #setFile temp/header.html
-<script type="module" src="./JS/inputTime.js"> </script>
+<script type="module" src="./JS/inputMinSec.js"> </script>
 #unSetFile
 
-#setFile wwwroot/JS/inputTime.js
-#newRFIcode(_WEB/API/Widgets/InputTime/plugins/inputTime.js,name=)
+#setFile wwwroot/JS/inputMinSec.js
+#newRFIcode(_WEB/API/Widgets/InputMinSec/plugins/inputMinSec.js,name=)
 #unSetFile
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -18,28 +18,28 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
-	'Nombre': 'inputTime',
-	'NombreToolBox': 'inputTime',
+	'Nombre': 'inputMinSec',
+	'NombreToolBox': 'inputMinSec',
 	'Tipo' : 'Widget',
 	'title': 'Control deslizante',
-	'html-tag': 'emic-widget-inputTime',
+	'html-tag': 'emic-widget-inputMinSec',
 }
 */
-//	'instance': '{"component":"emic-widget-inputtime","attributes":{}}',
+//	'instance': '{"component":"emic-widget-inputminsec","attributes":{}}',
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Evento
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
-	'Nombre': 'inputTimeChange',
-	'NombreToolBox': 'inputTimeChange',
+	'Nombre': 'inputMinSecChange',
+	'NombreToolBox': 'inputMinSecChange',
 	'Tipo' : 'SistemEvt',
 	'title': 'when press mouse over button',
 	'instancia':'{
-		"NombreWorkBox": "Event.inputTime.change",
+		"NombreWorkBox": "Event.inputMinSec.change",
 		"definir":"event_mousedown_active",
-		"parametros": [{"value":"InputTime","title":"InputTime name"},{"value":"Value","title":"InputTime value"}]
+		"parametros": [{"value":"InputMinSec","title":"InputMinSec name"},{"value":"Value","title":"InputMinSec value"}]
 		}'
 }
 */
@@ -48,36 +48,36 @@
 //                                 Funciones
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /**
- * @fn void timeSetValue(int timeName,int Value)
- * @alias timeSetValue
+ * @fn void minsecSetValue(int minsecName,int Value)
+ * @alias minsecSetValue
  * @brief Set Value
- * @param timeName timeName
+ * @param minsecName minsecName
  * @param Value Value
  * @return Nothing
  */ 
 
-function timeSetValue(timeName, value) {
+function minsecSetValue(minsecName, value) {
   // Expresión regular para verificar el formato MM:SS
   var regex = /^([0-5][0-9]|60):([0-5][0-9]|60)$/;  
-  var tName = timeName;
-  // Este 'if' comprueba si 'timeName' incluye '/',
+  var tName = minsecName;
+
+  // Este 'if' comprueba si 'minsecName' incluye '/',
   // si es así, entonces actualiza 'tName' para ser la porción después de la última '/'
-  if (timeName.includes('/')) {
-    tName = timeName.substr(timeName.lastIndexOf('/') + 1);
+  if (minsecName.includes('/')) {
+    tName = minsecName.substr(minsecName.lastIndexOf('/') + 1);
   }
+
   // Intenta obtener el elemento del documento por su 'id'
   var element = document.getElementById(tName); 
+
   // Este 'if' comprueba si el elemento con 'id' 'tName' existe
   if (element) {
     if (regex.test(value)) {
       element.value = value;
     } else {
-      console.error('El valor proporcionado no tiene el formato HH:MM');
+      console.error('El valor proporcionado no tiene el formato MM:SS');
     }
   } else {
     console.log("Elemento con id ", tName, " no encontrado");
   }
 }
-
-
-

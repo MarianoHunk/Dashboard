@@ -28,6 +28,7 @@ class EmicWidgetTextBox extends EmicWidget {
     //############################################################################
     // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
     this.myDiv.style.height = "40px";
+    this.myDiv.style.minWidth = "40px";
     this.myDiv.style.lineHeight = "40px"; // Centra el texto verticalmente al hacerlo igual a la altura
     this.myDiv.style.border = "2px solid #008CBA"; // Borde azul para coincidir con la tabla
     this.myDiv.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
@@ -63,7 +64,7 @@ class EmicWidgetTextBox extends EmicWidget {
       this.setAttribute("value", e.currentTarget.value);
       this.myDiv.innerHTML = e.currentTarget.value;
       if (window.textBoxChange)
-        textBoxChange(this.getAttribute("id").substr(7), e.currentTarget.value);
+        textBoxChange(this.getAttribute("id"), e.currentTarget.value);
     });
     input.addEventListener("keypress", (e) => {
       e.stopPropagation;
@@ -72,7 +73,7 @@ class EmicWidgetTextBox extends EmicWidget {
         this.myDiv.innerHTML = e.currentTarget.value;
         if (window.textBoxChange)
           textBoxChange(
-            this.getAttribute("id").substr(7),
+            this.getAttribute("id"),
             e.currentTarget.value
           );
       }
@@ -90,12 +91,12 @@ class EmicWidgetTextBox extends EmicWidget {
         //this.setAttribute("value", e.currentTarget.value)
         //this.myDiv.innerHTML = e.currentTarget.value;
         if (window.textBoxChange)
-          textBoxChange(this.getAttribute("id").substr(7), now);
+          textBoxChange(this.getAttribute("id"), now);
 
         break;
     }
   }
-
+ 
   set value(newVal) {
     this.setAttribute("value", newVal);
   }
