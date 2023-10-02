@@ -58,7 +58,7 @@
 
 function dateSetValue(dateName, value) {
   // Expresión regular para verificar el formato de fecha en ISO (AAAA-MM-DD)
-  var regex = /^\d{4}-\d{2}-\d{2}$/;
+  var regex = /^\d{2}\d{2}\d{2}$/;
   var dName = dateName;
     
   // Este 'if' comprueba si 'dateName' incluye '/',

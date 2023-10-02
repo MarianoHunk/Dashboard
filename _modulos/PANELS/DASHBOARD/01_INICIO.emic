@@ -52,7 +52,6 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/API/Widgets/Icon/icon.js,name=)
 #newRFIcode(_WEB/API/Widgets/Label/label.js,name=)
 #newRFIcode(_WEB/API/Widgets/LedIndicador/ledIndicador.js,name=)
-//#newRFIcode(_WEB/API/Widgets/InputMinSec/inputMinSec.emic,name=)
 #newRFIcode(_WEB/API/Widgets/InputDate/inputDate.emic,name=)
 #newRFIcode(_WEB/API/Widgets/InputTime/inputTime.emic,name=)
 #newRFIcode(_WEB/API/Widgets/InputNum/inputNum.emic,name=)
@@ -61,6 +60,7 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/API/Widgets/Table/table.emic,name=)
 #newRFIcode(_WEB/API/Widgets/TextBox/textBox.js,name=)
 #newRFIcode(_WEB/API/Widgets/Historical/historical.emic,name=)
+#newRFIcode(_WEB/API/Widgets/Historical2/historical2.emic,name=)
 #newRFIcode(temp/script.js,name=)
 #newRFIcode(temp/myVars.js,name=)
 #unSetFile

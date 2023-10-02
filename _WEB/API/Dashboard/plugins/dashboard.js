@@ -229,7 +229,10 @@ if (customElements.get("emic-dash-panel") === undefined) {
             // Si el panel (fila o columna) se encuentra fuera de areacentral o controles modifico el margen
             if (!this.closest("#areacentral") && !this.closest("#controles"))
             {
-                this.seccion.style['border'] = '1px solid #003366';
+                //this.seccion.style['border'] = '1px solid #003366';
+                this.seccion.style['border'] = '2px solid #008CBA';
+                this.seccion.style['border-radius'] = '10px';
+                this.seccion.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";  // Configuración de ejemplo para una sombra
                 this.style = "justify-content: center;display:flex;flex-grow:1;margin:1px"; 
             }
             //************************************************************************************************

@@ -3,6 +3,17 @@ import { EmicWidget } from "./emicWidget.js";
 class EmicWidgetLabel extends EmicWidget {
   static namesList = {};
   myLabel;
+  config = [
+    {
+      name: "font",
+      type: "list",
+      options: ["arial", "sansserif"],
+    },
+    {
+      name: "color",
+    },
+  ];
+
   //-----------------------------------------------------------------------------------
   //                   Método para obtener un nuevo ID
   //-----------------------------------------------------------------------------------
@@ -37,60 +48,27 @@ class EmicWidgetLabel extends EmicWidget {
     this.shadowRoot.appendChild(div);
     this.shadowRoot.appendChild(style);
     //############################################################################
-    // Aplicamos los estilos usando los atributos personalizados
-    this.applyStyles();
+    // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
+    this.myLabel.style.height = "40px";
+    this.myLabel.style.lineHeight = "40px"; // Centra el texto verticalmente al hacerlo igual a la altura
+    //this.myLabel.style.border = "1px solid #008CBA"; // Borde azul para coincidir con la tabla
+    this.myLabel.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
+    this.myLabel.style.backgroundColor = "transparent"; // Fondo celeste claro para coincidir con la tabla
+    this.myLabel.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
+    this.myLabel.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
     //############################################################################
-
 
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
-  
-    if (!this.hasAttribute("text_val")) {
-      this.setAttribute("text_val", this.getAttribute("id"));
-    }
-  
-    if (!this.hasAttribute("label-height")) {
-      this.setAttribute("label-height", "40px");
-    }
-  
-    if (!this.hasAttribute("label-font-size")) {
-      this.setAttribute("label-font-size", "18px");
-    }
-  
-    if (!this.hasAttribute("label-font-family")) {
-      this.setAttribute("label-font-family", "'Courier New', Courier, monospace");
-    }
-  
-    if (!this.hasAttribute("label-bg-color")) {
-      this.setAttribute("label-bg-color", "transparent");
-    }
-  
-    if (!this.hasAttribute("label-line-height")) {
-      this.setAttribute("label-line-height", "40px");
-    }
 
-    if (!this.hasAttribute("label-font-weight")) {
-      this.setAttribute("label-font-weight", "normal"); // Puedes usar valores como "bold", "bolder", o números como "400", "700", etc.
-    }
-    
-    if (!this.hasAttribute("label-color")) {
-      this.setAttribute("label-color", "#000000"); // Puedes usar cualquier valor de color válido aquí.
+    if (!this.hasAttribute("text_val")) {
+      this.setAttribute("text_val", this.getAttribute("id")); // Se setea el contenido de texto igual que el nombre del widget
     }
 
     div.textContent = this.getAttribute("text_val");
     this.addEventListener("click", this.eventClickListener);
     super.connectedCallback();
-  }
-  
-  applyStyles() {
-    this.myLabel.style.height = this.getAttribute("label-height") || "40px";
-    this.myLabel.style.fontSize = this.getAttribute("label-font-size") || "12px";
-    this.myLabel.style.fontFamily = this.getAttribute("label-font-family") || "'Courier New', Courier, monospace";
-    this.myLabel.style.backgroundColor = this.getAttribute("label-bg-color") || "transparent";
-    this.myLabel.style.lineHeight = this.getAttribute("label-line-height") || "40px";
-    this.myLabel.style.fontWeight = this.getAttribute("label-font-weight");
-    this.myLabel.style.color = this.getAttribute("label-color");
   }
 
   //-----------------------------------------------------------------------------------
@@ -106,84 +84,26 @@ class EmicWidgetLabel extends EmicWidget {
   //-----------------------------------------------------------------------------------
   // Este método define los atributos que se deben observar para detectar cambios.
   static get observedAttributes() {
-    return ["text_val", "label-height", "label-font-size", "label-font-family", "label-bg-color", "label-line-height",'label-font-weight', 'label-color'];
+    return ["text_val"];
   }
 
   // Se ejecuta cuando hay cambios en los atributos observados
   attributeChangedCallback(name, old, now) {
-    if (typeof this.myLabel === "undefined") return;
-
-    if (name === "text_val") {
+    if (name === "text_val" && this.myLabel) {
+      //this.myLabel.text_val = now;(error)
       this.myLabel.textContent = now;
-    } else {
-      // Si cambian los atributos de estilo, aplicamos de nuevo los estilos.
-      this.applyStyles();
     }
   }
 
+  // Setter para el atributo "text_val".
   set text_val(newVal) {
     this.setAttribute("text_val", newVal);
   }
 
+  // Getter para el atributo "text_val".
   get text_val() {
     return this.getAttribute("text_val");
   }
-
-  set labelHeight(newVal) {
-    this.setAttribute("label-height", newVal);
-  }
-
-  get labelHeight() {
-    return this.getAttribute("label-height");
-  }
-
-  set labelFontSize(newVal) {
-    this.setAttribute("label-font-size", newVal);
-  }
-
-  get labelFontSize() {
-    return this.getAttribute("label-font-size");
-  }
-
-  set labelFontFamily(newVal) {
-    this.setAttribute("label-font-family", newVal);
-  }
-
-  get labelFontFamily() {
-    return this.getAttribute("label-font-family");
-  }
-
-  set labelBgColor(newVal) {
-    this.setAttribute("label-bg-color", newVal);
-  }
-
-  get labelBgColor() {
-    return this.getAttribute("label-bg-color");
-  }
-
-  set labelLineHeight(newVal) {
-    this.setAttribute("label-line-height", newVal);
-  }
-
-  get labelLineHeight() {
-    return this.getAttribute("label-line-height");
-  }
-  get labelFontWeight() {
-    return this.getAttribute("label-font-weight");
-  }
-  
-  set labelFontWeight(value) {
-    this.setAttribute("label-font-weight", value);
-  }
-  
-  get labelColor() {
-    return this.getAttribute("label-color");
-  }
-  
-  set labelColor(value) {
-    this.setAttribute("label-color", value);
-  }
-
 }
 
 // Se registra el elemento personalizado en el navegador.

@@ -10,7 +10,7 @@ function resolventX1(op1, op2, op3) {
     if (discriminante < 0) {
       return NaN; // La raíz no es un número real
     } else {
-      return (-b + Math.sqrt(discriminante)) / (2 * a);
+      return (-b + Math.sqrt(discriminante)) / (2 * a).toString();
     }
   }
 #unSetFile

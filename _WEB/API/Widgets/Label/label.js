@@ -7,7 +7,7 @@
 #unSetFile
 
 #setFile temp/header.html
-<script type="module" src="./JS/label.js"> </script>
+<script type="module" src="./JS/Label.js"> </script>
 #unSetFile
 
 #setFile wwwroot/JS/Label.js
@@ -18,8 +18,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*RFI JSon
 {
-	'Nombre': 'Label',
-	'NombreToolBox': 'Label',
+	'Nombre': 'label',
+	'NombreToolBox': 'label',
 	'Tipo' : 'Widget',
 	'title': 'Botón sin retención',
 	'html-tag': 'emic-widget-label',

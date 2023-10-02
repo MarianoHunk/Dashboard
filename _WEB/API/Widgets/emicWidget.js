@@ -12,12 +12,13 @@ export class EmicWidget extends HTMLElement {
         {
         this.draggable = true;
         }
+        //*****************************************************************************************************
         // Si el widget se encuentra fuera de areacentral o controles (fabricacion) se bloquea el draggable.
         if (!this.closest("#areacentral") && !this.closest("#controles"))
         {
             this.draggable = false;
         }
-
+        //*****************************************************************************************************
 
         this.addEventListener('dragover', this.eventDragoverListener);
 

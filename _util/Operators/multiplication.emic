@@ -3,9 +3,7 @@
 	"Nombre": "multiplication",
 	'NombreToolBox': 'multiplication',
 	"Tipo" : "SistemFnc",
-	"title": "(Num) Multiplication (multiplicand, multiplier)",
+	"title": "(Num) multiplication(a*b)",
 	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/multiplication.js' definir='use_multiplication_function' originalclass='funcion' originalid='multiplication' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> * <div type='' class='parametroDiv'></div>)</div>"
 }
 */
-
-

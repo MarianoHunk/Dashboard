@@ -96,8 +96,8 @@ class EmicWidgetOptionChooser extends EmicWidget {
   generateOptionChooserContent() {
     // Añadir una opción por defecto al optionChooser
     const defaultOption = document.createElement("option");
-    defaultOption.text = "Seleccion";
-    defaultOption.value = "Seleccion";
+    //defaultOption.text = "Seleccion";
+    //defaultOption.value = "Seleccion";
     defaultOption.selected = false;
     this.optionChooser.appendChild(defaultOption);
   }
