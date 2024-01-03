@@ -2,7 +2,6 @@
 <script src="https://code.highcharts.com/highcharts.js" type="text/javascript"> </script>
 #unSetFile
 
-
 import { EmicWidget } from "./emicWidget.js";
 
 // Función de utilidad para intentar parsear JSON
@@ -39,13 +38,6 @@ class EmicWidgetHistorical extends EmicWidget {
       this.setAttribute("id", this.getNewID());
     }
 
-    if (!this.hasAttribute("widthGraph")) {
-      this.setAttribute("widthGraph", "800px");
-    }
-    if (!this.hasAttribute("heightGraph")) {
-      this.setAttribute("heightGraph", "250px");
-    }
-
     if (!this.hasAttribute("label")) {
       this.setAttribute("label", JSON.stringify(" "));
     }
@@ -71,13 +63,11 @@ class EmicWidgetHistorical extends EmicWidget {
       this.chartDiv.style.width = "800px"; 
       this.chartDiv.style.height = "250px"; 
       this.shadowRoot.appendChild(this.chartDiv);
-      
+  
       this.createChart(); // Llamamos a la función para crear el gráfico
     }
     super.connectedCallback();
   }
-  // Función para descargar el gráfico
-
 
   createChart() {
   const labels = tryParseJSON(this.getAttribute("data-labels"));
@@ -90,32 +80,7 @@ class EmicWidgetHistorical extends EmicWidget {
       type: 'line',
       zoomType: 'xy', // Habilitar el zoom y paneo
       panKey: 'shift',
-      panning: true,
-      // Agregar la configuración para mover el botón 'Reset Zoom'
-      resetZoomButton: {
-        position: {
-          align: 'left', 
-          verticalAlign: 'top', 
-          x: 700,
-          y: 210
-        },
-        relativeTo: 'chart'
-      }
-    },
-    exporting: { // Habilitar botones de exportación
-      enabled: true,
-      buttons: {
-        contextButton: { // Configuración del botón contextual
-          menuItems: [
-            'printChart', // Imprimir gráfico
-            'separator', // Separador
-            'downloadPNG', // Descargar como PNG
-            'downloadJPEG', // Descargar como JPEG
-            'downloadPDF', // Descargar como PDF
-            'downloadSVG' // Descargar como SVG
-          ]
-        }
-      }
+      panning: true
     },
     title: {
       text: null // Eliminar el título
@@ -123,7 +88,7 @@ class EmicWidgetHistorical extends EmicWidget {
     xAxis: {
       categories: labels,
       labels: {
-        rotation: -30, // Ángulo de rotación a 0
+        rotation: 0, // Ángulo de rotación a 0
         useHTML: true, // Permitir el uso de HTML para mayor control
         style: {
           "white-space": "normal" // Permitir saltos de línea
@@ -157,7 +122,7 @@ class EmicWidgetHistorical extends EmicWidget {
         dataLabels: {
           enabled: true
         },
-        enableMouseTracking: true 
+        enableMouseTracking: true // Deshabilitar el seguimiento del ratón
       }
     },
     tooltip: { // Tooltip personalizado
@@ -166,37 +131,11 @@ class EmicWidgetHistorical extends EmicWidget {
       }
     }
   });
-
 }
 
 
   attributeChangedCallback(name, old, now) {
     if (old !== now && this.chart) {
-       // Verifica si 'widthGraph' ha cambiado
-       if (name === "widthGraph") {
-        // Actualiza el ancho del canvas
-        if (this.canvas) {
-          this.canvas.style.width = `${now}px`; // Suponiendo que 'now' contiene un valor numérico
-        }
-        // Actualiza el ancho de la imagen, si existe
-        const img = this.shadowRoot.querySelector("img");
-        if (img) {
-          img.style.width = `${now}px`;
-        }
-      }
-      
-      // Verifica si 'heightGraph' ha cambiado
-      if (name === "heightGraph") {
-        // Actualiza la altura del canvas
-        if (this.canvas) {
-          this.canvas.style.height = `${now}px`; // Suponiendo que 'now' contiene un valor numérico
-        }
-        // Actualiza la altura de la imagen, si existe
-        const img = this.shadowRoot.querySelector("img");
-        if (img) {
-          img.style.height = `${now}px`;
-        }
-      }
       if (name === "data-labels" || name === "data-values" || name === "label") {
         this.createChart(); // Simplemente volvemos a crear el gráfico
       }
@@ -204,7 +143,7 @@ class EmicWidgetHistorical extends EmicWidget {
   }
 
   static get observedAttributes() {
-    return ["data-labels", "data-values", "label", "widthGraph", "heightGraph"];
+    return ["data-labels", "data-values", "label"];
   }
   
   disconnectedCallback() {

@@ -46,6 +46,10 @@
 
 // Esta función establece el valor de un indicador (gauge) en la página web.
 function GaugeSetValue(gaugeName, value) {
+    // Verifica si 'gaugeName' contiene "/PING/" y si es así, descarta la función.
+    if (gaugeName.includes('/PING/')) {
+        return;
+    }
     // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
     var gName = gaugeName.includes('/') ? gaugeName.substr(gaugeName.lastIndexOf('/') + 1) : gaugeName;
 

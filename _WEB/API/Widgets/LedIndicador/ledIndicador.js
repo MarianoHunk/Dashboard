@@ -45,12 +45,13 @@ function LedIndicadorSetValue(LedIndicadorName, Value) {
     }
     var element = document.getElementById(tName);
     if (element) {
-        // Si el elemento existe, le asigna el valor 'Value' a su propiedad 'state'
-        element.state = Value;
+        // Si el elemento existe, le asigna el valor 'Value' a su atributo 'state'
+        element.setAttribute('state', Value);
     } 
     else {
         console.log("Led Indicador con id ", tName, " no encontrado");
     }
 }
+
 
 

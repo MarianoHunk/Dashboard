@@ -41,6 +41,10 @@
 
 // Esta función establece el valor de un elemento de etiqueta (label) en la página web.
 function labelSetValue(labelViewName, value) {
+    // Verifica si 'gaugeName' contiene "/PING/" y si es así, descarta la función.
+    if (labelViewName.includes('/PING/')) {
+        return;
+    }
     // Normaliza el nombre de la etiqueta eliminando cualquier parte antes de la última barra diagonal '/'.
     var lName = labelViewName.includes('/') ? labelViewName.substr(labelViewName.lastIndexOf('/') + 1) : labelViewName;
 	console.log(lName);

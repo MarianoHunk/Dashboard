@@ -86,6 +86,6 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/Templates/serviceWorker.js,name=)
 #unSetFile
 
-#setFile wwwroot/firebase-messaging-sw.js
-#newRFIcode(_WEB/Templates/firebase-messaging-sw.js,name=)
-#unSetFile
+//#setFile wwwroot/firebase-messaging-sw.js
+//#newRFIcode(_WEB/Templates/firebase-messaging-sw.js,name=)
+//#unSetFile
