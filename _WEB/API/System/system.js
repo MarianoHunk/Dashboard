@@ -144,7 +144,7 @@
 //-----------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
 	if (typeof INICIO === 'function') {
-	  INICIO();
+	  INICIO(); 
 	}
   });
 
