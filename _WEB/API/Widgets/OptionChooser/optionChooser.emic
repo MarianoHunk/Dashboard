@@ -1,0 +1,156 @@
+//RFI TAG:driverName=HTML Widget
+
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/optionChooser.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/optionChooser.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/optionChooser.js
+#newRFIcode(_WEB/API/Widgets/OptionChooser/plugins/optionChooser.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'optionChooser',
+	'NombreToolBox': 'optionChooser',
+	'Tipo' : 'Widget',
+	'title': 'Control deslizante',
+	'html-tag': 'emic-widget-optionChooser',
+}
+*/
+//	'instance': '{"component":"emic-widget-optionchooser","attributes":{}}',
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'optionChooserChange',
+	'NombreToolBox': 'optionChooserChange',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.optionChooser.change",
+		"definir":"event_change_active",
+		"parametros": [{"value":"OptionChooser","title":"OptionChooser name "},{"value":"Value","title":"OptionChooser value "}]
+		}'
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void addOptionChooserOption(int optionChooserName, int label, int value)
+ * @alias addOptionChooserOption
+ * @brief Añade una nueva opción al widget de lista desplegable
+ * @param optionChooserName ID del widget de lista desplegable
+ * @param label Etiqueta que se mostrará en la lista desplegable
+ * @param value Valor de la nueva opción
+ * @return Nothing
+ */ 
+
+function addOptionChooserOption(optionChooserName, label, value) {
+  
+  var dName = optionChooserName;
+  console.log("dName", dName);
+  
+  // Este 'if' comprueba si 'optionChooserName' incluye '/',
+  // si es así, entonces actualiza 'dName' para ser la porción después de la última '/'
+  if (optionChooserName.includes('/')) {
+    dName = optionChooserName.substr(optionChooserName.lastIndexOf('/') + 1);
+  }
+
+  // Intenta obtener el elemento del documento por su 'id'
+  var element = document.getElementById(dName);
+  console.log("element", element);
+
+  // Este 'if' comprueba si el elemento con 'id' 'dName' existe y es un EmicWidgetOptionChooser
+  if (element && element.tagName.toLowerCase() === "emic-widget-optionchooser") {
+    // Validar que tanto la etiqueta como el valor sean cadenas no vacías
+    if (label && value && typeof label === "string" && typeof value === "string") {
+      element.addOption(label, value);
+    } else {
+      console.error('La etiqueta y el valor deben ser cadenas no vacías.');
+    }
+  } else {
+    console.log("Elemento con id ", dName, " no encontrado o no es un EmicWidgetOptionChooser");
+  }
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void setOptionChooserValue(int optionChooserId, int newValue)
+ * @alias setOptionChooserValue
+ * @brief Selecciona una nueva opcion
+ * @param optionChooserId ID del widget de lista desplegable
+ * @param newValue Valor de la nueva opción
+ * @return Nothing
+ */ 
+
+function setOptionChooserValue(optionChooserId, newValue) {
+  var CName = optionChooserId;
+  if (optionChooserId.includes('/')) {
+      CName = optionChooserId.substr(optionChooserId.lastIndexOf('/') + 1);
+  }
+  var element = document.getElementById(CName);
+
+  // Verifica si el elemento con 'id' existe y es un EmicWidgetOptionChooser
+  if (element && element.tagName.toLowerCase() === "emic-widget-optionchooser") {
+    
+    // Obtiene las opciones disponibles en el select
+    const options = Array.from(element.optionChooser.options).map(option => option.value);
+
+    // Verifica si el nuevo valor está entre las opciones disponibles
+    if (options.includes(newValue)) {
+      // Actualiza el atributo 'value' del elemento
+      element.setAttribute("value", newValue);
+    } else {
+      // Muestra un mensaje de error y lista las opciones disponibles
+      console.log(`El valor ${newValue} no está entre las opciones disponibles. Las opciones disponibles son: ${options.join(", ")}`);
+    }
+  } 
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void getOptionChooserValue(int optionChooserId)
+ * @alias getOptionChooserValue
+ * @brief Revise que opcion existe
+ * @param optionChooserId ID del widget de lista desplegable
+ * @return value
+ */ 
+
+
+// Función para obtener el valor seleccionado de EmicWidgetOptionChooser
+function getOptionChooserValue(optionChooserId) {
+  // Obtener el elemento EmicWidgetOptionChooser por su ID
+  var emicWidget = document.getElementById(optionChooserId);
+
+  // Verificar si el elemento existe y es una instancia de EmicWidgetOptionChooser
+  if (emicWidget) {
+    // Obtener el valor seleccionado del EmicWidgetOptionChooser
+    var selectedValue = emicWidget.value;
+
+    // Devolver el valor seleccionado
+    console.log("Valor seleccionado: " , selectedValue);
+    return selectedValue;
+  } else {
+    // Si el elemento no es un EmicWidgetOptionChooser o no existe, devuelve null o maneja el error según tus necesidades.
+    console.log("No se encontro valor.");
+    return null;
+  }
+}
+
+// Llamar a la función y guardar el valor en una variable
+var valorSeleccionado = getOptionChooserValue("tuIdDelEmicWidgetOptionChooser");
+
+// Imprimir el valor seleccionado en la consola
+console.log("El valor seleccionado es:", valorSeleccionado);

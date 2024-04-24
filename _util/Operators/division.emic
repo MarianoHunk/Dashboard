@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "division",
+	'NombreToolBox': 'division',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) division (numerator, denominator)",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/division.js' definir='use_division_function' originalclass='funcion' originalid='division' draggable='true' ondragstart='drag_linea(event)'>(<div type='' class='parametroDiv'></div> / <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

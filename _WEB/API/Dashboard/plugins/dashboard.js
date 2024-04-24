@@ -27,7 +27,7 @@ if (customElements.get("emic-dash-panel") === undefined) {
             //seccion;
             const nuevoDiv = document.createElement("div");
             const style = document.createElement("style");
-            style.innerHTML = `:host(:hover) {border : 1px solid;} section.show {min-height: 10px;opacity: 1;padding: 10px;} section.hide {min-height: 0px;  opacity: 0;padding: 0px;}                `;
+            style.innerHTML = `:host(:hover) {border : 1px solid;} section.show {min-height: 10px;opacity: 1;padding: 0px;} section.hide {min-height: 0px;  opacity: 0;padding: 0px;}                `;
 
             this.shadowRoot.appendChild(style);
             const boton = document.createElement("button");
@@ -136,6 +136,14 @@ if (customElements.get("emic-dash-panel") === undefined) {
                 this.style.opacity = "0.1";
 
             }
+            //************************************************************************************************
+            // Si el panel (fila o columna) se encuentra fuera de areacentral o controles (fabricacion) se bloquea el draggable.
+            if (!this.closest("#areacentral") && !this.closest("#controles"))
+            {
+                this.draggable = false;
+            }
+            //************************************************************************************************
+
             else if (this.shadowRoot.innerHTML !== "") {
                 return;
 
@@ -149,29 +157,33 @@ if (customElements.get("emic-dash-panel") === undefined) {
                     document.miDrag = this;
                     document.miDragAction = 'create';
                 });
-                this.addEventListener('dragend', (e) => {
-                    document.miDrag.style.opacity = "1";
-                    e.dataTransfer.setData("text", null);
-                    document.miDrag = null;
-                    this.style.opacity = "1";
+                
 
-                })
+                    this.addEventListener('dragend', (e) => {
+                        document.miDrag.style.opacity = "1";
+                        e.dataTransfer.setData("text", null);
+                        document.miDrag = null;
+                        this.style.opacity = "1";
+
+                    })
+                
                 return;
-            }
+                }
             //return true;
             //this.style.flexFlow = 1;
             const style = document.createElement("style");
             style.innerHTML = ``;
             this.shadowRoot.appendChild(style);
-            this.seccion.style['border'] = '1px solid';
+            this.seccion.style['border'] = '2px solid #008CBA';
             this.seccion.style['display'] = 'flex';
             this.seccion.style['justify-content'] = 'space-evenly';
             this.seccion.style['flex-wrap'] = 'wrap';
             this.seccion.style['min-width'] = '10px';
             this.seccion.style['min-height'] = '10px';
-            this.seccion.style['padding'] = '4px';
+            this.seccion.style['padding'] = '0px';
             this.seccion.style['flex-grow'] = '1';
             this.seccion.style['position'] = 'relative';
+            this.seccion.style.backgroundColor = "#f0f0f0"; 
 
             this.menu = document.createElement("i");
             this.menu.style = "position: absolute;right:0;right:1;top:0;"
@@ -212,11 +224,23 @@ if (customElements.get("emic-dash-panel") === undefined) {
 
             this.seccion.appendChild(this.menu);
             
-            this.style = "justify-content: center;display:flex;flex-grow:1;margin:4px"; // 
+            this.style = "justify-content: center;display:flex;flex-grow:1;margin:4px"; 
+            //************************************************************************************************
+            // Si el panel (fila o columna) se encuentra fuera de areacentral o controles modifico el margen
+            if (!this.closest("#areacentral") && !this.closest("#controles"))
+            {
+                //this.seccion.style['border'] = '1px solid #003366';
+                this.seccion.style['border'] = '2px solid #008CBA';
+                this.seccion.style['border-radius'] = '10px';
+                this.seccion.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";  // Configuración de ejemplo para una sombra
+                this.style = "justify-content: center;display:flex;flex-grow:1;margin:1px"; 
+            }
+            //************************************************************************************************
             this.seccion.appendChild(document.createElement("slot"));
             this.shadowRoot.appendChild(this.seccion);
 
             // --------------------- EVENTS ----------------
+
             this.addEventListener('dragover', this.enventDragoverListener);
             this.addEventListener('dragstart', (e) => {
                 e.stopPropagation();

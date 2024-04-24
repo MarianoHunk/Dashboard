@@ -60,7 +60,7 @@ class EmicWidgetIcon extends EmicWidget {
       img.src = this.getAttribute("src");
     } else {
       img.src =
-        "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/Encendido.png";
+        "/dashboard/.{userName}./.{project}./.{userModule}./images/icons/IconoEmicAReemplazar.jpg";
     }
 
     this.ondrop = async (e) => {

@@ -1,0 +1,11 @@
+#setFile toolbar/properties
+	<emic-widget-properties/>
+#unSetFile
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/emic-widget-properties.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/emic-widget-properties.js
+	#newRFIcode(_plugins/emic-widget-properties.js)
+#unSetFile

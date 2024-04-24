@@ -24,6 +24,7 @@ if ("serviceWorker" in navigator) {
 //-----------------------------------------------------------------------------------
 #newRFIcode(_WEB/API/Dashboard/dashboard.js,name=)
 #newRFIcode(_WEB/API/MQTT/mqtt.js,name=)
+#newRFIcode(_WEB/API/NOTIFICATION/notification.js,name=)
 #newRFIcode(_WEB/API/Tic/tic.js,name=)
 #newRFIcode(_WEB/API/System/system.js,name=)
 //-----------------------------------------------------------------------------------
@@ -46,18 +47,20 @@ if ("serviceWorker" in navigator) {
 //-----------------------------------------------------------------------------------
 #newRFIcode(_WEB/API/Widgets/Button/button.js,name=)
 #newRFIcode(_WEB/API/Widgets/CheckBox/checkBox.js,name=)
+#newRFIcode(_WEB/API/Widgets/OptionChooser/optionChooser.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Gauge/customGauge.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Icon/icon.js,name=)
-//#newRFIcode(_WEB/API/Widgets/Label/label.js,name=)
+#newRFIcode(_WEB/API/Widgets/Label/label.js,name=)
 #newRFIcode(_WEB/API/Widgets/LedIndicador/ledIndicador.js,name=)
-//#newRFIcode(_WEB/API/Widgets/Plot/plot.emic,name=)
+#newRFIcode(_WEB/API/Widgets/InputDate/inputDate.emic,name=)
 #newRFIcode(_WEB/API/Widgets/InputTime/inputTime.emic,name=)
 #newRFIcode(_WEB/API/Widgets/InputNum/inputNum.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Slider/slider.emic,name=)
 #newRFIcode(_WEB/API/Widgets/Switch/customSwitch.js,name=)
 #newRFIcode(_WEB/API/Widgets/Table/table.emic,name=)
 #newRFIcode(_WEB/API/Widgets/TextBox/textBox.js,name=)
-#newRFIcode(_WEB/API/Widgets/TextView/textview.js,name=)
+#newRFIcode(_WEB/API/Widgets/Historical/historical.emic,name=)
+#newRFIcode(_WEB/API/Widgets/Historical2/historical2.emic,name=)
 #newRFIcode(temp/script.js,name=)
 #newRFIcode(temp/myVars.js,name=)
 #unSetFile
@@ -82,3 +85,7 @@ if ("serviceWorker" in navigator) {
 #setFile wwwroot/serviceWorker.js
 #newRFIcode(_WEB/Templates/serviceWorker.js,name=)
 #unSetFile
+
+//#setFile wwwroot/firebase-messaging-sw.js
+//#newRFIcode(_WEB/Templates/firebase-messaging-sw.js,name=)
+//#unSetFile

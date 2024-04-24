@@ -55,16 +55,26 @@ class EmicWidgetTable extends EmicWidget {
 
     // Agregar estilos CSS para el borde de la tabla
     style.textContent = `
-    table {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-    
-    td {
-      border: 1px solid black;
-      padding: 5px;
-    }
-  `;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;  /* Tamaño de letra de 18px */
+      }
+      td, th {
+        border: 2px solid #008CBA;
+        text-align: center;
+        padding: 16px;
+        border-radius: 16px;
+      }
+      tr:nth-child(even) {
+        background-color: #e6f7ff;
+      }
+      th {
+        background-color: #333;
+        color: white;
+      }
+    `;
 
     // Agregar un event listener para el clic
     this.addEventListener("click", this.eventClickListener);

@@ -1,0 +1,185 @@
+//RFI TAG:driverName=HTML Widget
+
+
+#setFile plugins/www/header.html
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/historical.js"> </script>
+#unSetFile
+
+#setFile temp/header.html
+<script type="module" src="./JS/historical.js"> </script>
+#unSetFile
+
+#setFile wwwroot/JS/historical.js
+#newRFIcode(_WEB/API/Widgets/Historical/plugins/historical.js,name=)
+#unSetFile
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'historical',
+	'NombreToolBox': 'historical',
+	'Tipo' : 'Widget',
+	'title': 'Control deslizante',
+	'html-tag': 'emic-widget-historical',
+}
+*/
+//	'instance': '{"component":"emic-widget-historical","attributes":{}}',
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Evento
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'historicalChange',
+	'NombreToolBox': 'historicalChange',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.historical.change",
+		"definir":"event_mousedown_active",
+		"parametros": [{"json":"Historical","title":"Historical name "},{"json":"Value","title":"Historical json "}]
+		}'
+}
+*/
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Funciones
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+/**
+ * @fn void SetDataHist(int HistName,int Value)
+ * @alias SetDataHist
+ * @brief Set text
+ * @param HistName HistName
+ * @param Value Value
+ * @return Nothing
+ */ 
+ 
+function SetDataHist(HistName, Hjson) {
+    // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+    var gName = HistName.includes("/")
+        ? HistName.substr(HistName.lastIndexOf("/") + 1)
+        : HistName;
+    var historical = document.getElementById(gName);
+
+    if (!historical) {
+        historical = document.getElementById("H-" + gName);
+    }
+
+    // Verificar si el elemento existe y es del tipo correcto
+    if (
+        historical &&
+        historical.tagName.toLowerCase() === "emic-widget-historical"
+    ) {
+        // Intentar parsear el JSON
+        let obj;
+        try {
+            obj = JSON.parse(Hjson);
+        } catch (e) {
+            console.error("El argumento Hjson proporcionado no es un JSON válido.");
+            return; // Termina la función si Hjson no es un JSON válido
+        }
+
+        // Verificar que obj tiene las propiedades esperadas
+        if (
+            !obj.hasOwnProperty("label") ||
+            !obj.hasOwnProperty("dataLabels") ||
+            !obj.hasOwnProperty("dataValues")
+        ) {
+            console.error(
+                "El objeto JSON no tiene las propiedades requeridas: label, dataLabels, dataValues"
+            );
+            return;
+        }
+        const { label, dataLabels, dataValues } = obj;
+
+        if (Array.isArray(label)) {
+            historical.setAttribute("label", JSON.stringify(label));
+        } else {
+            console.error("label debe ser un array");
+        }
+
+        if (Array.isArray(dataLabels)) {
+            historical.setAttribute("data-labels", JSON.stringify(dataLabels));
+        } else {
+            console.error("dataLabels debe ser un array");
+        }
+
+        if (Array.isArray(dataValues)) {
+            historical.setAttribute("data-values", JSON.stringify(dataValues));
+        } else {
+            console.error("dataValues debe ser un array");
+        }
+    } 
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+ * @fn void MultiSetDataHist(int compTopic, int topic, int payload, int WidgetName)
+ * @alias MultiSetDataHist
+ * @brief Set text
+ * @param compTopic compTopic
+ * @param topic topic
+ * @param payload payload
+ * @param WidgetName WidgetName
+ * @return Nothing
+ */ 
+ 
+function MultiSetDataHist(compTopic, topic, payload, WidgetName) {
+    // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+    if (compTopic === topic) {
+        var historical = document.getElementById(WidgetName);
+
+        if (!historical) {
+            historical = document.getElementById("H-" + WidgetName);
+        }
+
+        // Verificar si el elemento existe y es del tipo correcto
+        if (
+            historical &&
+            historical.tagName.toLowerCase() === "emic-widget-historical"
+        ) {
+            // Intentar parsear el JSON
+            let obj;
+            try {
+                obj = JSON.parse(payload);
+            } catch (e) {
+                console.error("El argumento Hjson proporcionado no es un JSON válido.");
+                return; // Termina la función si Hjson no es un JSON válido
+            }
+
+            // Verificar que obj tiene las propiedades esperadas
+            if (
+                !obj.hasOwnProperty("label") ||
+                !obj.hasOwnProperty("dataLabels") ||
+                !obj.hasOwnProperty("dataValues")
+            ) {
+                console.error(
+                    "El objeto JSON no tiene las propiedades requeridas: label, dataLabels, dataValues"
+                );
+                return;
+            }
+            const { label, dataLabels, dataValues } = obj;
+
+            if (Array.isArray(label)) {
+                historical.setAttribute("label", JSON.stringify(label));
+            } else {
+                console.error("label debe ser un array");
+            }
+
+            if (Array.isArray(dataLabels)) {
+                historical.setAttribute("data-labels", JSON.stringify(dataLabels));
+            } else {
+                console.error("dataLabels debe ser un array");
+            }
+
+            if (Array.isArray(dataValues)) {
+                historical.setAttribute("data-values", JSON.stringify(dataValues));
+            } else {
+                console.error("dataValues debe ser un array");
+            }
+        }
+    }
+}

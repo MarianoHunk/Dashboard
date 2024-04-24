@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "resolventX2",
+	'NombreToolBox': 'resolventX2',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) Calculates the second (real) root of a quadratic equation (ax^2+bx+c)",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/resolventX2.js' definir='use_resolventX2_function' originalclass='funcion' originalid='resolventX2' draggable='true' ondragstart='drag_linea(event)'>(a=<div type='' class='parametroDiv'></div> , b= <div type='' class='parametroDiv'></div> , c= <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

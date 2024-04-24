@@ -37,7 +37,7 @@ class EmicWidgetCheckbox extends EmicWidget {
 
     // Establecemos el tipo de input como "checkbox"
     this.checkbox.type = "checkbox";
-    
+
     // Si el elemento no tiene un atributo "id", se le asigna uno nuevo
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
@@ -49,7 +49,30 @@ class EmicWidgetCheckbox extends EmicWidget {
     if (!this.hasAttribute("checked")) {
       this.setAttribute("checked", "0");
     }
-
+    //----------------------------------------------------
+    // Agregamos los estilos al shadowRoot
+    //----------------------------------------------------
+    const style = document.createElement("style");
+    style.textContent = `
+    /* Eliminar el aspecto por defecto del checkbox */
+    input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background-color: #e6f7ff;
+      border: 3px solid #008CBA;
+      cursor: pointer;
+    }
+    
+    /* Diseño cuando el checkbox está seleccionado */
+    input[type="checkbox"]:checked {
+      background: linear-gradient(to bottom, rgb(110, 159, 243) 40%, #6c79a7);
+      border: 3px solid #008CBA;
+    }
+    
+  `;
+    this.shadowRoot.appendChild(style);
+    //----------------------------------------------------
     this.shadowRoot.appendChild(this.checkbox);
 
     //----------------------------------------------------

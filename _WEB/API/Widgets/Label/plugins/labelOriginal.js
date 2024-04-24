@@ -1,8 +1,18 @@
 import { EmicWidget } from "./emicWidget.js";
 
-class EmicWidgetTextView extends EmicWidget {
+class EmicWidgetLabel extends EmicWidget {
   static namesList = {};
-  myTextView;
+  myLabel;
+  config = [
+    {
+      name: "font",
+      type: "list",
+      options: ["arial", "sansserif"],
+    },
+    {
+      name: "color",
+    },
+  ];
 
   //-----------------------------------------------------------------------------------
   //                   Método para obtener un nuevo ID
@@ -10,8 +20,8 @@ class EmicWidgetTextView extends EmicWidget {
   // Este método se utiliza para generar un nuevo ID único para el elemento.
   getNewID() {
     var i;
-    for (i = 1; document.getElementById(`textview-${i}`) !== null; i++);
-    return `textview-${i}`;
+    for (i = 1; document.getElementById(`label-${i}`) !== null; i++);
+    return `label-${i}`;
   }
 
   //-----------------------------------------------------------------------------------
@@ -28,26 +38,36 @@ class EmicWidgetTextView extends EmicWidget {
   //-----------------------------------------------------------------------------------
   // Este método se ejecuta cuando el elemento personalizado se conecta al DOM.
   connectedCallback() {
-    if (!super.preconnectedCallback("TextView")) {
+    if (!super.preconnectedCallback("Label")) {
       return;
     }
     const div = document.createElement("div");
     div.innerText = this.getAttribute("text_val");
-    this.myTextView = div;
+    this.myLabel = div;
     const style = document.createElement("style");
     this.shadowRoot.appendChild(div);
     this.shadowRoot.appendChild(style);
+    //############################################################################
+    // Aplicamos los estilos directamente al elemento para que coincidan con la gama de colores de la tabla
+    this.myLabel.style.height = "40px";
+    this.myLabel.style.lineHeight = "40px"; // Centra el texto verticalmente al hacerlo igual a la altura
+    //this.myLabel.style.border = "1px solid #008CBA"; // Borde azul para coincidir con la tabla
+    this.myLabel.style.borderRadius = "1px"; // Borde redondeado para coincidir con la tabla
+    this.myLabel.style.backgroundColor = "transparent"; // Fondo celeste claro para coincidir con la tabla
+    this.myLabel.style.fontFamily = "'Courier New', Courier, monospace"; // Tipo de letra para coincidir con la tabla
+    this.myLabel.style.fontSize = "18px"; // Tamaño de letra de 18px para coincidir con la tabla
+    //############################################################################
 
-    if (!this.hasAttribute('id')) {
-        this.setAttribute('id', this.getNewID());
+    if (!this.hasAttribute("id")) {
+      this.setAttribute("id", this.getNewID());
     }
 
-    if (!this.hasAttribute('text_val')) {
-        this.setAttribute('text_val', this.getAttribute("id")); // Se setea el contenido de texto igual que el nombre del widget
+    if (!this.hasAttribute("text_val")) {
+      this.setAttribute("text_val", this.getAttribute("id")); // Se setea el contenido de texto igual que el nombre del widget
     }
 
     div.textContent = this.getAttribute("text_val");
-    this.addEventListener('click', this.eventClickListener);
+    this.addEventListener("click", this.eventClickListener);
     super.connectedCallback();
   }
 
@@ -69,15 +89,15 @@ class EmicWidgetTextView extends EmicWidget {
 
   // Se ejecuta cuando hay cambios en los atributos observados
   attributeChangedCallback(name, old, now) {
-    if (name === 'text_val' && this.myTextView) {
-      //this.myTextView.text_val = now;(error)
-      this.myTextView.textContent = now;
+    if (name === "text_val" && this.myLabel) {
+      //this.myLabel.text_val = now;(error)
+      this.myLabel.textContent = now;
     }
   }
 
   // Setter para el atributo "text_val".
   set text_val(newVal) {
-    this.setAttribute('text_val', newVal);
+    this.setAttribute("text_val", newVal);
   }
 
   // Getter para el atributo "text_val".
@@ -88,9 +108,9 @@ class EmicWidgetTextView extends EmicWidget {
 
 // Se registra el elemento personalizado en el navegador.
 /*
- * El custom element: "emic-widget-textview" *
+ * El custom element: "emic-widget-label" *
  * Debe contener al menos un guion (-).
  * No puede contener letras en mayúscula.
  * Debe tener al menos un carácter que no sea un guion.
  */
-customElements.define("emic-widget-textview", EmicWidgetTextView);
+customElements.define("emic-widget-label", EmicWidgetLabel);

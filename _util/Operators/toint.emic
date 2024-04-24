@@ -1,0 +1,11 @@
+ /*RFI JSon
+{
+	"Nombre": "toint",
+	'NombreToolBox': 'Convert to int',
+	"Tipo" : "SistemFnc",
+	"title": "(Num) toint(float)",
+	"InnerHTML": "<div class='lineaDeCodigo' location='_util/Operators/toint.js' definir='use_toint_function' originalclass='funcion' originalid='toint' draggable='true' ondragstart='drag_linea(event)'>(toint <div type='' class='parametroDiv'></div>)</div>"
+}
+*/
+
+

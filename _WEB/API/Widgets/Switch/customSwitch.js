@@ -15,7 +15,6 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 /*RFI JSon
 {
 	'Nombre': 'switch',
@@ -25,6 +24,7 @@
 	'html-tag': 'emic-widget-switch'
 }
 */
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Evento
@@ -39,7 +39,7 @@
 	'instancia':'{
 		"NombreWorkBox": "Event.Switch.Toogle",
 		"definir":"event_switchToogle_active",
-		"parametros": [	{"value":"Switch","title":"Switch name "},{"value":"Value","title":"Switch value"}]
+		"parametros": [{"value":"Switch","title":"Switch name "},{"value":"Value","title":"Switch value"}]
 		}'
 }
 */
@@ -63,21 +63,15 @@
 */
 
 function SwitchSetValue(switchName, Value) {
-    var tName = switchName;
-    if (switchName.includes('/')) {
-        tName = switchName.substr(switchName.lastIndexOf('/') + 1);
-    }
-
-    // Intenta obtener el elemento del documento por su 'id'
-    // El 'id' del elemento es 'switch-' seguido de 'tName'
-    var element = document.getElementById(`switch-${tName}`);
-    if (element) {
-        // Si el elemento existe, le asigna el valor 'Value'
-        element.value = Value;
-    } 
-    else {
-        // Imprime un mensaje de error en la consola
-        console.log("Switch con id switch-", tName, " no encontrado");
-    }
-}
-
+	var tName = switchName;
+	if (switchName.includes('/')) {
+		tName = switchName.substr(switchName.lastIndexOf('/') + 1);
+	}
+  
+	var element = document.getElementById(tName);
+	if (element) {  // Usar 'instanceof' en lugar de 'classList.contains'
+		element.value = Value;
+	} else {
+		console.log("Switch con id ", tName, " no encontrado");
+	}
+  }
