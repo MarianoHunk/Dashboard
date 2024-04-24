@@ -63,6 +63,9 @@ if ("serviceWorker" in navigator) {
 #newRFIcode(_WEB/API/Widgets/Historical2/historical2.emic,name=)
 #newRFIcode(temp/script.js,name=)
 #newRFIcode(temp/myVars.js,name=)
+
+ INICIO();
+
 #unSetFile
 
 #setFile wwwroot/CSS/dashboard.css
