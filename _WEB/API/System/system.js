@@ -139,14 +139,8 @@
 }
 */
 
-//-----------------------------------------------------------------------------------
-// Llama al evento INICIO 
-//-----------------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-	if (typeof INICIO === 'function') {
-	  INICIO();
-	}
-  });
+
+//document.addEventListener('DOMContentLoaded', INICIO);
 
 
 
