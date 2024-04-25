@@ -45,11 +45,11 @@ export class EmicWidget extends HTMLElement {
 		if (event.type === "click") {
             event.stopPropagation();
 		    const messageEvent = new CustomEvent("user:data-message", {
-			detail: { from: "Manz", message: "Hello!" },
-			bubbles: true,
-			composed: true
-		  });
-		  this.dispatchEvent(messageEvent);
+                detail: { from: "Manz", message: "Hello!" },
+                bubbles: true,
+                composed: true
+            });
+		    this.dispatchEvent(messageEvent);
 		}
 
 	  }	

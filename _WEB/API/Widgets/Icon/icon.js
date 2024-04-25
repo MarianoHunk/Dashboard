@@ -2,17 +2,17 @@
 
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/icon.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/icon.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/icon.js
-#newRFIcode(_WEB/API/Widgets/Icon/plugins/icon.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/icon.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Icon/plugins/icon.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente

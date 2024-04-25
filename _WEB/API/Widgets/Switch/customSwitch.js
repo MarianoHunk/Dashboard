@@ -1,16 +1,16 @@
 //RFI TAG:driverName=HTML Widget
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/switch.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/switch.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/switch.js
-#newRFIcode(_WEB/API/Widgets/Switch/plugins/switch.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/switch.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Switch/plugins/switch.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente

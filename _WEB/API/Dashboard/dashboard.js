@@ -37,14 +37,14 @@ console.log("local_dashboard.js");
 */
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/dashboard.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/dashboard.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/dashboard.js
-#newRFIcode(_WEB/API/Dashboard/plugins/dashboard.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/dashboard.js)
+EMIC:setInput(DEV:_WEB/API/Dashboard/plugins/dashboard.js)
+EMIC:restoreOutput

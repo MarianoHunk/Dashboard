@@ -43,9 +43,9 @@ target
 
 
 #### #newRFIcode(dir/file[,param=value][, ......])
-##### #setFile dir/file
+##### EMIC:setOutput(TARGET:dir/file)
 ##### #reSetFile dir/file
-##### #unSetFile
+##### EMIC:restoreOutput
 ##### #define
 ##### #undef
 ##### #copy

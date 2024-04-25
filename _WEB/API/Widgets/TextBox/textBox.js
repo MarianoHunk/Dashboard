@@ -1,16 +1,16 @@
 //RFI TAG:driverName=HTML Widget
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/textBox.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/textBox.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/textBox.js
-#newRFIcode(_WEB/API/Widgets/TextBox/plugins/textBox.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/textBox.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/TextBox/plugins/textBox.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente

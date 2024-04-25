@@ -41,17 +41,26 @@ class EmicWidgetSlider extends EmicWidget {
     // Establecemos el valor mínimo y maximo
     //this.slider.min = "0";
     //this.slider.max = "100";
+
+    // Si el elemento no tiene un atributo "id", se le asigna uno nuevo
+    if (!this.hasAttribute("id")) {
+      this.setAttribute("id", this.getNewID());
+    }
+    // Mostrar identificador    
+    if (!this.hasAttribute("sub-topic")) {
+      this.setAttribute("sub-topic", "");
+    }
+    else if (this.getAttribute("sub-topic") !== "") {
+      this.subTopic = this.getAttribute("sub-topic"); 
+    }
+
     if (this.hasAttribute("min")) {
     this.slider.min = this.getAttribute("min");
     }
     if (this.hasAttribute("max")) {
     this.slider.max = this.getAttribute("max");
     }
-    // Si el elemento no tiene un atributo "id", se le asigna uno nuevo
-    if (!this.hasAttribute("id")) {
-      this.setAttribute("id", this.getNewID());
-    }
-    // Mostrar identificador
+
     this.setAttribute("title", this.getAttribute("id"));
 
     // Si el elemento no tiene un atributo "value", se le asigna el valor 50
@@ -125,7 +134,16 @@ class EmicWidgetSlider extends EmicWidget {
 
   // Método llamado cuando ocurre el evento "change" en el slider
   change(event) {
-    console.log(this.getAttribute("id"), " change ", event.target.value);
+    let value = event.target.value;
+    console.log(this.getAttribute("id"), " change ", value);
+
+    const messageEvent = new CustomEvent(`user:subscribe:${this.subTopic}`, {
+      detail: { topic: this.subTopic, message: value },
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(messageEvent);
+
 
     // Si existe una función global "sliderChange", se llama a esa función y se le pasa el ID del slider y su nuevo valor
     if (window.sliderChange)

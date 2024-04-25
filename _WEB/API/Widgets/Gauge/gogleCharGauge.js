@@ -10,9 +10,9 @@
 }
 */
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
 
 google.charts.load('current', {'packages':['gauge']});

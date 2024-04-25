@@ -42,6 +42,14 @@ class EmicWidgetCheckbox extends EmicWidget {
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
     }
+
+    if (!this.hasAttribute("sub-topic")) {
+      this.setAttribute("sub-topic", "");
+    }
+    else if (this.getAttribute("sub-topic") !== "") {
+      this.subTopic = this.getAttribute("sub-topic"); 
+    }
+
     // Mostrar identificador
     this.setAttribute("title", this.getAttribute("id"));
 
@@ -87,6 +95,13 @@ class EmicWidgetCheckbox extends EmicWidget {
     let checkedValue = event.target.checked ? "1" : "0";
     console.log(this.getAttribute("id"), " change ", checkedValue);
 
+    const messageEvent = new CustomEvent(`user:subscribe:${this.subTopic}`, {
+      detail: { topic: this.subTopic, message: checkedValue },
+      bubbles: true,
+      composed: true
+    });
+  this.dispatchEvent(messageEvent);
+
     // Si existe una función global "checkboxChange", se llama a esa función y se le pasa el ID del checkbox y su nuevo valor
     if (window.checkboxChange)
       checkboxChange(this.getAttribute("id"), checkedValue);
@@ -97,7 +112,7 @@ class EmicWidgetCheckbox extends EmicWidget {
   //-----------------------------------------------------------------------------------
   // Lista de atributos observados por el elemento
   static get observedAttributes() {
-    return ["checked"];
+    return ["checked","sub-topic"];
   }
 
   // Método llamado cuando hay cambios en los atributos del elemento
@@ -107,6 +122,18 @@ class EmicWidgetCheckbox extends EmicWidget {
 
     switch (name) {
       // Si el atributo cambiado es "checked", se actualiza el estado del checkbox
+      case "sub-topic":
+
+        //if (lod !== ""){
+        //  document.removeEventListener(`user:subscribe:${old}`);
+        //}
+
+        this.subTopic = `user:subscribe:${now}`
+        //document.addEventListener(`user:subscribe:${now}`, (e) => {
+        //  console.log(e);
+        //}); 
+
+        break;
       case "checked":
         this.checkbox.checked = now == "1";
         break;

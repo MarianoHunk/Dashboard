@@ -1,4 +1,4 @@
-#setFile wwwroot/JS/emic.js
+EMIC:setOutput(TARGET:wwwroot/JS/emic.js)
 function resolventX1(op1, op2, op3) {
     // Convertir los parámetros a valores flotantes
     const a = parseFloat(op1);
@@ -13,4 +13,4 @@ function resolventX1(op1, op2, op3) {
       return (-b + Math.sqrt(discriminante)) / (2 * a).toString();
     }
   }
-#unSetFile
+EMIC:restoreOutput
