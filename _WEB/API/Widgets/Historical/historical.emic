@@ -1,17 +1,17 @@
 //RFI TAG:driverName=HTML Widget
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/historical.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/historical.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/historical.js
-#newRFIcode(_WEB/API/Widgets/Historical/plugins/historical.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/historical.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Historical/plugins/historical.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente
@@ -183,3 +183,27 @@ function MultiSetDataHist(compTopic, topic, payload, WidgetName) {
         }
     }
 }
+
+
+/**
+ * @fn void HistoricAddPoint(int HistName, int X, int Y)
+ * @alias HistoricAddPoint
+ * @brief Add data point
+ * @param HistName HistName
+ * @param X X
+ * @param Y Y
+ * @return Nothing
+ */ 
+
+ function HistoricAddPoint(HistName, X , Y) {
+    // Normaliza el nombre del indicador eliminando cualquier parte antes de la última barra diagonal '/'.
+    var gName =  HistName;
+
+    var historical = document.getElementById(gName);
+
+    if (!historical) {
+        historical = document.getElementById("H-" + gName);
+    }
+
+    historical.addPoint(X,Y)
+ }

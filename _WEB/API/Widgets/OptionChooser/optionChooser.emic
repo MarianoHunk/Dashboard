@@ -1,17 +1,17 @@
 //RFI TAG:driverName=HTML Widget
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/optionChooser.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/optionChooser.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/optionChooser.js
-#newRFIcode(_WEB/API/Widgets/OptionChooser/plugins/optionChooser.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/optionChooser.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/OptionChooser/plugins/optionChooser.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente

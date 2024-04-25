@@ -12,13 +12,13 @@
 }
 */
 
-#setFile pluggins/www/header.html
+EMIC:setOutput(TARGET:pluggins/www/header.html)
 <script src="JS/pluggins/gauge.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="JS/gauge.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
 var myGauges = [];
 function onLoadGauge(obj){

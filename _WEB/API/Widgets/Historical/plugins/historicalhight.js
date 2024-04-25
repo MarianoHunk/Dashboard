@@ -1,6 +1,6 @@
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="https://code.highcharts.com/highcharts.js" type="text/javascript"> </script>
-#unSetFile
+EMIC:restoreOutput
 
 import { EmicWidget } from "./emicWidget.js";
 

@@ -1,14 +1,14 @@
 //RFI TAG:driverName=NOTIFICATION
 		
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"> </script>
-#unSetFile
-#setFile temp/header.html
+EMIC:restoreOutput
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js" type="text/javascript"> </script>
-#unSetFile
-#setFile temp/header.html
+EMIC:restoreOutput
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-messaging-compat.js" type="text/javascript"> </script>
-#unSetFile
+EMIC:restoreOutput
 
 
 /*RFI JSon

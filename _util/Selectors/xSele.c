@@ -1,4 +1,4 @@
-#setFile wwwroot/JS/emic.js
+EMIC:setOutput(TARGET:wwwroot/JS/emic.js)
 /* function xSele(...args)
 {
 	for (i = 1; i < args.length; i+= 2)
@@ -31,5 +31,5 @@ function xSele(...args) {
   return result; // Retornamos el resultado
 }
 
-#unSetFile
+EMIC:restoreOutput
 

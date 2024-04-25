@@ -1,0 +1,92 @@
+EMIC:define(nombreModulo,"DASHBOARD")
+EMIC:setOutput(TARGET:wwwroot/JS/emic.js)
+
+//-----------------------------------------------------------------------------------
+// Llama al inicio de las variables.
+//-----------------------------------------------------------------------------------
+if (typeof INIVAR === "function") {
+  INIVAR();
+}
+
+//-----------------------------------------------------------------------------------
+// Verifica si es compatible con los Service Workers y registra uno en la página.
+//-----------------------------------------------------------------------------------
+if ("serviceWorker" in navigator) {
+	window.addEventListener("load", function () {
+		navigator.serviceWorker
+			.register("./serviceWorker.js")
+			.then(res => console.log("service worker registered"))
+			.catch(err => console.log("service worker not registered", err));
+	});
+}
+//-----------------------------------------------------------------------------------
+// Se cargan los archivos de Dashboard, MQTT, tic y system a la pagina.
+//-----------------------------------------------------------------------------------
+EMIC:setInput(DEV:_WEB/API/Dashboard/dashboard.js)
+EMIC:setInput(DEV:_WEB/API/MQTT/mqtt.js)
+EMIC:setInput(DEV:_WEB/API/EMIC_Message/message.js)
+EMIC:setInput(DEV:_WEB/API/NOTIFICATION/notification.js)
+EMIC:setInput(DEV:_WEB/API/Tic/tic.js)
+EMIC:setInput(DEV:_WEB/API/System/system.js)
+//-----------------------------------------------------------------------------------
+// Se crea un sistema de carpetas para el Dashboard generado y sus widgets.
+//-----------------------------------------------------------------------------------
+EMIC:setOutput(TARGET:plugins/www/header.html)
+<script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/emicWidget.js"> </script>
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:temp/header.html)
+<script type="module" src="./JS/emicWidget.js"> </script>
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:wwwroot/JS/emicWidget.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/emicWidget.js)
+EMIC:restoreOutput
+
+//-----------------------------------------------------------------------------------
+// Carga los archivos que controlan los widgets y su carga.
+//-----------------------------------------------------------------------------------
+EMIC:setInput(DEV:_WEB/API/Widgets/Button/button.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/CheckBox/checkBox.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/OptionChooser/optionChooser.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/Gauge/customGauge.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/Icon/icon.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Label/label.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/LedIndicador/ledIndicador.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/InputDate/inputDate.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/InputTime/inputTime.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/InputNum/inputNum.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/Slider/slider.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/Switch/customSwitch.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Table/table.emic)
+EMIC:setInput(DEV:_WEB/API/Widgets/TextBox/textBox.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Historical/historical.emic)
+//EMIC:setInput(DEV:_WEB/API/Widgets/Historical2/historical2.emic)
+EMIC:setInput(TARGET:temp/script.js)
+EMIC:setInput(TARGET:temp/myVars.js)
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:wwwroot/CSS/dashboard.css)
+EMIC:setInput(DEV:_WEB/Templates/TemplateDashboard.css)
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:wwwroot/index.html)
+EMIC:setInput(DEV:_WEB/Templates/index_Template.html)
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:htmlOut/Response)
+<a href="./dashboard/.{userName}./.{project}./.{userModule}./index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
+EMIC:restoreOutput
+
+
+EMIC:setOutput(TARGET:wwwroot/manifest.json)
+EMIC:setInput(DEV:_WEB/Templates/manifest.json)
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:wwwroot/serviceWorker.js)
+EMIC:setInput(DEV:_WEB/Templates/serviceWorker.js)
+EMIC:restoreOutput
+
+//EMIC:setOutput(TARGET:wwwroot/firebase-messaging-sw.js)
+//EMIC:setInput(DEV:_WEB/Templates/firebase-messaging-sw.js)
+//EMIC:restoreOutput

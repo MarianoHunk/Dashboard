@@ -1,28 +1,23 @@
 //RFI TAG:driverName=MQTT
 
 		
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"> </script>
-#unSetFile
+EMIC:restoreOutput
 
 
-var  MQTTsvr;
-doCMDstr(MQTTsvr) // IP number of TCP server.
+var MQTTsvr; /**< IP number of TCP server */
 
-var MQTTport
-doCMDstr(MQTTport) // IP port of TCP server.
+var MQTTport; /**< IP port of TCP server */
 
-var CLIENTID;
-doCMDstr(CLIENTID) // MQTT Client identifier.
+var CLIENTID; /**< MQTT Client identifier */
 
-var USERMQTT;
-doCMDstr(USERMQTT) // Username for authentication on MQTT broker.
+var USERMQTT; /**< Username for authentication on MQTT broker */
 
-var PASSMQTT;
-doCMDstr(PASSMQTT) // Password for authentication on MQTT broker.
+var PASSMQTT; /**< Password for authentication on MQTT broker */
 
-var TOPICSUBS;
-doCMDstr(TOPICSUBS) // Topic to subscribe immediately after connect to MQTT broker.
+var TOPICSUBS; /**< Topic to subscribe immediately after connect to MQTT broker */
+
 /*RFI JSon
 {
 	'Nombre': 'pMQTT',

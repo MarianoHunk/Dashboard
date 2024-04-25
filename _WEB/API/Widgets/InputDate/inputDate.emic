@@ -1,17 +1,17 @@
 //RFI TAG:driverName=HTML Widget
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/inputDate.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/inputDate.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/inputDate.js
-#newRFIcode(_WEB/API/Widgets/InputDate/plugins/inputDate.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/inputDate.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/InputDate/plugins/inputDate.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente

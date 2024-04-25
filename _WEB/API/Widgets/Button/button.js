@@ -2,17 +2,17 @@
 
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/button.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/button.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/Button.js
-#newRFIcode(_WEB/API/Widgets/Button/plugins/button.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/Button.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Button/plugins/button.js)
+EMIC:restoreOutput
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

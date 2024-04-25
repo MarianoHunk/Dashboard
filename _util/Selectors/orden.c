@@ -1,4 +1,4 @@
-#setFile wwwroot/JS/emic.js
+EMIC:setOutput(TARGET:wwwroot/JS/emic.js)
 function orden(x, y, z1, z2, z3) {
     // Comparar x e y para determinar qué mensaje imprimir
     if (x > y) {
@@ -11,4 +11,4 @@ function orden(x, y, z1, z2, z3) {
         return eval(z1); // Evaluar y devolver z1 si x es igual a y
     }
 }
-#unSetFile
+EMIC:restoreOutput

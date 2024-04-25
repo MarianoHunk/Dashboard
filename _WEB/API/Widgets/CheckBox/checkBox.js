@@ -1,16 +1,16 @@
 //RFI TAG:driverName=HTML Widget
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module"  src="/dashboard/.{userName}./.{project}./.{userModule}./JS/checkBox.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/checkBox.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/checkBox.js
-#newRFIcode(_WEB/API/Widgets/CheckBox/plugins/checkBox.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/checkBox.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/CheckBox/plugins/checkBox.js)
+EMIC:restoreOutput
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente

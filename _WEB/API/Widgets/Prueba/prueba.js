@@ -2,17 +2,17 @@
 
 
 
-#setFile plugins/www/header.html
+EMIC:setOutput(TARGET:plugins/www/header.html)
 <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/prueba.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script type="module" src="./JS/prueba.js"> </script>
-#unSetFile
+EMIC:restoreOutput
 
-#setFile wwwroot/JS/Prueba.js
-#newRFIcode(_WEB/API/Widgets/Prueba/plugins/prueba.js,name=)
-#unSetFile
+EMIC:setOutput(TARGET:wwwroot/JS/Prueba.js)
+EMIC:setInput(DEV:_WEB/API/Widgets/Prueba/plugins/prueba.js)
+EMIC:restoreOutput
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                                 Componente
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

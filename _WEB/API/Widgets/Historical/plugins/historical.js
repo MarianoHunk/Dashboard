@@ -1,6 +1,6 @@
-#setFile temp/header.html
+EMIC:setOutput(TARGET:temp/header.html)
 <script src="https://code.highcharts.com/highcharts.js" type="text/javascript"> </script>
-#unSetFile
+EMIC:restoreOutput
 
 
 import { EmicWidget } from "./emicWidget.js";
@@ -30,6 +30,7 @@ class EmicWidgetHistorical extends EmicWidget {
     this.attachShadow({ mode: "open" });
   }
 
+
   connectedCallback() {
     if (!super.preconnectedCallback("Historical")) {
       return;
@@ -37,6 +38,14 @@ class EmicWidgetHistorical extends EmicWidget {
 
     if (!this.hasAttribute("id")) {
       this.setAttribute("id", this.getNewID());
+    }
+
+    if (!this.hasAttribute("sub-topic")) {
+      this.setAttribute("sub-topic", "");
+    }
+    else if (this.getAttribute("sub-topic") !== "") {
+      this.subTopic = this.getAttribute("sub-topic")
+      document.addEventListener(`user:subscribe:${this.subTopic}`,this.reciveData); 
     }
 
     if (!this.hasAttribute("widthGraph")) {
@@ -55,7 +64,7 @@ class EmicWidgetHistorical extends EmicWidget {
     }
 
     if (!this.hasAttribute("data-values")) {
-      this.setAttribute("data-values", JSON.stringify([[0]]));
+      this.setAttribute("data-values", ""); //JSON.stringify([[0]]));
     }
 
     if (typeof Highcharts === "undefined") {  // Verificación de Highcharts
@@ -80,101 +89,142 @@ class EmicWidgetHistorical extends EmicWidget {
 
 
   createChart() {
-  const labels = tryParseJSON(this.getAttribute("data-labels"));
-  const datasets = tryParseJSON(this.getAttribute("data-values"));
-  const labelNames = tryParseJSON(this.getAttribute("label"));
-  const chartDiv = this.chartDiv;
+    const labels = tryParseJSON(this.getAttribute("data-labels"));
+    const datasets = tryParseJSON(this.getAttribute("data-values"));
+    const labelNames = tryParseJSON(this.getAttribute("label"));
+    const chartDiv = this.chartDiv;
 
-  this.chart = Highcharts.chart(chartDiv, {
-    chart: {
-      type: 'line',
-      zoomType: 'xy', // Habilitar el zoom y paneo
-      panKey: 'shift',
-      panning: true,
-      // Agregar la configuración para mover el botón 'Reset Zoom'
-      resetZoomButton: {
-        position: {
-          align: 'left', 
-          verticalAlign: 'top', 
-          x: 700,
-          y: 210
-        },
-        relativeTo: 'chart'
-      }
-    },
-    exporting: { // Habilitar botones de exportación
-      enabled: true,
-      buttons: {
-        contextButton: { // Configuración del botón contextual
-          menuItems: [
-            'printChart', // Imprimir gráfico
-            'separator', // Separador
-            'downloadPNG', // Descargar como PNG
-            'downloadJPEG', // Descargar como JPEG
-            'downloadPDF', // Descargar como PDF
-            'downloadSVG' // Descargar como SVG
-          ]
+    this.chart = Highcharts.chart(chartDiv, {
+      chart: {
+        type: 'line',
+        zoomType: 'x', // Habilitar el zoom y paneo
+        panKey: 'shift',
+        panning: true,
+        // Agregar la configuración para mover el botón 'Reset Zoom'
+        resetZoomButton: {
+          position: {
+            align: 'left', 
+            verticalAlign: 'top', 
+            x: 700,
+            y: 210
+          },
+          relativeTo: 'chart'
         }
-      }
-    },
-    title: {
-      text: null // Eliminar el título
-    },
-    xAxis: {
-      categories: labels,
-      labels: {
-        rotation: -30, // Ángulo de rotación a 0
-        useHTML: true, // Permitir el uso de HTML para mayor control
-        style: {
-          "white-space": "normal" // Permitir saltos de línea
+      },
+      exporting: { // Habilitar botones de exportación
+        enabled: true,
+        buttons: {
+          contextButton: { // Configuración del botón contextual
+            menuItems: [
+              'printChart', // Imprimir gráfico
+              'separator', // Separador
+              'downloadPNG', // Descargar como PNG
+              'downloadJPEG', // Descargar como JPEG
+              'downloadPDF', // Descargar como PDF
+              'downloadSVG' // Descargar como SVG
+            ]
+          }
         }
-      }
-    },
-    yAxis: {
+      },
       title: {
-        text: 'Valores'
-      }
+        text: null // Eliminar el título
+      },
+      xAxis: {
+        type: 'datetime'
     },
-    exporting: { // Habilitar botones de exportación
-      enabled: true
-    },
-    legend: { // Leyenda interactiva
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle',
-      borderWidth: 0,
-      useHTML: true,
-      labelFormatter: function() {
-        return `<div onclick="alert('${this.name}')">${this.name}<div>`;
+      //xAxis: {
+      //  categories: labels,
+      //  labels: {
+      //    rotation: -30, // Ángulo de rotación a 0
+      //    useHTML: true, // Permitir el uso de HTML para mayor control
+      //    style: {
+      //      "white-space": "normal" // Permitir saltos de línea
+      //    }
+      //  }
+      //},
+      yAxis: {
+        title: {
+          text: 'Valores'
+        }
+      },
+      exporting: { // Habilitar botones de exportación
+        enabled: true
+      },
+      //legend: { // Leyenda interactiva
+      //  layout: 'vertical',
+      //  align: 'right',
+      //  verticalAlign: 'middle',
+      //  borderWidth: 0,
+      //  useHTML: true,
+      //  labelFormatter: function() {
+      //    return `<div onclick="alert('${this.name}')">${this.name}<div>`;
+      //  }
+      //},
+      series: datasets.map((data, index) => ({
+        name: labelNames[index], 
+        data: data
+      })),
+      //plotOptions: {
+      //  line: {
+      //    dataLabels: {
+      //      enabled: true
+      //    },
+      //    enableMouseTracking: true,
+      //    animation: false 
+      //  }
+      //},
+      //tooltip: { // Tooltip personalizado
+      //  formatter: function() {
+      //    return `<b>${this.series.name}</b><br>${this.x}: ${this.y}`;
+      //  }
+      //}
+    });
+
+  }
+
+  reciveData =  (e) => {
+    console.log(e);
+    this.addPoint(e.detail.message)
+  }
+
+  
+  addPoint = (point) => {
+    let X;
+    let Y;
+
+    if (point instanceof Object) {
+      
+      if (('X' in point)){
+        X = point.X
+      } else {
+        X = (new Date()).getTime();
       }
-    },
-    series: datasets.map((data, index) => ({
-      name: labelNames[index], 
-      data: data
-    })),
-    plotOptions: {
-      line: {
-        dataLabels: {
-          enabled: true
-        },
-        enableMouseTracking: true,
-        animation: false 
-      }
-    },
-    tooltip: { // Tooltip personalizado
-      formatter: function() {
-        return `<b>${this.series.name}</b><br>${this.x}: ${this.y}`;
-      }
+      Y = parseFloat(point.Y);
     }
-  });
+    else{
 
-}
-
+      X = (new Date()).getTime();
+      Y = parseFloat(point);
+    }
+    if (this.chart) {
+      this.chart.series[0].addPoint([X,parseFloat(Y)], true, false);
+    }
+  }
 
   attributeChangedCallback(name, old, now) {
     if (old !== now && this.chart) {
-       // Verifica si 'widthGraph' ha cambiado
-       if (name === "widthGraph") {
+      if (name === "sub-topic"){
+
+        if (old !== ""){
+          document.removeEventListener(`user:subscribe:${old}`);
+        }
+
+        //this.subTopic = `user:subscribe:${now}`
+        document.addEventListener(`user:subscribe:${now}`, this.reciveData); 
+      }
+
+      // Verifica si 'widthGraph' ha cambiado
+      if (name === "widthGraph") {
         // Actualiza el ancho del canvas
         if (this.canvas) {
           this.canvas.style.width = `${now}px`; // Suponiendo que 'now' contiene un valor numérico
@@ -205,7 +255,7 @@ class EmicWidgetHistorical extends EmicWidget {
   }
 
   static get observedAttributes() {
-    return ["data-labels", "data-values", "label", "widthGraph", "heightGraph"];
+    return ["data-labels", "data-values", "label", "widthGraph", "heightGraph", "sub-topic"];
   }
   
   disconnectedCallback() {
