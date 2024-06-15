@@ -1,11 +1,4 @@
-EMIC:setOutput(TARGET:wwwroot/JS/emic.js)
-//-----------------------------------------------------------------------------------
-// Llama al inicio de las variables.
-//-----------------------------------------------------------------------------------
-if (typeof INIVAR === "function") {
-  INIVAR();
-}
-EMIC:restoreOutput
+EMIC:setInput(DEV:_api/Index/index.js)
 
 
 //   //-----------------------------------------------------------------------------------
