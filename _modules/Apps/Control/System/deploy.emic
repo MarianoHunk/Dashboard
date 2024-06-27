@@ -2,5 +2,9 @@ EMIC:setOutput(SYS:toolbar/Properties)
 	<emic-widget-properties/>
 EMIC:restoreOutput
 
-EMIC:define(dev-headers.emic-widget-properties,emic-widget-properties)
+EMIC:define(tool-headers.emic-widget-properties,emic-widget-properties)
 EMIC:copy(DEV:_plugins/emic-widget-properties.js > TARGET:wwwroot/JS/emic-widget-properties.js)
+
+
+EMIC:copy(DEV:_plugins/header-tool.html > SYS:plugins/tool/header.html)
+
