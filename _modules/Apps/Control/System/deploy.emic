@@ -1,11 +1,6 @@
-//   EMIC:setOutput(SYS:toolbar/myTool)
-//   	<emic-widget-properties/>
-//   EMIC:restoreOutput
-//   
-//   EMIC:setOutput(TARGET:plugins/www/header.html)
-//   <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/emic-widget-properties.js"> </script>
-//   EMIC:restoreOutput
-//   
-//   EMIC:setOutput(TARGET:wwwroot/JS/emic-widget-properties.js)
-//   	EMIC:setInput(DEV:_plugins/emic-widget-properties.js)
-//   EMIC:restoreOutput
+EMIC:setOutput(SYS:toolbar/Properties)
+	<emic-widget-properties/>
+EMIC:restoreOutput
+
+EMIC:define(dev-headers.emic-widget-properties,emic-widget-properties)
+EMIC:copy(DEV:_plugins/emic-widget-properties.js > TARGET:wwwroot/JS/emic-widget-properties.js)

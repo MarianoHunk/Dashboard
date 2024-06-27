@@ -20,7 +20,7 @@ EMIC:copy(DEV:_plugins/header.html > SYS:plugins/dev/header.html)
 
 
 EMIC:setOutput(TARGET:htmlOut/Response)
-<a href="./dashboard/.{userName}./NuevoProyecto/Control_1/index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
+<a href="./dashboard/.{userName}./.{project}./.{userModule}./index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
 EMIC:restoreOutput
 
 EMIC:setOutput(TARGET:htmlOut/Autores)
