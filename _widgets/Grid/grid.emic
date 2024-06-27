@@ -1,0 +1,52 @@
+//RFI TAG:driverName=HTML Widget
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'Grid',
+	'NombreToolBox': 'Grid',
+	'Tipo' : 'Widget',
+	'title': 'Grilla simple',
+	'html-tag': 'emic-widget-grid',
+}
+*/
+
+EMIC:define(dev-headers.grid,grid)
+EMIC:copy(grid.js > TARGET:wwwroot/JS/grid.js)
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Eventos
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/* nux x  RFI JSon
+{
+	'Nombre': 'buttonPress',
+	'NombreToolBox': 'buttonPress',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.Button.Presionado",
+		"definir":"event_mousedown_active",
+		"parametros": [{"value":"Button","title":"Button name "}]
+		}'
+}
+*/
+
+
+/* nux x  RFI JSon
+{
+	'Nombre': 'buttonRelease',
+	'NombreToolBox': 'buttonRelease',
+	'Tipo' : 'SistemEvt',
+	'title': 'time in which the button was up in [ms], when up mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.Button.Soltado",
+		"definir":"event_mousedown_active",
+		"parametros": [	{"value":"ChecktBox","title":"ChecktBox name "},{"value":"TimeEndClick","title":"time in which the button was up in [ms] "}]
+		}'
+}
+*/
+

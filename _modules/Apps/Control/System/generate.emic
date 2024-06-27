@@ -2,10 +2,8 @@
 EMIC:setInput(SYS:usedFunction.emic)
 EMIC:setInput(SYS:usedEvent.emic)
 
-//------------------- Web Components ----------------
-EMIC:setInput(DEV:_main/emicComponents.emic)
-
 //------------------- Apis ----------------
+EMIC:setInput(DEV:_main/emicComponents.emic)
 EMIC:setInput(DEV:_api/Timers/timers.emic,name=1)
 EMIC:setInput(DEV:_api/Timers/timers.emic,name=2)
 EMIC:setInput(DEV:_api/Timers/timers.emic,name=3)
