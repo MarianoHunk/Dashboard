@@ -176,6 +176,6 @@ export class EmicWidget extends HTMLElement {
     }
 }
 
-    customElements.define("emic-widget", EmicWidget);
+//    customElements.define("emic-widget", EmicWidget);
 
 //}
