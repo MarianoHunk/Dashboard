@@ -1,5 +1,37 @@
+//------------------- Process generate files ----------------
+EMIC:setInput(SYS:usedFunction.emic)
+EMIC:setInput(SYS:usedEvent.emic)
+
+//------------------- Web Components ----------------
+EMIC:setInput(DEV:_main/emicComponents.emic)
+
+//------------------- Apis ----------------
+EMIC:setInput(DEV:_api/Timers/timers.emic,name=1)
+EMIC:setInput(DEV:_api/Timers/timers.emic,name=2)
+EMIC:setInput(DEV:_api/Timers/timers.emic,name=3)
+EMIC:setInput(DEV:_api/Timers/timers.emic,name=4)
+EMIC:setInput(DEV:_api/MQTT/mqtt.emic)
+EMIC:setInput(DEV:_api/Alert/alert.emic)
+
 EMIC:setInput(DEV:_api/Index/index.emic)
 
+
+EMIC:copy(TARGET:temp/myVars.js > TARGET:wwwroot/JS/myVars.js)
+
+EMIC:copy(DEV:_plugins/header.html > SYS:plugins/dev/header.html)
+
+
+EMIC:setOutput(TARGET:htmlOut/Response)
+<a href="./dashboard/.{userName}./.{project}./.{userModule}./index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
+EMIC:restoreOutput
+
+EMIC:setOutput(TARGET:htmlOut/Autores)
+ .{Autores.*}.
+EMIC:restoreOutput
+
+
+
+//____________________________________________________________________________________________
 
 //   //-----------------------------------------------------------------------------------
 //   // Verifica si es compatible con los Service Workers y registra uno en la página.
@@ -25,7 +57,7 @@ EMIC:setInput(DEV:_api/Index/index.emic)
 //   // Se crea un sistema de carpetas para el Dashboard generado y sus widgets.
 //   //-----------------------------------------------------------------------------------
 //   EMIC:setOutput(TARGET:plugins/www/header.html)
-//   <script type="module" src="/dashboard/.{userName}./.{project}./.{userModule}./JS/emicWidget.js"> </script>
+//   <script type="module" src="/dashboard/.{userName}./NuevoProyecto/Control_1/JS/emicWidget.js"> </script>
 //   EMIC:restoreOutput
 //   
 //   EMIC:setOutput(TARGET:temp/header.html)
@@ -68,7 +100,7 @@ EMIC:setInput(DEV:_api/Index/index.emic)
 //   EMIC:restoreOutput
 //   
 //   EMIC:setOutput(TARGET:htmlOut/Response)
-//   <a href="./dashboard/.{userName}./.{project}./.{userModule}./index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
+//   <a href="./dashboard/.{userName}./NuevoProyecto/Control_1/index.html" target="_blank" rel="noopener noreferrer" >Dashboard</a>
 //   EMIC:restoreOutput
 //   
 //   

@@ -1,0 +1,13 @@
+//RFI TAG:driverName=SYSTEM
+
+/**
+* @fn void page.show(string webPage);
+* @alias showWebPage
+* @brief Show web page. 
+* @param webPage page to show
+* @return Nothing
+*/
+
+EMIC:copy(page.js > TARGET:wwwroot/JS/page.js)
+
+EMIC:define(modules.page,page)

@@ -1,0 +1,29 @@
+//RFI TAG:driverName=Layout
+
+
+
+/*RFI JSon
+{
+	'Nombre': 'panelVert',
+	'NombreToolBox': 'Vertical Panel',
+	'Tipo' : 'Widget',
+	'title': 'when it receives a text string on the EMIC bus',
+	'html-tag': 'emic-dash-panel',
+	'attributes':{'direction': 'column'}
+}
+*/
+
+
+/*RFI JSon
+{
+	'Nombre': 'panelHoriz',
+	'NombreToolBox': 'Horizontal Panel',
+	'Tipo' : 'Widget',
+	'title': 'when it receives a text string on the EMIC bus',
+	'html-tag': 'emic-dash-panel',
+	'attributes':{'direction': 'row'}
+}
+*/
+
+EMIC:define(dev-headers.panel,panel)
+EMIC:copy(panel.js > TARGET:wwwroot/JS/panel.js)

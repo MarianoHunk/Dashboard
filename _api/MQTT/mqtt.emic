@@ -1,0 +1,64 @@
+//RFI TAG:driverName=MQTT
+
+var globalThis.USERMQTT; /**<(Alias:user) Username for authentication on MQTT broker */
+
+var globalThis.PASSMQTT; /**<(Alias:password) Password for authentication on MQTT broker */
+
+
+/**
+* @fn extern void eMQTT(string topic,string payload);
+* @alias messageReceived
+* @brief When it receives a string from MQTT broker. 
+* @param topic received topic wildcard value
+* @param payload received payload
+* @return Nothing
+*/
+
+
+/**
+* @fn extern void eMQTTCON();
+* @alias connected
+* @brief When the client and broker are connected. 
+* @return Nothing
+*/
+
+/**
+* @fn extern void eMQTTDISCON();
+* @alias disconnected
+* @brief When the client and broker are disconnected. 
+* @return Nothing
+*/
+
+
+/**
+* @fn void mqtt.connectMQTT(string MQTTsvr,string MQTTport);
+* @alias connect
+* @brief Connect to MQTT brocker. 
+* @param MQTTsvr MQTT Server name
+* @param MQTTport MQTT port number
+* @return Nothing
+*/
+
+
+/**
+* @fn void mqtt.pMQTT(string topic,string payload);
+* @alias publish
+* @brief Publish a MQTT topic. 
+* @param topic Topic to publish
+* @param payload Data to publish
+* @return Nothing
+*/
+
+
+/**
+* @fn void mqtt.sMQTT(string topic);
+* @alias subscribe
+* @brief Subscribe to a MQTT topic. 
+* @param topic Topic to subscribe
+* @return Nothing
+*/
+
+EMIC:copy(mqtt.js > TARGET:wwwroot/JS/mqtt.js)
+
+EMIC:define(modules.mqtt,mqtt)
+EMIC:define(headers.mqtt,https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js)

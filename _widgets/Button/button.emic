@@ -1,0 +1,52 @@
+//RFI TAG:driverName=HTML Widget
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Componente
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*RFI JSon
+{
+	'Nombre': 'Button',
+	'NombreToolBox': 'Button',
+	'Tipo' : 'Widget',
+	'title': 'Botón sin retención',
+	'html-tag': 'emic-widget-button',
+}
+*/
+
+EMIC:define(dev-headers.button,button)
+EMIC:copy(button.js > TARGET:wwwroot/JS/button.js)
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                 Eventos
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*x  RFI JSon
+{
+	'Nombre': 'buttonPress',
+	'NombreToolBox': 'buttonPress',
+	'Tipo' : 'SistemEvt',
+	'title': 'when press mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.Button.Presionado",
+		"definir":"event_mousedown_active",
+		"parametros": [{"value":"Button","title":"Button name "}]
+		}'
+}
+*/
+
+
+/*x  RFI JSon
+{
+	'Nombre': 'buttonRelease',
+	'NombreToolBox': 'buttonRelease',
+	'Tipo' : 'SistemEvt',
+	'title': 'time in which the button was up in [ms], when up mouse over button',
+	'instancia':'{
+		"NombreWorkBox": "Event.Button.Soltado",
+		"definir":"event_mousedown_active",
+		"parametros": [	{"value":"ChecktBox","title":"ChecktBox name "},{"value":"TimeEndClick","title":"time in which the button was up in [ms] "}]
+		}'
+}
+*/
+

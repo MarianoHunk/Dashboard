@@ -1,0 +1,14 @@
+EMIC:copy(DEV:_widgets\emicWidget.js > TARGET:wwwroot/JS/emicWidget.js)
+
+
+EMIC:setInput(DEV:_containers\webpage\webpage.emic)
+EMIC:setInput(DEV:_containers\panels\panel.emic)
+
+EMIC:setInput(DEV:_widgets\Button\button.emic)
+
+
+
+
+EMIC:setInput(DEV:_api/Page/page.emic)
+
+//<div type="void" class="lineaDeCodigo" originalclass="funcion" originalid="alert.showAlert" usedfunction="alert.showAlert" draggable="true" ondragstart="drag_linea(event)" title="Show alert.">SYSTEM.showAlert(<div type="string" title=" text to show" class="parametroDiv"></div>)</div>

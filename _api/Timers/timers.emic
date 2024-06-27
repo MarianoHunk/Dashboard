@@ -1,0 +1,20 @@
+//RFI TAG:driverName=TIMERS
+
+/**
+* @fn void timer.{name}..setTimer(string time,string mode);
+* @alias setTimer.{name}.
+* @brief timer. 
+* @param time Time in milliseconds
+* @param mode select timer mode
+* @return Nothing
+*/
+/**
+* @fn extern void etOut.{name}.();
+* @alias etOut.{name}.
+* @brief timer. 
+* @return Nothing
+*/
+
+EMIC:setInput(timers.js,name=.{name}.)
+
+EMIC:define(modules.timer.{name}.,timer.{name}.)
