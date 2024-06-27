@@ -1,0 +1,13 @@
+//RFI TAG:driverName=SYSTEM
+
+/**
+* @fn void alert.showAlert(string text);
+* @alias showAlert
+* @brief Show alert. 
+* @param text text to show
+* @return Nothing
+*/
+
+EMIC:copy(alert.js > TARGET:wwwroot/JS/alert.js)
+
+EMIC:define(modules.alert,alert)

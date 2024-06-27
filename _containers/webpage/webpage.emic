@@ -1,0 +1,39 @@
+//RFI TAG:driverName=HTML_Web_page
+
+/*RFI JSon
+{
+	'Nombre': 'panel',
+	'NombreToolBox': 'panel',
+	'Tipo' : 'emic-component',
+	'title': 'Dashboard panel',
+	'component': 'emic-dashboard',
+	'target': '.tabs'
+}
+*/
+
+
+/*x  RFI JSon
+{
+	'Nombre': 'panelVert',
+	'NombreToolBox': 'Vertical Panel',
+	'Tipo' : 'Widget',
+	'title': 'when it receives a text string on the EMIC bus',
+	'html-tag': 'emic-dash-panel',
+	'attributes':{'direction': 'column'}
+}
+*/
+
+
+/*x  RFI JSon
+{
+	'Nombre': 'panelHoriz',
+	'NombreToolBox': 'Horizontal Panel',
+	'Tipo' : 'Widget',
+	'title': 'when it receives a text string on the EMIC bus',
+	'html-tag': 'emic-dash-panel',
+	'attributes':{'direction': 'row'}
+}
+*/
+
+EMIC:define(dev-headers.dashboard,dashboard)
+EMIC:copy(dashboard.js > TARGET:wwwroot/JS/dashboard.js)

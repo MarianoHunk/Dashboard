@@ -1,40 +1,21 @@
 //RFI TAG:driverName=SYSTEM
 
-/*RFI JSon
-{
-	'Nombre': 'INIVAR',
-	'NombreToolBox': 'initVar',
-	'Tipo' : 'SistemEvt',
-	'title': 'When the module is powered up or reset',
-	'ReturnInfo': {'type':'','tooltip':'nothing'},
-	'parameters': [],
-	'instancia':'{
-		"NombreWorkBox": "Event.SYSTEM.initVar",
-		"definir":"event_INIVAR_active",
-		"parametros": []
-		}'
-}
+/**
+* @fn extern void onInit();
+* @alias onInit
+* @brief When the module and all its functions are ready. 
+* @return Nothing
 */
 
-/*RFI JSon
-{
-	'Nombre': 'INICIO',
-	'NombreToolBox': 'initMod',
-	'Tipo' : 'SistemEvt',
-	'title': 'When the module and all its functions are ready',
-	'ReturnInfo': {'type':'','tooltip':'nothing'},
-	'parameters': [],
-	'instancia':'{
-		"NombreWorkBox": "Event.SYSTEM.initMod",
-		"definir":"event_INICIO_active",
-		"parametros": []
-		}'
-}
+/*
+* @fn extern void SystemConfig();
+* @alias SystemConfig
+* @brief before initializing the drivers, recommended for initializing system variables. 
+* @return Nothing
 */
 
 
-
-/*RFI JSon
+/*x   RFI JSon
 {
 	'Nombre': 'save',
 	'NombreToolBox': 'saveVar',
@@ -49,7 +30,7 @@
 }
 */
 
-/*RFI JSon
+/*x   RFI JSon
 {
 	'Nombre': 'load',
 	'NombreToolBox': 'loadVar',
@@ -64,7 +45,7 @@
 }
 */
 
-/*RFI JSon
+/x   RFI JSon
 {
 	'Nombre': 'execute',
 	'NombreToolBox': 'execute',
@@ -79,11 +60,8 @@
 }
 */
 
-EMIC:setOutput(TARGET:wwwroot/JS/index.js)
-//-----------------------------------------------------------------------------------
-// Llama al inicio de las variables.
-//-----------------------------------------------------------------------------------
-if (typeof INIVAR === "function") {
-  INIVAR();
-}
-EMIC:restoreOutput
+EMIC:copy(index.html > TARGET:wwwroot/index.html)
+EMIC:copy(index.js > TARGET:wwwroot/JS/index.js)
+EMIC:copy(script.js > TARGET:wwwroot/JS/script.js)
+
+EMIC:define(Autores.mariano.hunkeler@gmail.com,mariano.hunkeler@gmail.com)

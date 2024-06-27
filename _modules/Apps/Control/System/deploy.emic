@@ -1,4 +1,4 @@
-//   EMIC:setOutput(TARGET:toolbar/myTool)
+//   EMIC:setOutput(SYS:toolbar/myTool)
 //   	<emic-widget-properties/>
 //   EMIC:restoreOutput
 //   
